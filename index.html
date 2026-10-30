@@ -900,7 +900,7 @@ html[lang=en] .closing h2{font-size:40px;line-height:1.25}html[lang=en] .discuss
     document.querySelectorAll('.step').forEach(function(b,i){b.setAttribute('aria-label',(language==='en'?'Slide '+(i+1)+': ':'第 '+(i+1)+' 页：')+slides[i].dataset.title)});
     document.querySelectorAll('.overview-card').forEach(function(b,i){b.querySelector('strong').textContent=slides[i].dataset.title;b.querySelector('small').textContent=slides[i].dataset.subtitle});
   }
-  function applyLanguage(next,persist){
+  function applyLanguage(next){
     language=next==='en'?'en':'zh';
     document.documentElement.lang=language==='en'?'en':'zh-CN';
     textBindings.forEach(function(binding){binding.node.data=t(binding.source)});
@@ -910,7 +910,6 @@ html[lang=en] .closing h2{font-size:40px;line-height:1.25}html[lang=en] .discuss
     button.title=language==='en'?'切换到中文':'Switch to English';
     button.setAttribute('aria-pressed',String(language==='en'));
     button.querySelectorAll('[data-lang-code]').forEach(function(label){label.classList.toggle('selected',label.dataset.langCode===language)});
-    if(persist!==false){try{localStorage.setItem('rubric-brief-language',language)}catch(e){}}
     refreshChrome();setRubric(rubricClear);setCounter(counterCorrect);updateCost();setPage(current,false);
   }
   document.getElementById('languageBtn').addEventListener('click',function(){applyLanguage(language==='en'?'zh':'en')});
@@ -985,8 +984,7 @@ html[lang=en] .closing h2{font-size:40px;line-height:1.25}html[lang=en] .discuss
   ['sampleN','rubricK','repeatR'].forEach(function(id){document.getElementById(id).addEventListener('input',updateCost)});
   window.addEventListener('hashchange',function(){var n=Number(location.hash.slice(1));if(Number.isInteger(n)&&n>=1&&n<=slides.length)setPage(n-1)});
   var initial=Number(location.hash.slice(1));current=Number.isInteger(initial)&&initial>=1&&initial<=slides.length?initial-1:0;
-  var savedLanguage='zh';try{savedLanguage=localStorage.getItem('rubric-brief-language')||'zh'}catch(e){}
-  applyLanguage(savedLanguage,false);
+  applyLanguage('en');
 })();
 </script>
 </body>
