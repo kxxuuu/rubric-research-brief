@@ -1,0 +1,993 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<title>从评分分歧到明确的 Rubric · Research Brief</title>
+<style>
+:root{--paper:#f6f5f0;--white:#fff;--ink:#182521;--muted:#5d6b63;--line:#d9dfd7;--green:#245d47;--mint:#e4eee5;--blue:#3d5cd2;--pale:#e9edfc;--orange:#9c542a;--warm:#f5e9dc;--serif:Georgia,"Songti SC","STSong",serif;--sans:Inter,"SF Pro Display",-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased}
+button,input{font:inherit}button,a,input{-webkit-tap-highlight-color:transparent}button{cursor:pointer}a{color:var(--green);text-underline-offset:4px}a:hover{color:var(--blue)}button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid var(--blue);outline-offset:4px}button:disabled{opacity:.3;cursor:default}button{border:0;background:none;color:inherit}
+.topbar{height:70px;display:flex;align-items:center;justify-content:space-between;gap:20px;padding:0 3.6vw;border-bottom:1px solid var(--line);background:var(--paper);position:relative;z-index:5}
+.brand{display:flex;align-items:center;gap:13px;white-space:nowrap}.brand-symbol{font-family:var(--serif);font-size:30px;font-style:italic;background:var(--green);color:white;width:36px;height:36px;line-height:36px;text-align:center;border-radius:50%}.brand-name{font-size:11px;letter-spacing:.16em;font-weight:700}.brand-sub{font-size:11px;color:var(--muted);letter-spacing:.1em}
+.tools{display:flex;align-items:center;gap:5px}.tool{font-size:12px;padding:8px 12px;border-radius:6px;white-space:nowrap}.tool:hover,.tool[aria-pressed=true]{background:var(--mint);color:var(--green)}.tool.key{border:1px solid var(--line)}
+.stage{max-width:1430px;margin:auto}.slide{display:none;flex-direction:column;min-height:calc(100vh - 127px);padding:37px 5vw 40px;position:relative}.slide.active{display:flex;animation:arrive .25s ease-out}
+@keyframes arrive{from{opacity:.3;transform:translateY(7px)}to{opacity:1;transform:translateY(0)}}
+.eyebrow{font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--green);margin-bottom:12px;display:flex;gap:12px;align-items:center}.eyebrow::before{content:"";width:24px;height:2px;background:var(--green)}h1,h2,h3,p{margin:0}h1{font-size:clamp(42px,4.6vw,67px);line-height:1.25;letter-spacing:-.05em;font-weight:600}h2{font-size:clamp(28px,3vw,41px);font-weight:600;line-height:1.3;letter-spacing:-.035em}h3{font-size:19px;font-weight:600;line-height:1.5}.lead{font-size:16px;line-height:1.85;color:var(--muted);margin-top:12px;max-width:950px}.heading{margin-bottom:28px}.accent{color:var(--green)}.blue{color:var(--blue)}.muted{color:var(--muted)}.small{font-size:12px;line-height:1.65}.mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-variant-numeric:tabular-nums}.serif{font-family:var(--serif)}
+.tag{display:inline-block;font-size:10px;font-weight:600;letter-spacing:.04em;padding:3px 9px;border-radius:3px;background:var(--mint);color:var(--green);vertical-align:middle}.tag.blue-tag{background:var(--pale);color:var(--blue)}.tag.warm{background:var(--warm);color:var(--orange)}.tag.neutral{background:#eaece7;color:var(--muted)}.citation{font-size:10px;vertical-align:super;margin-left:3px;text-decoration:none}.section-foot{margin-top:auto;padding-top:23px;font-size:12px;color:var(--muted);display:flex;gap:18px;justify-content:space-between;align-items:flex-end}.section-foot p{max-width:940px}
+.bottom{height:57px;border-top:1px solid var(--line);padding:0 3.6vw;display:flex;align-items:center;gap:16px;background:var(--paper);position:sticky;bottom:0;z-index:5}.chapter{font-size:11px;color:var(--muted);width:170px}.progress{display:flex;gap:6px;flex:1;max-width:500px;margin:0 auto}.step{padding:15px 0;flex:1;position:relative}.step::after{content:"";height:3px;background:var(--line);display:block}.step.done::after{background:#9eb3a3}.step.current::after{background:var(--green)}.page-num{font-size:12px;color:var(--muted);min-width:53px}.arrow{font-size:20px;padding:4px 12px}.footer-hint{font-size:10px;color:var(--muted)}
+.hero-grid{display:grid;grid-template-columns:1.04fr 1fr;gap:65px;align-items:center;flex:1;padding:18px 0}.hero-kicker{margin-bottom:24px}.hero-desc{font-size:18px;line-height:1.9;color:var(--muted);margin-top:26px;max-width:500px}.hero-meta{display:flex;gap:23px;font-size:11px;color:var(--muted);margin-top:33px}.hero-meta b{display:block;color:var(--ink);font-weight:500;font-size:13px;margin-top:3px}.hero-art{position:relative;min-height:400px;padding:0 20px}.orbit{border:1px solid #cbd8cc;border-radius:50%;width:340px;height:340px;position:absolute;left:50%;top:50%;transform:translate(-50%,-50%)}.orbit.second{width:255px;height:255px;opacity:.65}.core{position:absolute;width:130px;height:130px;left:50%;top:50%;transform:translate(-50%,-50%);background:var(--green);border-radius:50%;color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;box-shadow:0 20px 60px #245d4718}.core strong{font-family:var(--serif);font-weight:400;font-style:italic;font-size:63px;line-height:1}.core span{font-size:10px;letter-spacing:.12em;margin-top:6px}.agent-orbit{position:absolute;background:var(--paper);padding:9px 16px;text-align:center;min-width:105px}.agent-orbit b{font-size:32px;line-height:1.2;font-family:var(--serif);font-weight:400}.agent-orbit span{font-size:11px;display:block;color:var(--muted)}.orbit-minus{left:0;top:43%}.orbit-plus{right:0;top:43%}.orbit-a{left:50%;top:2%;transform:translateX(-50%);color:var(--orange)}.orbit-question{position:absolute;bottom:5px;left:0;right:0;text-align:center;font-size:13px;color:var(--green)}.hero-bottom{border-top:1px solid var(--line);padding-top:17px;display:flex;justify-content:space-between;gap:24px;font-size:12px}.hero-bottom strong{font-weight:500}.start-btn{color:var(--green);font-weight:600;white-space:nowrap}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:38px}.rule{border-top:1px solid var(--line);padding-top:18px}.paper-panel{background:#fff;padding:24px 27px;border-radius:3px;border:1px solid #e6e8e1}.label{font-size:10px;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);font-weight:600;margin-bottom:10px}.quote{font-family:var(--serif);font-size:24px;line-height:1.8;margin:13px 0 21px}.toggle{display:inline-flex;border:1px solid var(--line);border-radius:6px;padding:3px;gap:3px;background:#fff}.toggle button{font-size:12px;padding:8px 13px;border-radius:4px}.toggle button[aria-pressed=true]{background:var(--green);color:#fff}.sample-title{font-size:17px;line-height:1.7}.rubric-content{margin-top:17px;min-height:116px;font-size:14px}.rubric-content ol{padding-left:22px;margin:0}.rubric-content li{margin:3px 0}.score-pair{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin:20px 0}.score-item{padding:19px 0 10px;border-top:2px solid var(--green)}.score-item:last-child{border-color:var(--blue)}.score-head{display:flex;align-items:center;justify-content:space-between;font-size:14px}.score-big{font-size:64px;font-weight:400;letter-spacing:-.05em;line-height:1.3}.score-big small{font-size:17px;color:var(--muted);margin-left:4px;letter-spacing:0}.score-explain{font-size:13px;color:var(--muted);min-height:42px}.gap-strip{background:var(--mint);padding:15px 20px;display:flex;align-items:center;justify-content:space-between;gap:18px;font-size:14px;border-radius:3px}.gap-strip strong{font-size:23px;font-weight:500;white-space:nowrap}.note-line{font-size:12px;color:var(--muted);padding:15px 0 0}.principle{padding:18px 24px;border-left:3px solid var(--green);background:var(--mint);font-size:15px;line-height:1.75;margin-top:24px}
+.flow{display:grid;grid-template-columns:1.05fr 40px 1fr 40px 1.05fr;align-items:center;gap:10px;margin-top:3px}.flow-node{padding:24px 22px;background:#fff;min-height:191px;border-top:3px solid var(--line)}.flow-node.train{background:var(--mint);border-top-color:var(--green)}.flow-node.eval{background:var(--pale);border-top-color:var(--blue)}.flow-node h3{font-size:21px;margin:13px 0 10px}.flow-node p{font-size:13px;color:var(--muted);line-height:1.8}.flow-arrow{text-align:center;color:var(--muted);font-size:25px}.loop-line{margin:17px 20px 0;padding:9px 12px;border-bottom:1px solid #8aaa96;border-left:1px solid #8aaa96;border-right:1px solid #8aaa96;text-align:center;font-size:12px;color:var(--green)}.math-band{display:grid;grid-template-columns:1.35fr 1fr;gap:30px;margin-top:27px;padding:23px 0;border-top:1px solid var(--line)}.equation{font-size:24px;font-family:var(--serif);line-height:1.9;letter-spacing:.015em}.equation sub{font-size:60%}.math-key{font-size:13px;color:var(--muted);display:flex;flex-direction:column;justify-content:center;gap:5px}.math-key b{color:var(--ink);font-weight:500}
+.anchor-layout{display:grid;grid-template-columns:1.05fr 1fr;gap:42px}.anchor-options{display:grid;grid-template-columns:1fr;gap:15px}.anchor-option{border-top:1px solid var(--line);padding-top:13px}.anchor-option .num{font-family:var(--serif);font-size:25px;color:var(--green);margin-right:10px}.anchor-option p{font-size:13px;color:var(--muted);padding-left:35px;margin-top:4px}.counterexample{background:white;padding:24px 27px}.counter-table{width:100%;margin:17px 0;border-collapse:collapse;font-size:13px}.counter-table th,.counter-table td{padding:9px 5px;text-align:center;border-bottom:1px solid var(--line)}.counter-table th{font-size:11px;font-weight:500;color:var(--muted)}.counter-result{display:flex;gap:25px;align-items:baseline}.counter-result strong{font-size:29px;line-height:1.2}.counter-result span{font-size:11px;color:var(--muted)}.counter-caption{font-size:12px;color:var(--muted);margin-top:13px;min-height:40px}
+.lit-table,.data-table,.ablation-table,.results-table{width:100%;border-collapse:collapse;text-align:left}.lit-table th,.data-table th,.ablation-table th,.results-table th{padding:9px 13px;border-bottom:1px solid var(--ink);font-size:11px;font-weight:500;color:var(--muted)}.lit-table td,.data-table td{padding:15px 13px;border-bottom:1px solid var(--line);font-size:13px;vertical-align:top;line-height:1.7}.lit-table td:first-child{width:20%}.lit-table td:nth-child(2){width:29%}.lit-table td:nth-child(3){width:28%}.lit-table a,.data-table a{font-weight:600;text-decoration:none}.lit-table .result{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:15px;display:block;color:var(--green);letter-spacing:-.03em}.lit-table .sub,.data-table .sub{display:block;color:var(--muted);font-size:11px;margin-top:4px}.lit-takeaway{display:flex;align-items:center;gap:17px;margin-top:20px;font-size:14px}.lit-takeaway .pin{width:6px;height:6px;background:var(--green);border-radius:50%;flex-shrink:0}.h-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-bottom:26px}.hypothesis{padding:18px 0;border-top:2px solid var(--green)}.hypothesis .h-label{font-family:var(--serif);font-size:23px;color:var(--green)}.hypothesis h3{font-size:17px;margin:7px 0}.hypothesis p{font-size:12px;line-height:1.8;color:var(--muted)}.exp-lower{display:grid;grid-template-columns:1.25fr 1fr;gap:40px}.ablation-table td{font-size:12px;padding:8px 10px;border-bottom:1px solid var(--line)}.protocol-list{padding-left:19px;margin:0;font-size:13px;line-height:1.8}.protocol-list li{margin-bottom:8px}.protocol-list strong{font-weight:600}
+.data-table td:first-child{width:20%}.data-table td:nth-child(2){width:34%}.data-table td:nth-child(3){width:27%}.data-table td{padding-top:16px;padding-bottom:16px}.data-callout{display:flex;align-items:center;gap:22px;border-top:2px solid var(--green);padding-top:19px;margin-top:22px}.data-callout strong{font-size:36px;font-family:var(--serif);font-weight:400;line-height:1.1;white-space:nowrap}.data-callout p{font-size:13px;color:var(--muted)}
+.resource-layout{display:grid;grid-template-columns:1.05fr 1fr;gap:45px}.calculator{padding:25px 28px;background:var(--green);color:white}.calculator .label{color:#d0e0d5}.calc-field{display:grid;grid-template-columns:1fr 85px;align-items:center;gap:20px;margin-top:17px}.calc-field label{font-size:13px}.calc-field label small{display:block;font-size:10px;color:#d0e0d5}.calc-field input{width:85px;border:1px solid #789a85;border-radius:3px;color:white;background:#ffffff0c;padding:6px 8px;font-size:15px;text-align:right}.calc-out{border-top:1px solid #789a85;margin-top:22px;padding-top:17px}.calc-total{font-size:52px;line-height:1.25;font-weight:400;letter-spacing:-.03em}.calc-breakdown{font-size:12px;color:#d0e0d5;margin:7px 0}.calculator .small{color:#d0e0d5;margin-top:17px}.resource-stage{border-top:1px solid var(--line);padding:17px 0}.resource-stage h3{font-size:17px;margin-bottom:8px}.resource-stage p{font-size:13px;color:var(--muted);line-height:1.8}.resource-stage .tag{margin-bottom:10px}.budget-formula{font-size:13px;margin-top:19px;padding-top:14px;border-top:1px solid var(--line);color:var(--muted)}
+.results-layout{display:grid;grid-template-columns:1.15fr 1fr;gap:42px}.results-table td{padding:17px 13px;border-bottom:1px solid var(--line);font-size:13px}.pending{color:var(--muted);font-family:ui-monospace,monospace;letter-spacing:.05em}.decision{border-left:1px solid #9eb3a3;padding:0 0 20px 24px;margin-left:7px;position:relative}.decision:before{content:"";position:absolute;left:-5px;top:6px;width:9px;height:9px;background:var(--green);border:2px solid var(--paper);border-radius:50%}.decision:last-child{border-left-color:transparent;padding-bottom:0}.decision h3{font-size:16px}.decision p{font-size:13px;line-height:1.8;color:var(--muted);margin-top:6px}.decision .label{margin-bottom:5px}
+.closing{display:grid;grid-template-columns:1.15fr 1fr;gap:65px;align-items:center;flex:1}.closing h2{font-size:45px;line-height:1.4}.closing .big-q{font-family:var(--serif);font-style:italic;font-size:21px;color:var(--green);margin-top:22px}.discussion{padding:20px 0;border-top:1px solid var(--line)}.discussion h3{font-size:17px}.discussion p{font-size:13px;color:var(--muted);margin-top:7px}.discussion strong{font-family:var(--serif);font-size:28px;font-weight:400;color:var(--green);margin-right:12px}.closing-box{margin-top:30px;padding:18px 22px;background:var(--mint);font-size:13px;color:var(--green)}
+.refs{display:grid;grid-template-columns:1fr 1fr;column-gap:40px;row-gap:12px;list-style:none;padding:0;margin:0;counter-reset:reference}.refs li{padding:12px 0 11px 35px;border-top:1px solid var(--line);position:relative;font-size:12px;line-height:1.65;counter-increment:reference}.refs li:before{content:"[" counter(reference) "]";position:absolute;left:0;top:12px;color:var(--muted);font-family:ui-monospace,monospace;font-size:10px}.refs a{font-weight:600;text-decoration:none}.refs span{display:block;font-size:11px;color:var(--muted);margin-top:3px}.refs .extra{display:inline;font-weight:400}.ref-bottom{margin-top:20px;font-size:11px;color:var(--muted)}
+.speaker-notes{display:none;margin:0 auto 20px;max-width:1200px;border:1px solid #d6cfb9;background:#fff9e8;padding:16px 24px;border-radius:4px;font-size:13px;line-height:1.8;color:#5b513c}.speaker-notes.visible{display:block}.speaker-notes b{font-size:10px;letter-spacing:.12em;display:block;margin-bottom:5px}.overview{position:fixed;inset:70px 0 57px;background:var(--paper);z-index:10;padding:35px 6vw;overflow:auto;display:none}.overview.visible{display:block}.overview-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:25px}.overview-head h2{font-size:26px}.overview-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.overview-card{text-align:left;background:white;border:1px solid var(--line);padding:22px;min-height:125px;border-radius:3px}.overview-card:hover,.overview-card[aria-current=true]{border-color:var(--green);background:var(--mint)}.overview-card span{font-size:11px;color:var(--green);font-family:ui-monospace,monospace}.overview-card strong{display:block;font-weight:500;font-size:18px;margin:8px 0 4px}.overview-card small{font-size:11px;color:var(--muted)}.toast{position:fixed;left:50%;bottom:80px;transform:translateX(-50%);background:var(--ink);color:white;padding:10px 18px;border-radius:5px;font-size:12px;z-index:30;display:none}.toast.visible{display:block}
+body.reading .slide{display:flex;min-height:760px;border-bottom:1px solid var(--line);animation:none}body.reading .bottom{position:static}body.reading .topbar{position:sticky;top:0}
+@media(min-width:1500px){.slide{padding-top:48px;padding-bottom:45px}.heading{margin-bottom:35px}.hero-grid{gap:85px}.hero-art{min-height:450px}.orbit{width:390px;height:390px}.orbit.second{width:290px;height:290px}.lit-table td,.data-table td{padding-top:19px;padding-bottom:19px}}
+@media(max-width:1000px){.slide{padding:28px 4vw 32px}.hero-grid{gap:28px}.hero-art{min-height:350px}.orbit{width:280px;height:280px}.orbit.second{width:210px;height:210px}.agent-orbit{padding:8px}.hero-desc{font-size:16px}.two-col,.anchor-layout,.resource-layout,.results-layout{gap:25px}.flow-node{padding:18px 15px}.closing{gap:30px}.closing h2{font-size:36px}.footer-hint{display:none}.chapter{width:140px}.math-band{grid-template-columns:1.1fr 1fr;gap:20px}.equation{font-size:21px}.lit-table td,.data-table td{font-size:12px;padding:12px 9px}.lit-table .result{font-size:13px}}
+@media(max-width:720px){.topbar{height:auto;min-height:65px;padding:12px 5vw;align-items:flex-start;gap:10px;flex-wrap:wrap}.brand-name{font-size:10px}.brand-sub{display:none}.brand-symbol{width:29px;height:29px;font-size:24px;line-height:29px}.tools{gap:0;flex-wrap:wrap}.tool{padding:5px 8px;font-size:10px}.slide{min-height:calc(100vh - 122px);padding:28px 6vw 30px}.heading{margin-bottom:24px}h1{font-size:42px}h2{font-size:28px}.lead{font-size:14px}.hero-grid{grid-template-columns:1fr;gap:20px;padding-top:5px}.hero-desc{font-size:15px;margin-top:20px}.hero-meta{margin-top:22px;gap:20px}.hero-art{min-height:305px;margin:10px 0}.orbit{width:260px;height:260px}.orbit.second{width:185px;height:185px}.core{width:112px;height:112px}.orbit-minus{left:6%}.orbit-plus{right:6%}.hero-bottom{font-size:11px;align-items:center}.hero-bottom p{max-width:70%}.two-col,.anchor-layout,.resource-layout,.results-layout,.closing,.exp-lower{grid-template-columns:1fr;gap:25px}.paper-panel{padding:20px}.quote{font-size:21px}.rubric-content{min-height:0}.score-big{font-size:52px}.score-explain{min-height:0}.section-foot{font-size:11px;display:block}.section-foot>span{display:block;margin-top:8px}.flow{grid-template-columns:1fr;gap:4px}.flow-node{min-height:0;padding:18px 20px}.flow-node h3{margin:8px 0}.flow-arrow{transform:rotate(90deg);font-size:20px;line-height:24px}.math-band{grid-template-columns:1fr;gap:12px}.equation{font-size:21px}.h-grid{grid-template-columns:1fr;gap:0;margin-bottom:20px}.hypothesis{padding:14px 0}.hypothesis .h-label{font-size:20px}.hypothesis h3{margin:2px 0}.lit-table thead,.data-table thead{display:none}.lit-table tr,.data-table tr{display:block;padding:15px 0;border-top:1px solid var(--line)}.lit-table td,.data-table td{display:block;width:100%!important;border:0;padding:4px 0;font-size:13px}.lit-table td:first-child,.data-table td:first-child{font-size:17px}.lit-table td[data-label]:before,.data-table td[data-label]:before{content:attr(data-label) " · ";color:var(--muted);font-size:11px}.lit-table .result{display:inline;font-size:15px}.lit-table .sub,.data-table .sub{font-size:11px}.lit-takeaway{align-items:flex-start;font-size:13px}.data-callout{align-items:flex-start}.data-callout strong{font-size:30px}.calculator{padding:22px}.closing{padding-bottom:10px}.closing h2{font-size:35px}.closing-box{margin-top:20px}.refs{grid-template-columns:1fr}.bottom{padding:0 4vw;gap:10px}.chapter{display:none}.progress{gap:4px}.page-num{font-size:11px;min-width:45px}.arrow{font-size:19px;padding:4px 5px}.overview{inset:90px 0 57px;padding:25px 6vw}.overview-grid{grid-template-columns:1fr 1fr;gap:10px}.overview-card{padding:15px;min-height:110px}.overview-card strong{font-size:15px}.speaker-notes{margin:0 6vw 20px}.counterexample{padding:20px}.counter-table{font-size:12px}.counter-result{gap:20px}}
+@media screen and (min-width:721px) and (max-height:850px){
+ .slide{padding:24px 4.5vw 25px}.heading{margin-bottom:20px}.eyebrow{margin-bottom:8px}h2{font-size:32px}.lead{font-size:14px;line-height:1.75;margin-top:9px}.section-foot{padding-top:16px;font-size:11px}
+ .lit-table td,.data-table td{font-size:12px;padding:10px 11px}.lit-table .result{font-size:14px}.lit-takeaway{margin-top:15px;font-size:13px}.data-callout{margin-top:15px;padding-top:13px}.data-callout p{font-size:12px}
+ .paper-panel,.counterexample{padding:20px 23px}.quote{font-size:22px;margin:10px 0 17px}.rubric-content{min-height:101px;margin-top:14px;font-size:13px}.score-pair{margin:15px 0}.score-big{font-size:56px}.principle{margin-top:17px;padding:14px 20px;font-size:14px}
+ .anchor-option{padding-top:10px}.anchor-option h3{font-size:17px}.anchor-option p{font-size:12px}.anchor-options{gap:12px}.counter-table th,.counter-table td{padding:7px 5px}
+ .flow-node{min-height:177px;padding:18px 20px}.flow-node h3{font-size:19px;margin:10px 0 8px}.math-band{margin-top:20px;padding:17px 0}.equation{font-size:22px}.math-key{font-size:12px}
+ .h-grid{margin-bottom:18px}.hypothesis{padding:13px 0}.hypothesis h3{font-size:16px;margin:5px 0}.protocol-list{font-size:12px}.protocol-list li{margin-bottom:6px}
+ .calculator{padding:20px 25px}.calc-field{margin-top:12px}.calc-out{margin-top:18px;padding-top:14px}.calc-total{font-size:45px}.calculator .small{margin-top:13px;font-size:11px}.resource-stage{padding:12px 0}.resource-stage h3{font-size:16px;margin-bottom:6px}.resource-stage p{font-size:12px}.resource-stage .tag{margin-bottom:7px}.budget-formula{margin-top:13px;padding-top:11px;font-size:12px}
+ .refs{row-gap:8px}.refs li{padding-top:10px;padding-bottom:9px}.ref-bottom{margin-top:15px}
+}
+@media screen and (min-width:721px) and (min-height:851px){.data-table td{padding-top:13px;padding-bottom:13px}}
+@media screen and (max-width:720px){h1{font-size:clamp(28px,8.8vw,42px)}.agent-orbit{min-width:76px;padding:7px 8px}.orbit-minus{left:0}.orbit-plus{right:0}.agent-orbit span{font-size:10px}.core strong{font-size:50px}}
+.paper-layout{display:grid;grid-template-columns:1.08fr 1fr;gap:38px}.paper-meta{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}.method-steps{list-style:none;counter-reset:method;padding:0;margin:0}.method-steps li{position:relative;padding:12px 0 12px 43px;border-top:1px solid var(--line);counter-increment:method}.method-steps li::before{content:"0" counter(method);position:absolute;top:12px;left:0;font-family:var(--serif);font-size:21px;color:var(--green)}.method-steps strong{display:block;font-size:16px;font-weight:600}.method-steps p{font-size:12px;line-height:1.75;color:var(--muted);margin-top:3px}.method-loop{font-size:12px;color:var(--green);margin:12px 0 0;padding-top:12px;border-top:1px solid var(--line)}.evidence-box{background:#fff;padding:20px 24px}.mini-table{border-collapse:collapse;width:100%;font-size:13px}.mini-table th,.mini-table td{padding:9px 8px;border-bottom:1px solid var(--line);text-align:left}.mini-table th{font-size:10px;font-weight:500;color:var(--muted)}.mini-table td:last-child{text-align:right;font-variant-numeric:tabular-nums}.mini-table .emphasis{color:var(--green);font-weight:600}.bridge{border-left:3px solid var(--green);padding:14px 19px;background:var(--mint);margin-top:19px}.bridge h3{font-size:16px;margin-bottom:6px}.bridge p{font-size:13px;line-height:1.8}.paper-caution{font-size:12px;color:var(--muted);margin-top:13px;line-height:1.75}.matrix{border-collapse:separate;border-spacing:5px;width:100%;margin:12px 0 15px}.matrix th{font-size:11px;font-weight:500;color:var(--muted);padding:7px 4px}.matrix td{background:var(--mint);padding:14px 7px;text-align:center;font-family:var(--serif);font-size:21px;color:var(--green)}.matrix td.diagonal{background:#d7e5da}.matrix th:first-child{width:34%;text-align:left}.matrix-caption{font-size:11px;color:var(--muted)}.reward-summary{border-top:1px solid var(--line);margin-top:17px;padding-top:15px;font-size:13px;line-height:1.9}.stage-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-bottom:16px}.stage-block{padding:15px 18px;border-top:2px solid var(--green);background:#fff}.stage-block strong{font-size:17px;color:var(--green);font-weight:600}.stage-block p{font-size:12px;color:var(--muted);line-height:1.8;margin-top:4px}.reward-table{border-collapse:collapse;width:100%;font-size:13px}.reward-table th{font-size:10px;font-weight:500;color:var(--muted);text-align:left;padding:8px;border-bottom:1px solid var(--ink)}.reward-table td{padding:11px 8px;border-bottom:1px solid var(--line);vertical-align:top}.reward-table td:last-child{font-family:var(--serif);font-size:17px;white-space:nowrap}.metric-line{display:flex;justify-content:space-between;align-items:baseline;gap:15px;font-size:12px;border-bottom:1px solid var(--line);padding:13px 0}.metric-line b{font-family:ui-monospace,monospace;font-size:19px;color:var(--green);font-weight:500;white-space:nowrap}.comparison-table{border-collapse:collapse;width:100%;font-size:12px;line-height:1.75}.comparison-table th{font-size:10px;font-weight:500;color:var(--muted);padding:10px 12px;border-bottom:1px solid var(--ink);text-align:left}.comparison-table td{padding:16px 12px;border-bottom:1px solid var(--line);vertical-align:top}.comparison-table td:first-child{width:19%;font-weight:600}.comparison-table td:nth-child(2){width:17%}.comparison-table td:nth-child(3){width:24%}.comparison-table td:nth-child(4){width:22%}.comparison-table .proposed td{background:var(--mint)}.comparison-table .sub{display:block;font-size:11px;color:var(--muted);font-weight:400}.comparison-bottom{display:grid;grid-template-columns:1fr 1fr;gap:30px;margin-top:22px}.comparison-bottom h3{font-size:15px;margin-bottom:8px}.comparison-bottom p{font-size:12px;line-height:1.8;color:var(--muted)}.comparison-bottom .identity{font-family:var(--serif);font-size:19px;color:var(--ink);line-height:1.65;margin-bottom:5px}.agent-reference{padding:14px 18px;background:var(--warm);border-left:3px solid var(--orange);margin-bottom:17px;display:flex;gap:20px;align-items:center}.agent-reference strong{font-family:var(--serif);font-size:25px;color:var(--orange);font-weight:400;white-space:nowrap}.agent-reference p{font-size:12px;color:var(--muted);line-height:1.7}.agent-reference .to-reward{margin-left:auto;color:var(--orange);font-size:12px;white-space:nowrap}.method-slide .flow-node{min-height:160px;padding:18px 20px}.method-slide .flow-node h3{margin:9px 0 7px;font-size:19px}.method-slide .math-band{margin-top:17px;padding:16px 0}.method-slide .equation{font-size:22px;line-height:1.7}.method-slide .math-key{font-size:12px}.method-slide .loop-line{margin-top:12px}
+@media screen and (min-width:721px) and (max-height:850px){.paper-layout{gap:28px}.paper-meta{margin-bottom:12px}.method-steps li{padding-top:9px;padding-bottom:9px}.method-steps li::before{top:9px}.method-steps strong{font-size:15px}.evidence-box{padding:16px 21px}.mini-table th,.mini-table td{padding:7px 8px}.bridge{margin-top:15px;padding:12px 17px}.bridge p{font-size:12px}.paper-caution{font-size:11px;margin-top:10px}.paper-slide .section-foot{font-size:10px}.matrix td{padding:11px 6px}.matrix{margin:8px 0 10px}.reward-summary{margin-top:12px;padding-top:11px;font-size:12px}.stage-strip{margin-bottom:16px;gap:13px}.stage-block{padding:11px 15px}.reward-table td{padding:10px 8px}.metric-line{padding:10px 0}.metric-line b{font-size:17px}.comparison-table td{padding:12px 10px}.comparison-bottom{margin-top:18px;gap:25px}.comparison-bottom .identity{font-size:17px}.agent-reference{padding:10px 16px;margin-bottom:13px}.method-slide .heading{margin-bottom:15px}.method-slide .flow-node{min-height:148px;padding:15px 17px}.method-slide .flow-node p{font-size:12px}.method-slide .math-band{padding:12px 0;margin-top:13px}.method-slide .equation{font-size:20px}.method-slide .math-key{font-size:11px}}
+@media(max-width:720px){.paper-layout,.comparison-bottom{grid-template-columns:1fr;gap:22px}.paper-meta{margin-bottom:12px}.method-steps li{padding-left:37px}.evidence-box{padding:18px 20px}.stage-strip{grid-template-columns:1fr;gap:10px}.stage-block{padding:12px 16px}.comparison-table thead{display:none}.comparison-table tr{display:block;border-top:1px solid var(--line);padding:13px 0}.comparison-table td{display:block;width:100%!important;border:0;padding:5px 12px;font-size:13px}.comparison-table td:first-child{font-size:17px}.comparison-table td[data-label]:before{content:attr(data-label) " · ";font-size:11px;color:var(--muted);font-weight:400}.comparison-table .proposed{background:var(--mint)}.comparison-bottom .identity{font-size:17px;overflow-wrap:anywhere}.reward-table{font-size:12px}.reward-table td:last-child{font-size:15px;white-space:normal}.agent-reference{flex-wrap:wrap;gap:7px 14px}.agent-reference p{width:100%}.agent-reference .to-reward{margin-left:0}.method-slide .flow-node{min-height:0}.matrix th{font-size:10px}.matrix td{font-size:18px;padding:11px 5px}.metric-line b{font-size:17px}}
+@media print{.paper-layout{gap:25px}.paper-meta{margin-bottom:12px}.method-steps li{padding-top:9px;padding-bottom:9px;padding-left:35px}.method-steps li::before{top:9px;font-size:18px}.method-steps strong{font-size:14px}.method-steps p,.method-loop{font-size:10px}.evidence-box{padding:15px 20px}.mini-table{font-size:11px}.mini-table th,.mini-table td{padding:7px 8px}.bridge{margin-top:14px;padding:12px 16px}.bridge h3{font-size:14px}.bridge p,.paper-caution{font-size:11px}.matrix{margin:8px 0 10px}.matrix td{padding:10px 6px;font-size:19px}.matrix-caption{font-size:10px}.reward-summary{font-size:11px;margin-top:12px;padding-top:12px}.stage-strip{gap:14px;margin-bottom:16px}.stage-block{padding:10px 14px}.stage-block strong{font-size:15px}.stage-block p{font-size:10px}.reward-table{font-size:11px}.reward-table td{padding:10px 8px}.reward-table td:last-child{font-size:15px}.metric-line{font-size:10px;padding:11px 0}.metric-line b{font-size:16px}.comparison-table{font-size:11px}.comparison-table th{font-size:9px}.comparison-table td{padding:11px 9px}.comparison-table .sub{font-size:10px}.comparison-bottom{gap:25px;margin-top:18px}.comparison-bottom h3{font-size:13px}.comparison-bottom p{font-size:10px}.comparison-bottom .identity{font-size:17px}.agent-reference{padding:9px 14px;margin-bottom:12px}.agent-reference strong{font-size:23px}.agent-reference p,.agent-reference .to-reward{font-size:10px}.method-slide .flow-node{min-height:135px;padding:15px 18px}.method-slide .flow-node h3{font-size:17px}.method-slide .flow-node p{font-size:11px}.method-slide .math-band{margin-top:13px;padding:12px 0}.method-slide .equation{font-size:20px}.method-slide .math-key{font-size:10px}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
+@page{size:A4 landscape;margin:11mm}
+@media print{body{background:white;font-size:11px;line-height:1.5;-webkit-print-color-adjust:exact;print-color-adjust:exact}.topbar,.bottom,.speaker-notes,.overview,.toast,.start-btn{display:none!important}.stage{max-width:none}.slide,body.reading .slide{display:flex!important;min-height:0!important;height:185mm;padding:4mm 2mm 3mm;break-after:page;page-break-after:always;animation:none!important;border:0!important;overflow:visible}.slide:last-child{break-after:auto;page-break-after:auto}.heading{margin-bottom:16px}.eyebrow{margin-bottom:8px;font-size:9px}h1{font-size:43px}h2{font-size:28px}.lead{font-size:12px;margin-top:8px}.hero-grid{gap:40px}.hero-desc{font-size:14px}.hero-meta{font-size:10px;margin-top:20px}.hero-art{min-height:320px}.orbit{width:285px;height:285px}.orbit.second{width:215px;height:215px}.hero-bottom{font-size:10px}.section-foot{font-size:9px;padding-top:12px}.two-col,.anchor-layout,.resource-layout,.results-layout{gap:28px}.paper-panel,.counterexample{padding:18px 22px}.quote{font-size:20px;margin:9px 0 14px}.sample-title{font-size:14px}.score-big{font-size:50px}.score-pair{margin:12px 0}.score-explain,.rubric-content{font-size:12px}.rubric-content{min-height:90px}.gap-strip{padding:10px 15px;font-size:12px}.principle{font-size:12px;padding:12px 18px;margin-top:17px}.flow-node{padding:18px;min-height:165px}.flow-node h3{font-size:19px}.flow-node p{font-size:12px}.math-band{margin-top:20px;padding:17px 0}.equation{font-size:22px}.math-key{font-size:11px}.lit-table td,.data-table td{font-size:11px;padding:10px 11px}.lit-table .result{font-size:13px}.lit-table .sub,.data-table .sub{font-size:10px}.lit-takeaway{font-size:12px;margin-top:14px}.h-grid{margin-bottom:15px;gap:20px}.hypothesis{padding:12px 0}.hypothesis p,.protocol-list{font-size:11px}.hypothesis h3{font-size:15px}.ablation-table td{padding:6px 10px;font-size:11px}.data-callout{margin-top:16px;padding-top:13px}.data-callout p{font-size:12px}.calculator{padding:20px 25px}.calc-field{margin-top:12px}.calc-total{font-size:40px}.calc-out{margin-top:15px;padding-top:13px}.calculator .small{font-size:10px;margin-top:10px}.resource-stage{padding:12px 0}.resource-stage p{font-size:11px}.resource-stage h3{font-size:15px}.resource-stage .tag{margin-bottom:7px}.budget-formula{font-size:11px}.results-table td{padding:13px 11px;font-size:11px}.decision p{font-size:12px}.closing h2{font-size:38px}.discussion p{font-size:12px}.refs{row-gap:9px;column-gap:35px}.refs li{font-size:11px;padding-top:10px;padding-bottom:8px}.refs span{font-size:10px}.ref-bottom{font-size:10px}a{color:inherit;text-decoration:none}.toggle button{font-size:11px;padding:6px 11px}.counter-caption{font-size:11px}.counter-table{margin:12px 0}.counter-table td,.counter-table th{padding:7px 5px}}
+.language-toggle{font-size:11px;letter-spacing:.02em;display:inline-flex;align-items:center;gap:5px}.language-toggle [data-lang-code]{color:var(--muted);font-weight:400}.language-toggle .selected{color:var(--green);font-weight:700}.language-toggle[aria-pressed=true]{background:var(--mint)}
+html[lang=en] h2{font-size:clamp(27px,2.5vw,36px);line-height:1.23;letter-spacing:-.03em}
+html[lang=en] .heading{margin-bottom:22px}html[lang=en] .lead{font-size:15px;line-height:1.6}
+html[lang=en] h1{font-size:clamp(40px,4.1vw,59px);line-height:1.17}html[lang=en] .hero-desc{font-size:17px;line-height:1.65}html[lang=en] .hero-meta{gap:18px}html[lang=en] .hero-meta b{font-size:11px}
+html[lang=en] .lit-table td,html[lang=en] .data-table td,html[lang=en] .comparison-table{line-height:1.5}html[lang=en] .lit-table .sub,html[lang=en] .data-table .sub{line-height:1.5}
+html[lang=en] .paper-caution,html[lang=en] .bridge p,html[lang=en] .reward-summary{line-height:1.6}html[lang=en] .method-steps strong{font-size:15px}html[lang=en] .method-steps p{line-height:1.6}
+html[lang=en] .flow-node h3{font-size:18px}html[lang=en] .flow-node p{font-size:12px;line-height:1.65}html[lang=en] .agent-reference{gap:16px}html[lang=en] .agent-reference p{font-size:12px}html[lang=en] .agent-reference .to-reward{font-size:10px}
+html[lang=en] .comparison-bottom h3{font-size:14px}html[lang=en] .comparison-bottom p{line-height:1.6}html[lang=en] .comparison-table .sub{font-size:10px}html[lang=en] .protocol-list{font-size:12px;line-height:1.65}
+html[lang=en] .closing h2{font-size:40px;line-height:1.25}html[lang=en] .discussion h3{font-size:16px}html[lang=en] .discussion p{line-height:1.65}
+@media screen and (min-width:721px) and (min-height:851px){html[lang=en] .lit-table td{padding-top:13px;padding-bottom:13px}html[lang=en] .comparison-table td{padding-top:14px;padding-bottom:14px}}
+@media(max-width:720px){html[lang=en] .results-table{table-layout:fixed}html[lang=en] .results-table td,html[lang=en] .results-table th{overflow-wrap:anywhere;padding-left:7px;padding-right:7px}}
+@media screen and (min-width:721px) and (max-height:850px){html[lang=en] .heading{margin-bottom:17px}html[lang=en] h2{font-size:29px}html[lang=en] .lead{font-size:13px}html[lang=en] .lit-table td,html[lang=en] .data-table td{font-size:12px;padding-top:11px;padding-bottom:11px}html[lang=en] .flow-node h3{font-size:17px}html[lang=en] .flow-node p{font-size:11px}html[lang=en] .comparison-table td{padding-top:10px;padding-bottom:10px}html[lang=en] .paper-caution{font-size:10px}html[lang=en] .bridge p{font-size:11px}html[lang=en] .method-steps strong{font-size:14px}html[lang=en] .method-steps p{font-size:11px}html[lang=en] .closing h2{font-size:36px}}
+@media(max-width:720px){.language-toggle{font-size:10px;gap:3px}html[lang=en] h1{font-size:39px}html[lang=en] h2{font-size:26px}html[lang=en] .lead{font-size:14px}html[lang=en] .hero-desc{font-size:15px}html[lang=en] .hero-meta{flex-wrap:wrap}html[lang=en] .agent-reference p{font-size:12px}html[lang=en] .agent-reference .to-reward{font-size:11px}html[lang=en] .closing h2{font-size:34px}html[lang=en] .chapter{display:none}html[lang=en] .reward-table td:last-child{font-size:14px}.overview{top:108px}}
+@media print{html[lang=en] h1{font-size:43px}html[lang=en] h2{font-size:26px}html[lang=en] .heading{margin-bottom:15px}html[lang=en] .lead{font-size:11px;line-height:1.5}html[lang=en] .hero-desc{font-size:13px}html[lang=en] .method-steps strong{font-size:13px}html[lang=en] .method-steps p{font-size:10px}html[lang=en] .flow-node h3{font-size:16px}html[lang=en] .flow-node p{font-size:10px}html[lang=en] .agent-reference p{font-size:10px}html[lang=en] .agent-reference .to-reward{font-size:9px}html[lang=en] .paper-caution,html[lang=en] .bridge p,html[lang=en] .reward-summary{font-size:10px}html[lang=en] .protocol-list{font-size:10px}html[lang=en] .comparison-bottom h3{font-size:12px}html[lang=en] .comparison-table .sub{font-size:9px}html[lang=en] .closing h2{font-size:35px}}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="brand"><div class="brand-symbol" aria-hidden="true">R</div><div><div class="brand-name">RUBRIC / RESEARCH BRIEF</div><div class="brand-sub">A PROPOSAL FOR DISCUSSION · 2026.10</div></div></div>
+  <nav class="tools" aria-label="演示工具">
+    <button class="tool key language-toggle" id="languageBtn" type="button" aria-label="Switch to English" title="Switch to English" aria-pressed="false"><span data-lang-code="zh" lang="zh-CN" class="selected">中文</span><span aria-hidden="true"> / </span><span data-lang-code="en" lang="en">EN</span></button>
+    <button class="tool" id="overviewBtn" aria-expanded="false">目录</button>
+    <button class="tool" id="notesBtn" aria-pressed="false">讲稿备注</button>
+    <button class="tool" id="readingBtn" aria-pressed="false">连续阅读</button>
+    <button class="tool" id="printBtn">打印 / PDF</button>
+    <button class="tool key" id="fullscreenBtn">全屏 ↗</button>
+  </nav>
+</header>
+<main class="stage" id="stage">
+  <section class="slide active" id="slide-1" aria-labelledby="title-1" data-title="研究问题" data-subtitle="从评分分歧到 rubric 的明确性">
+    <div class="hero-grid">
+      <div>
+        <div class="eyebrow hero-kicker">01 / Research proposal <span class="tag neutral">尚未开展实验</span></div>
+        <h1 id="title-1">同一份答案，<br>两条评分路径。<br><span class="accent">能否打出同一分数？</span></h1>
+        <p class="hero-desc">用加分与减分评分器之间的分歧，<br>学习更明确、可执行的评分标准。</p>
+        <div class="hero-meta"><div>研究对象<b>Rubric 生成与修订</b></div><div>候选方法<b>一致性信号 + RL</b></div><div>应用场景<b>学生短答题评分</b></div></div>
+      </div>
+      <div class="hero-art" role="img" aria-label="同一个 rubric R 输入两个评分器：L减从满分扣分，L加从零分加分。A 是可选的参考评分器。">
+        <div class="orbit"></div><div class="orbit second"></div>
+        <div class="core"><strong>R</strong><span>SHARED RUBRIC</span></div>
+        <div class="agent-orbit orbit-minus"><b>L−</b><span>从满分扣分</span></div>
+        <div class="agent-orbit orbit-plus"><b>L+</b><span>从零分加分</span></div>
+        <div class="agent-orbit orbit-a"><b>A</b><span>参考评分 · 待校准</span></div>
+        <div class="orbit-question">更小的 gap，能否带来更准确的评分？</div>
+      </div>
+    </div>
+    <div class="hero-bottom"><p><strong>核心目标：</strong>降低评分对执行路径的敏感性，并用独立人工评分验证有效性。</p><button class="start-btn" data-next>开始汇报 →</button></div>
+  </section>
+
+  <section class="slide" id="slide-2" aria-labelledby="title-2" data-title="现象与直觉" data-subtitle="切换 rubric，观察两条路径的差距">
+    <div class="heading"><div class="eyebrow">02 / The intuition</div><h2 id="title-2">分歧可能来自评分规则中未写明的判断。</h2><p class="lead">同一题目、同一答案、同一模型；只改变评分方式。下面用一个构造示例说明直觉。</p></div>
+    <div class="two-col">
+      <div class="paper-panel">
+        <div class="label">Question · 满分 10 分</div>
+        <h3 class="sample-title">为什么实验需要设置对照组？</h3>
+        <div class="label" style="margin-top:23px">Student response</div>
+        <p class="quote">“有对照才能知道变化是不是<br>实验处理造成的。”</p>
+        <div class="toggle" aria-label="切换示例评分规则"><button id="vagueBtn" aria-pressed="true">初始 rubric</button><button id="clearBtn" aria-pressed="false">细化后的 rubric</button></div>
+        <div class="rubric-content" id="rubricText">“解释对照组的作用，逻辑清楚。”<p class="muted small" style="margin-top:12px">未规定要点权重、隐含表达是否算分，以及遗漏要点如何处理。</p></div>
+      </div>
+      <div>
+        <div class="tag warm">构造示例 · 不是模型实测结果</div>
+        <div class="score-pair" aria-live="polite">
+          <div class="score-item"><div class="score-head"><span>L+ 加分式</span><span class="small muted">0 → S</span></div><div class="score-big"><span id="plusScore">7</span><small>/ 10</small></div><p class="score-explain" id="plusReason">认可核心作用，认为解释尚不充分。</p></div>
+          <div class="score-item"><div class="score-head"><span>L− 减分式</span><span class="small muted">10 → S</span></div><div class="score-big"><span id="minusScore">9</span><small>/ 10</small></div><p class="score-explain" id="minusReason">未见明显错误，仅对解释不足扣分。</p></div>
+        </div>
+        <div class="gap-strip" aria-live="polite"><span>路径差距 Δ = |S+ − S−|</span><strong><span id="gapScore">2</span> 分</strong></div>
+        <p class="note-line" id="exampleNote">两种评分方式都能给出解释，但采用了不同的默认假设。</p>
+        <div class="principle"><strong>待验证的假设</strong><br>明确得分点、部分分与遗漏规则后，两条评分路径的差距会缩小。</div>
+      </div>
+    </div>
+    <div class="section-foot"><p>加分、减分必须是同一评分政策的两种表达；L− 与 L+ 不自动构成分数的上下界。</p><span>HYPOTHESIS, NOT EVIDENCE</span></div>
+  </section>
+
+  <section class="slide method-slide" id="slide-3" aria-labelledby="title-3" data-title="A + L+ + L−" data-subtitle="固定 A 与双向评分器，优化 rubric">
+    <div class="heading"><div class="eyebrow">03 / Proposed method</div><h2 id="title-3">A 给参照，L+ 与 L− 暴露评分分歧。</h2><p class="lead">本汇报主线：固定三个评分 agent，仅优化 rubric 生成器 Gθ；A 是有噪声的老师，独立人工评分负责验收。</p></div>
+    <div class="agent-reference"><strong>A → t<sub>A</sub></strong><p>A 用题目 q、固定标准 R₀ 和答卷 x 预先评分；不读取候选 rubric R，也不读取 L± 的输出。</p><span class="to-reward">t<sub>A</sub> 输入下方奖励项 ↓</span></div>
+    <div class="flow">
+      <div class="flow-node train"><span class="tag">可训练</span><h3>Gθ → 候选 rubric R</h3><p>输入题目 q、原始 rubric R₀<br>补充权重、边界条件、部分分规则<br>每道题的 R 跨多份答案共享</p></div>
+      <div class="flow-arrow" aria-hidden="true">→</div>
+      <div class="flow-node"><span class="tag neutral">同一 q、x、候选 R</span><h3>L+ &amp; L− → S+, S−</h3><p>L+ 从零分加分；L− 从满分扣分<br>独立会话，互不见分数及 t<sub>A</sub><br>逐项判定，程序汇总分数</p></div>
+      <div class="flow-arrow" aria-hidden="true">→</div>
+      <div class="flow-node eval"><span class="tag blue-tag">汇合 S+、S−、tA</span><h3>Gap + A 的参照误差</h3><p>控制两条路径的 gap<br>控制两路平均分对 t<sub>A</sub> 的误差<br>约束 rubric 不改变考核要求</p></div>
+    </div>
+    <div class="loop-line">↰ 汇总多份训练答案的反馈，更新 Gθ；测试时冻结 Gθ 与评分器</div>
+    <div class="math-band">
+      <div><div class="label">拟议目标 · 按题目满分归一化，再跨答卷取平均</div><div class="equation">r(R) = −λ<sub>c</sub> (S+ − S−)²<br><span style="padding-left:66px">−λ<sub>a</sub> (m − t<sub>A</sub>)²</span></div></div>
+      <div class="math-key"><div><b>m = (S+ + S−) / 2</b>；t<sub>A</sub> 为预先冻结的 A 分数。</div><div><b>λ<sub>c</sub>、λ<sub>a</sub></b>：分开控制 gap 与参照误差。</div><div>若用人工分数替代 t<sub>A</sub>，应作为单独的监督设置报告。</div><div>R 对同一题的多份答卷共享，不包含单份答卷的目标分数。</div></div>
+    </div>
+    <div class="section-foot"><p>这里的 RL 更新 rubric 生成器参数；仅在 API 上反复改写 rubric 属于提示优化，可先用于低成本验证。</p><span>TRAIN ONE COMPONENT FIRST</span></div>
+  </section>
+
+  <section class="slide" id="slide-4" aria-labelledby="title-4" data-title="A 与正确性" data-subtitle="一致性不能替代外部参照">
+    <div class="heading"><div class="eyebrow">04 / The identification problem</div><h2 id="title-4">两个 agent 完全一致，也可能一起打错分。</h2><p class="lead">强模型 A 可以提供低成本监督，但它的可靠性需要用独立人工标注校准。</p></div>
+    <div class="anchor-layout">
+      <div class="counterexample">
+        <div class="label">Counterexample · 构造数据 / 满分 10 分</div>
+        <div class="toggle" aria-label="切换一致性反例"><button id="collapseBtn" aria-pressed="true">全部给 5 分</button><button id="correctBtn" aria-pressed="false">准确且一致</button></div>
+        <table class="counter-table"><thead><tr><th>答案</th><th>人工参照</th><th>L+</th><th>L−</th></tr></thead><tbody id="counterBody"><tr><td>答案一</td><td>2</td><td>5</td><td>5</td></tr><tr><td>答案二</td><td>5</td><td>5</td><td>5</td></tr><tr><td>答案三</td><td>8</td><td>5</td><td>5</td></tr></tbody></table>
+        <div class="counter-result" aria-live="polite"><div><strong>0</strong> <span>平均 gap</span></div><div><strong id="counterMae">2.0</strong> <span>平均分相对人工的 MAE</span></div></div>
+        <p class="counter-caption" id="counterCaption">常数评分拿到了完美的一致性奖励，却丢失了区分答案质量的能力。</p>
+      </div>
+      <div class="anchor-options">
+        <div class="anchor-option"><h3><span class="num">1</span>有人工评分：优先作为外部参照</h3><p>保留双评分者信息；对争议样本复核。人工评分本身也可能有不确定性。</p></div>
+        <div class="anchor-option"><h3><span class="num">2</span>使用强模型 A：定位为有噪声的老师</h3><p>A 使用固定评分标准，先评估其人工一致性，再生成训练监督；不要让它随候选 rubric 一起漂移。</p></div>
+        <div class="anchor-option"><h3><span class="num">3</span>没有可靠参照：限制可得出的结论</h3><p>可以验证协议一致性改善；仅凭 gap 收敛，无法判断评分是否更正确。</p></div>
+      </div>
+    </div>
+    <div class="principle">建议将 A 放入消融实验：<strong>gap-only / 均值对齐 A / gap + 均值对齐 A</strong>，最终都用未参与优化的人工标注评估。</div>
+    <div class="section-foot"><p>要研究的是“更稳定且有效的评分”，而不是把某个强模型的输出直接定义为真值。</p><span>AGREEMENT ≠ VALIDITY</span></div>
+  </section>
+
+  <section class="slide" id="slide-5" aria-labelledby="title-5" data-title="相关工作" data-subtitle="已有证据、方法差异与复现成本">
+    <div class="heading"><div class="eyebrow">05 / Research landscape</div><h2 id="title-5">已有工作验证了部分机制，尚需检验加减分信号。</h2><p class="lead">以下是作者报告的结果；任务、参照和指标不同，数值不能直接横向排名。</p></div>
+    <table class="lit-table">
+      <thead><tr><th>工作</th><th>与你的想法的联系</th><th>已报告的结果</th><th>资源 / 复现情况</th></tr></thead>
+      <tbody>
+        <tr><td><a href="https://aclanthology.org/2026.conll-main.47/" target="_blank" rel="noopener">Reflect-and-Revise ↗</a><span class="sub">CoNLL 2026 · 教育评分</span></td><td data-label="联系">根据人工评分误差反思并修改 rubric；最重要的提示优化基线。</td><td data-label="结果"><span class="result">QWK 最高 +0.403</span><span class="sub">三套作文数据；最佳组合的增益，非平均。</span></td><td data-label="资源">无需权重训练；API 推理。<span class="sub"><a href="https://github.com/kenoharada/Reflect-and-Revise" target="_blank" rel="noopener">实现代码 ↗</a></span></td></tr>
+        <tr><td><a href="https://arxiv.org/html/2608.29856v1" target="_blank" rel="noopener">GenRubric ↗</a><span class="sub">2026 预印本 · rubric RL</span></td><td data-label="联系">跨 rubric 交叉评估产生奖励，训练 rubric 生成器。</td><td data-label="结果"><span class="result">ρ 0.324 → 0.452</span><span class="sub">8B，SFT → SFT+RL；对专家 rubric 所诱导排序的相关性。</span></td><td data-label="资源">报告 2×H800；SFT 约 20.7 万条。<span class="sub"><a href="https://github.com/foggpoy/GenRubric" target="_blank" rel="noopener">仓库 ↗</a> 有模型链接；检查时无训练脚本。</span></td></tr>
+        <tr><td><a href="https://alignment.openai.com/argo/" target="_blank" rel="noopener">ARGO ↗</a><span class="sub">2026 研究报告 · 参考模型</span></td><td data-label="联系">固定 judge，用 RL 学习 rubric，拟合参考 reward model。</td><td data-label="结果">留出集上参考模型偏好一致性改善。<span class="sub">目标是复现参考模型行为，不能据此认定更正确。</span></td><td data-label="资源">内部偏好数据。<span class="sub">报告未提供完整公开复现配置。</span></td></tr>
+        <tr><td><a href="https://proceedings.mlr.press/v306/yang26n.html" target="_blank" rel="noopener">FairJudge ↗</a><span class="sub">ICML 2026 · judge 训练</span></td><td data-label="联系">以对齐的参考标签训练评分器，改善单独打分与成对比较的一致性。</td><td data-label="结果"><span class="result">60.59% → 65.52%</span><span class="sub">8B，两种模式一致率；完整训练流程的收益。</span></td><td data-label="资源">SFT → DPO → GRPO，约 1.6 万条。<span class="sub">完整下载入口与训练算力尚未核实。</span></td></tr>
+        <tr><td><a href="https://arxiv.org/html/2310.08491" target="_blank" rel="noopener">Prometheus ↗</a><span class="sub">ICLR 2024 · 强老师蒸馏</span></td><td data-label="联系">GPT-4 生成 rubric、反馈和分数，监督训练较小评分器。</td><td data-label="结果"><span class="result">Pearson r = 0.897</span><span class="sub">13B，45 个实例的人工评测；非学生考试成绩。</span></td><td data-label="资源">约 10 万条合成记录。<span class="sub">原论文全参数训练 8×A100 80GB。</span></td></tr>
+      </tbody>
+    </table>
+    <div class="lit-takeaway"><span class="pin"></span><p><strong>候选贡献：</strong>把“加分 / 减分”的协议差距作为歧义信号，并验证其能否改善学生评分的准确性与泛化。</p></div>
+    <div class="section-foot"><p>截至本轮检索，未找到完全同构的加减分 gap 优化方法；这不是首创性证明，正式立项前仍需系统检索。</p><span>LITERATURE CHECK · 2026-10-29</span></div>
+  </section>
+
+  <section class="slide paper-slide" id="slide-6" aria-labelledby="title-6" data-title="精读 · Reflect-and-Revise" data-subtitle="从人工评分误差中改写 rubric">
+    <div class="heading"><div class="eyebrow">06 / Paper 01 · Reflect-and-Revise</div><h2 id="title-6">让模型从错分案例中修订评分规则。</h2><p class="lead">优化对象是 rubric 文本。通过“评分 → 找错 → 反思 → 改写”的循环，使模型更接近人工评分。</p></div>
+    <div class="paper-layout">
+      <div>
+        <div class="paper-meta"><span class="tag">CoNLL 2026</span><span class="tag neutral">不更新模型权重</span><span class="tag neutral">需要人工分数</span></div>
+        <ol class="method-steps">
+          <li><strong>用当前 rubric 给训练作文评分</strong><p>每个设置使用 100 篇带人工分数的作文，保留预测分数与评分理由。</p></li>
+          <li><strong>从错分案例提取规则缺口</strong><p>按人工分数分层抽取不一致案例；结合原文、分数差异与理由反思。</p></li>
+          <li><strong>生成并筛选候选 rubric</strong><p>把模糊描述改成条件、阈值、封顶规则等；按训练集 QWK 保留前 3 个候选。</p></li>
+          <li><strong>迭代 5 轮，再在留出集评估</strong><p>测试标签不参与修改；检验改写是否能泛化到新的作文。</p></li>
+        </ol>
+      </div>
+      <div>
+        <div class="evidence-box"><div class="label">作者结果 · ASAP / GPT-5 mini / QWK ↑</div><table class="mini-table"><thead><tr><th>评分设置</th><th>测试 QWK</th></tr></thead><tbody><tr><td>人工编写的原始 rubric</td><td>0.119</td></tr><tr><td>AutoCalibrate 基线</td><td>0.487</td></tr><tr class="emphasis"><td>Reflect-and-Revise</td><td>0.522</td></tr></tbody></table><p class="paper-caution">+0.403 是相对原始 rubric 的最佳组合增益；同一设置相对 AutoCalibrate 的增益为 +0.035。QWK 衡量有序评分一致性，并加重较大分差的惩罚。</p></div>
+        <div class="bridge"><h3>对你的方案：必须比较的强基线</h3><p>先检验加入 L+ / L− 分歧后，能否比“仅用人工或 A 的误差反馈修订 rubric”更有效。固定标签与调用预算，才能识别 gap 的额外价值。</p></div>
+        <p class="paper-caution">收益并非普遍成立：TOEFL11 上 GPT-5 mini 的 QWK 为 0.526 → 0.506。ASAP、ASAP 2.0 的实验各只选一个题目，跨题结论有限。</p>
+      </div>
+    </div>
+    <div class="section-foot"><p>复现入口：<a href="https://aclanthology.org/2026.conll-main.47.pdf" target="_blank" rel="noopener">正式论文 · §3–4、表 1 / 6 ↗</a> · <a href="https://github.com/kenoharada/Reflect-and-Revise" target="_blank" rel="noopener">作者代码 ↗</a>；主要资源为标注作文与模型推理调用。</p><span>RUBRIC TEXT SEARCH</span></div>
+  </section>
+
+  <section class="slide paper-slide" id="slide-7" aria-labelledby="title-7" data-title="精读 · GenRubric" data-subtitle="用交叉评分产生奖励，训练 rubric 生成器">
+    <div class="heading"><div class="eyebrow">07 / Paper 02 · GenRubric</div><h2 id="title-7">好的 rubric，能引导出经得起其他规则检验的答案。</h2><p class="lead">优化 rubric 生成器 Gθ；固定答案生成器与 judge。主奖励来自不同 rubric 之间的交叉评估。</p></div>
+    <div class="paper-layout">
+      <div>
+        <div class="paper-meta"><span class="tag">2026 预印本</span><span class="tag neutral">SFT → RL</span><span class="tag neutral">RL 阶段无新增人工标签</span></div>
+        <p class="small">同一题生成多个 Rᵢ → 每个 Rᵢ 引导生成答案 aᵢ → 用所有 Rⱼ 逐项评 aᵢ。</p>
+        <table class="matrix" aria-label="交叉评分的符号示意，非实验数据"><thead><tr><th>答案来源 ↓ / 评分标准 →</th><th>R₁</th><th>R₂</th><th>R₃</th></tr></thead><tbody><tr><th>R₁ → a₁</th><td class="diagonal">s₁₁</td><td>s₁₂</td><td>s₁₃</td></tr><tr><th>R₂ → a₂</th><td>s₂₁</td><td class="diagonal">s₂₂</td><td>s₂₃</td></tr><tr><th>R₃ → a₃</th><td>s₃₁</td><td>s₃₂</td><td class="diagonal">s₃₃</td></tr></tbody></table>
+        <p class="matrix-caption">符号示意；论文实际每组采样 8 份 rubric。每项标准带权重，judge 判断是否满足后加权汇总。</p>
+        <div class="reward-summary"><strong>主奖励：</strong>对每一行的归一化得分取平均，包含自身 rubric 的评分，衡量答案满足其他标准的程度。<br><strong>辅助奖励：</strong>答案区分度、标准区分度、重复判定模式惩罚；用 GRPO 变体更新 Gθ。</div>
+      </div>
+      <div>
+        <div class="evidence-box"><div class="label">作者结果 · 8B / 排序 Spearman ρ ↑</div><table class="mini-table"><thead><tr><th>训练设置</th><th>ρ</th></tr></thead><tbody><tr><td>仅 SFT</td><td>0.324</td></tr><tr><td>SFT + 仅主奖励 RL</td><td>0.438</td></tr><tr class="emphasis"><td>SFT + 完整 RL</td><td>0.452</td></tr></tbody></table><p class="paper-caution">700 个问题、每题 8 个模型答案；比较生成 rubric 与专家 rubric 在固定 judge 下诱导的排序。这里没有直接测量学生试卷分数的准确性。</p></div>
+        <div class="bridge"><h3>对你的方案：最接近的训练框架</h3><p>都训练 Gθ。但你的答案 x 固定，用同一 R 的加分 / 减分执行差异给奖励；GenRubric 改变 R 并生成新答案，奖励跨规则的满足程度。</p></div>
+        <p class="paper-caution">SFT 使用约 20.7 万条数据；论文报告 2×H800，推理成本另计。仓库有模型入口；10 月 29 日检查时未见完整训练脚本。</p>
+      </div>
+    </div>
+    <div class="section-foot"><p><a href="https://arxiv.org/html/2608.29856v1#S3" target="_blank" rel="noopener">论文 · 方法、主结果与消融 ↗</a> · <a href="https://github.com/foggpoy/GenRubric" target="_blank" rel="noopener">作者仓库 ↗</a>；交叉评估仍依赖固定 judge 的判断，不能消除共同偏差。</p><span>LEARN THE RUBRIC GENERATOR</span></div>
+  </section>
+
+  <section class="slide paper-slide" id="slide-8" aria-labelledby="title-8" data-title="精读 · FairJudge" data-subtitle="以对齐标签训练 judge，改善跨模式一致性">
+    <div class="heading"><div class="eyebrow">08 / Paper 03 · FairJudge</div><h2 id="title-8">让评分器学会遵循标准，并减少跨模式矛盾。</h2><p class="lead">训练 judge 参数，以对齐标签监督单独评分与成对比较；正式版奖励不直接匹配两种输出。</p></div>
+    <div class="stage-strip">
+      <div class="stage-block"><strong>01 · SFT</strong><p>学习按照给定 rubric 产生评分与判断。</p></div>
+      <div class="stage-block"><strong>02 · DPO</strong><p>偏好无偏判断，抑制位置、格式等干扰。</p></div>
+      <div class="stage-block"><strong>03 · GRPO</strong><p>依据不同任务的参考标签给予奖励。</p></div>
+    </div>
+    <div class="paper-layout">
+      <div>
+        <div class="label">正式版附录 A.3 · 奖励结构</div>
+        <table class="reward-table"><thead><tr><th>任务</th><th>奖励</th></tr></thead><tbody><tr><td>成对比较</td><td>2 × 𝟙[偏好与 g₁、g₂ 排序一致]</td></tr><tr><td>数值评分</td><td>max(0, 2 − |g₁ − Int(c)|)</td></tr><tr><td>离散标签匹配</td><td>2 × 𝟙[c = g₁]</td></tr></tbody></table>
+        <p class="paper-caution">g 为数据中的参考标签，c 为模型输出；无法有效匹配时奖励为 0。“Ground truth” 指训练参照，不意味着所有数据都是独立人工真值。</p>
+        <div class="bridge"><h3>相近问题，不同训练信号</h3><p>论文通过对齐监督改善“单点评分 / 成对比较”一致性；你的方案显式测量“加分 / 减分”分歧，并将它用于优化 rubric。</p></div>
+      </div>
+      <div>
+        <div class="evidence-box"><div class="label">Qwen3-VL-8B 基座 → 完整训练流程</div><div class="metric-line"><span>跨模式一致率<br><small class="muted">内部测试集</small></span><b>60.59% → 65.52%</b></div><div class="metric-line"><span>与人类偏好一致率<br><small class="muted">PandaLM，正式版表 2</small></span><b>69.63% → 76.83%</b></div><p class="paper-caution">是 SFT + DPO + GRPO 的整体收益，不能全部归因于一致性或 GRPO。内部测试集与训练数据采用相同生成流程，仅实例分离。</p></div>
+        <p class="paper-caution">资源：FairJudge-16K，基于 JudgeLM 构建，涉及教师模型判断；训练 2B / 4B / 8B judge。完整数据入口及训练 GPU 预算尚未核实；论文中的 4090 测量是推理表现。</p>
+      </div>
+    </div>
+    <div class="section-foot"><p><a href="https://proceedings.mlr.press/v306/yang26n.html" target="_blank" rel="noopener">ICML 2026 正式版 ↗</a> · <a href="https://raw.githubusercontent.com/mlresearch/v306/main/assets/yang26n/yang26n.pdf" target="_blank" rel="noopener">表 2、跨模式评估、附录 A.3 ↗</a>。若你改为训练 L±，它会成为更直接的方法基线。</p><span>LEARN THE JUDGE</span></div>
+  </section>
+
+  <section class="slide paper-slide" id="slide-9" aria-labelledby="title-9" data-title="与 A + L± 的对比" data-subtitle="分清训练对象、参照来源和 gap 的增量价值">
+    <div class="heading"><div class="eyebrow">09 / Method comparison</div><h2 id="title-9">你的可检验贡献，是加减分差距的额外价值。</h2><p class="lead">此处比较“固定 A 与 L±、优化 Gθ”的版本。若选择训练 L±，应单独定义实验，避免同时改动规则与评分器。</p></div>
+    <table class="comparison-table"><thead><tr><th>方法</th><th>更新什么？</th><th>信号从哪里来？</th><th>与 A、L+、L− 的关系</th><th>对本项目的用途</th></tr></thead><tbody>
+      <tr><td>Reflect-and-Revise<span class="sub">教育评分</span></td><td data-label="更新对象">rubric 文本<span class="sub">提示搜索，无参数训练</span></td><td data-label="监督与奖励">人工分数 + 错分案例与理由；按训练 QWK 筛选。</td><td data-label="A 与 L± 的关系">人工标签承担参照作用；没有加减分双路径。</td><td data-label="对本项目的用途">回答“是否仅靠反思改写就足够”。</td></tr>
+      <tr><td>GenRubric<span class="sub">rubric 生成</span></td><td data-label="更新对象">rubric 生成器 Gθ<span class="sub">SFT + RL</span></td><td data-label="监督与奖励">候选 R 引导答案，再跨 R 评分；加区分度与冗余奖励。</td><td data-label="A 与 L± 的关系">固定 judge 提供内部反馈；没有 A 的固定目标分或 L±。</td><td data-label="对本项目的用途">借用训练框架，替换并消融奖励。</td></tr>
+      <tr><td>FairJudge<span class="sub">评分器训练</span></td><td data-label="更新对象">judge 参数<span class="sub">SFT + DPO + GRPO</span></td><td data-label="监督与奖励">对齐的任务参考标签；奖励正确评分 / 偏好判断。</td><td data-label="A 与 L± 的关系">参照作用类似老师监督；模式为单点评分 / 成对比较。</td><td data-label="对本项目的用途">训练 L± 时的近邻；提醒区分直接 gap 与标签监督。</td></tr>
+      <tr class="proposed"><td>A + L+ + L−<span class="sub">本汇报拟议版本 · 尚未实测</span></td><td data-label="更新对象">rubric 生成器 Gθ<span class="sub">先提示优化，再考虑 RL</span></td><td data-label="监督与奖励">λc(S+ − S−)² + λa(m − tA)²；同时约束 rubric 语义。</td><td data-label="A 与 L± 的关系">A 给冻结参照 tA；L± 独立执行同一 R，产生协议差距。</td><td data-label="对本项目的用途">验证 gap 能否降低独立人工误差，并跨题泛化。</td></tr>
+    </tbody></table>
+    <div class="comparison-bottom">
+      <div><h3>关键等式：分别追 A，已隐含 gap 惩罚</h3><p class="identity">(S+ − tA)² + (S− − tA)²<br>= 2(m − tA)² + ½(S+ − S−)²</p><p>其中 m = (S+ + S−) / 2。对两路分别使用平方误差时，“A-only”本身就会压缩 gap。</p></div>
+      <div><h3>因此，消融要明确拆开两个作用</h3><p><strong>均值对齐 A：</strong>仅优化 (m − tA)²。<br><strong>Gap-only：</strong>仅优化 (S+ − S−)²。<br><strong>组合：</strong>均值对齐 + 可独立调权的 gap。<br>用留出人工分数验收；A 的错误可能被两条路径共同继承。</p></div>
+    </div>
+    <div class="section-foot"><p>前三行依据前页原文；对比、代数展开与实验建议为本提案分析。现有论文不构成“加减分 gap 可代表 rubric 歧义”的直接证据。</p><span>CONSISTENCY + EXTERNAL VALIDATION</span></div>
+  </section>
+
+  <section class="slide" id="slide-10" aria-labelledby="title-10" data-title="实验设计" data-subtitle="先验证信号，再训练模型">
+    <div class="heading"><div class="eyebrow">10 / Experimental design</div><h2 id="title-10">先回答三个问题，再决定 RL 是否值得投入。</h2><p class="lead">第一阶段固定同一个基础模型，隔离“评分协议”的影响；第二阶段再测试跨模型迁移。</p></div>
+    <div class="h-grid">
+      <div class="hypothesis"><span class="h-label">H₁</span><h3>路径分歧是否超出随机波动？</h3><p>比较 L+ / L− 的差距与同协议重复评分的差距。控制输入、采样设置和输出格式。</p></div>
+      <div class="hypothesis"><span class="h-label">H₂</span><h3>分歧是否包含有用的误差信息？</h3><p>分析 gap 与人工评分误差的关系；复核高 gap 样本是否集中在部分分、遗漏与隐含表达。</p></div>
+      <div class="hypothesis"><span class="h-label">H₃</span><h3>利用分歧能否改进未见样本？</h3><p>优化后的 rubric 同时降低 gap 与人工评分误差，并保留对答案质量的区分能力。</p></div>
+    </div>
+    <div class="exp-lower">
+      <div><div class="label">Ablations · 保持相近搜索 / 调用预算</div><table class="ablation-table"><thead><tr><th>实验组</th><th>优化信号</th><th>作用</th></tr></thead><tbody><tr><td>原始 rubric</td><td>无</td><td>基础参照</td></tr><tr><td>Reflect-and-Revise</td><td>人工误差反馈</td><td>强提示优化基线</td></tr><tr><td>均值对齐 A</td><td>(m − tA)²</td><td>不直接惩罚两路差距</td></tr><tr><td>Gap-only</td><td>(S+ − S−)²</td><td>检验退化与信号质量</td></tr><tr><td><strong>Gap + 均值对齐 A</strong></td><td>λc · gap² + λa · (m − tA)²</td><td>检验 gap 的额外价值</td></tr></tbody></table></div>
+      <div><div class="label">Controls · 必须保持的实验条件</div><ol class="protocol-list"><li><strong>语义等价：</strong>相同考点与权重；明确部分分、遗漏和重复扣分规则。</li><li><strong>独立评分：</strong>两路互不见对方分数；逐项返回证据，程序计算总分。</li><li><strong>严格划分：</strong>先做题内答案留出，再做按题目留出；测试标签不进入修改流程。</li><li><strong>正确归因：</strong>增加等长度 rubric 与同协议重复评分对照；报告逐题结果和置信区间。</li></ol></div>
+    </div>
+    <div class="section-foot"><p>A 监督与人工监督分别报告，不混用预算。ASAP-SAS 仅 10 道题，按题留出需逐题报告并说明不确定性。</p><span>KEEP SIGNALS SEPARATE</span></div>
+  </section>
+
+  <section class="slide" id="slide-11" aria-labelledby="title-11" data-title="数据选择" data-subtitle="真实评分用于验证，合成 rubric 用于冷启动">
+    <div class="heading"><div class="eyebrow">11 / Data strategy</div><h2 id="title-11">从真实学生答案起步，再补充 rubric 训练数据。</h2><p class="lead">先验证研究信号；大规模合成数据不能替代独立的人类评分测试集。</p></div>
+    <table class="data-table"><thead><tr><th>数据集</th><th>包含内容</th><th>在本研究中的角色</th><th>主要限制</th></tr></thead><tbody>
+      <tr><td><a href="https://www.kaggle.com/competitions/asap-sas/data" target="_blank" rel="noopener">ASAP-SAS ↗</a><span class="sub">首选 pilot</span></td><td data-label="内容">10 道短答题，约 1.7 万条训练答案；题目 rubric、人工分数。<span class="sub">通常为 0–2 / 0–3 分；原始数据有双评分者信息。</span></td><td data-label="用途">验证 gap、人工误差、题内与跨题泛化。</td><td data-label="限制">题目数量少；获取时检查标签完整性。</td></tr>
+      <tr><td><a href="https://aclanthology.org/S13-2045/" target="_blank" rel="noopener">SciEntsBank ↗</a><span class="sub">SemEval 2013 Task 7</span></td><td data-label="内容">科学短答题、参考答案；正确、部分正确、矛盾等人工类别标签。</td><td data-label="用途">扩展题目与错误类型，研究知识点级分歧。</td><td data-label="限制">类别并非现成分数；需补充评分规则。</td></tr>
+      <tr><td><a href="https://github.com/scrosseye/ASAP_2.0" target="_blank" rel="noopener">ASAP 2.0 ↗</a><span class="sub">作文扩展 · CC BY 4.0</span></td><td data-label="内容">24,278 篇作文、7 个题目；评分、rubric 和材料文本。</td><td data-label="用途">后续测试作文场景；对比 Reflect-and-Revise。</td><td data-label="限制">整体质量分较难直接拆成加减得分点。</td></tr>
+      <tr><td><a href="https://huggingface.co/datasets/prometheus-eval/Feedback-Collection" target="_blank" rel="noopener">Feedback Collection ↗</a><span class="sub">通用评分能力</span></td><td data-label="内容">约 1,000 个 rubric、10 万条合成回答 / 反馈 / 分数。</td><td data-label="用途">评分器 SFT 或强模型 A 的蒸馏实验。</td><td data-label="限制">模型合成评分；不能当人工真值。</td></tr>
+      <tr><td><a href="https://huggingface.co/datasets/sojuL/RubricHub_v1" target="_blank" rel="noopener">RubricHub ↗</a><span class="sub">Rubric 生成冷启动</span></td><td data-label="内容">通用任务及对应合成 rubric。</td><td data-label="用途">为 Gθ 提供结构化 rubric 的初始能力。</td><td data-label="限制">需固定数据版本；教育领域仍需验证。</td></tr>
+    </tbody></table>
+    <div class="data-callout"><strong>10 ≠ 17k</strong><p>学习“新题目的 rubric”时，独立题目数量比同一题的答案数量更关键。<br>ASAP-SAS 适合概念验证，广泛泛化仍需要更多题型。</p></div>
+    <div class="section-foot"><p>下载入口不代表无访问限制：遵循各数据集条款；不将没有真实标签的镜像误作训练集。</p><span>HUMAN LABELS FOR EXTERNAL VALIDATION</span></div>
+  </section>
+
+  <section class="slide" id="slide-12" aria-labelledby="title-12" data-title="资源预算" data-subtitle="先 API pilot，后参数训练">
+    <div class="heading"><div class="eyebrow">12 / Resource plan</div><h2 id="title-12">第一阶段可以从零训练 GPU 开始。</h2><p class="lead">下方估算评分调用次数；费用取决于具体模型、输入长度、反馈长度与缓存策略。</p></div>
+    <div class="resource-layout">
+      <div class="calculator">
+        <div class="label">Pilot call estimator · 可修改参数</div>
+        <div class="calc-field"><label for="sampleN">答案数量 N<small>每个 rubric 设置评估的答案</small></label><input id="sampleN" type="number" min="1" max="100000" step="1" value="500"></div>
+        <div class="calc-field"><label for="rubricK">Rubric 设置数 K<small>基线或候选版本的数量</small></label><input id="rubricK" type="number" min="1" max="1000" step="1" value="1"></div>
+        <div class="calc-field"><label for="repeatR">每方向重复次数 r<small>两个方向：加分 + 减分</small></label><input id="repeatR" type="number" min="1" max="100" step="1" value="3"></div>
+        <div class="calc-out" aria-live="polite"><div class="calc-total" id="callTotal">3,500</div><div class="calc-breakdown" id="callBreakdown">3,000 次双向评分 + 500 次固定 A 评分</div><div class="small">调用量 = 2 × N × K × r + N<br>A 分数预先生成并复用；不包含 rubric 生成、反思及失败重试。</div></div>
+      </div>
+      <div>
+        <div class="resource-stage"><span class="tag">阶段 1 · 发现信号</span><h3>普通电脑 + 模型 API + 已标注数据</h3><p>同模型双协议，多次重复；估计 gap 是否超过随机波动，并分析与人工误差的关系。</p></div>
+        <div class="resource-stage"><span class="tag">阶段 2 · 优化基线</span><h3>提示修改 + 独立测试 + 人工复核</h3><p>复现误差反馈式 rubric 修改。建议抽取 100–200 份争议或高 gap 答案复核；这是拟议规模，可随预算调整。</p></div>
+        <div class="resource-stage"><span class="tag blue-tag">阶段 3 · 有条件投入 RL</span><h3>4B / 8B rubric 生成器 + 固定评分器</h3><p>GenRubric 报告 2×H800，可作为参考配置；不代表本项目的最低需求或完整 GPU 时预算。多次评分推理需另计。<a class="citation" href="https://arxiv.org/html/2608.29856v1" target="_blank" rel="noopener">[2]</a></p></div>
+        <p class="budget-formula">候选评估的放大效应：8 个 rubric × 16 份答案 × 2 个方向 = <strong>256 次评分</strong>，尚未计入重复采样。</p>
+      </div>
+    </div>
+    <div class="section-foot"><p>是否投入 RL，由前两阶段的证据决定。没有观察到有效信号时，不以增加训练规模替代问题诊断。</p><span>ESTIMATE, NOT A QUOTE</span></div>
+  </section>
+
+  <section class="slide" id="slide-13" aria-labelledby="title-13" data-title="成功标准" data-subtitle="同时看一致性、准确性与泛化">
+    <div class="heading"><div class="eyebrow">13 / Success &amp; failure criteria</div><h2 id="title-13">成功需要三个结果同时成立。</h2><p class="lead">gap 缩小、人工误差下降，以及改进在未见样本中保持。当前所有实验结果均为待测。</p></div>
+    <div class="results-layout">
+      <div>
+        <table class="results-table"><thead><tr><th>评估维度</th><th>指标 / 检查</th><th>结果</th></tr></thead><tbody>
+          <tr><td><strong>协议一致性</strong></td><td>归一化平均 gap<br><span class="small muted">相对同协议重复评分差距</span></td><td class="pending">待测</td></tr>
+          <tr><td><strong>人工评分有效性</strong></td><td>归一化 MAE、QWK<br><span class="small muted">分别报告 L+、L− 与平均分</span></td><td class="pending">待测</td></tr>
+          <tr><td><strong>泛化</strong></td><td>留出答案 / 留出题目<br><span class="small muted">后续增加未见评分模型</span></td><td class="pending">待测</td></tr>
+          <tr><td><strong>退化检查</strong></td><td>分数分布、排序、逐项证据<br><span class="small muted">检测常数评分与rubric语义偏移</span></td><td class="pending">待测</td></tr>
+        </tbody></table>
+        <p class="note-line">对同一测试集做成对比较；报告效应大小、逐题差异与置信区间。显著性阈值和样本量在 pilot 后预先确定。</p>
+      </div>
+      <div>
+        <div class="decision"><div class="label">Gate 01</div><h3>没有超出随机波动的路径差距</h3><p>先修正协议操纵与测量设计；暂不进入 RL。</p></div>
+        <div class="decision"><div class="label">Gate 02</div><h3>gap 下降，但人工误差不变或上升</h3><p>不能支持“评分更准确”；检查奖励利用、分数塌缩与 A 的共同偏差。</p></div>
+        <div class="decision"><div class="label">Gate 03</div><h3>组合信号在留出集优于强基线</h3><p>再测试跨题与跨模型迁移，判断收益来自可解释的 rubric 澄清，还是特定模型的适配。</p></div>
+      </div>
+    </div>
+    <div class="section-foot"><p>只有一致性改善时，研究结论应限定为“协议稳定性”；准确性与公平性需要各自独立的证据。</p><span>PREDEFINE THE CLAIM BEFORE TRAINING</span></div>
+  </section>
+
+  <section class="slide" id="slide-14" aria-labelledby="title-14" data-title="讨论与下一步" data-subtitle="与 mentor 对齐研究贡献和第一阶段投入">
+    <div class="eyebrow">14 / Discussion</div>
+    <div class="closing">
+      <div><h2 id="title-14">能否把评分分歧，<br>转化成<span class="accent">澄清规则</span><br>的训练信号？</h2><p class="big-q">From disagreement to explicit criteria.</p><p class="lead" style="margin-top:21px">潜在贡献是识别一种可操作的歧义信号，<br>并验证它能否产生更稳定、更准确的评分。</p><div class="closing-box"><strong>建议下一步：</strong>ASAP-SAS 上先做 500 份答案的协议实验；若信号成立，进入 rubric 提示优化与消融，之后再评估 RL。</div></div>
+      <div>
+        <div class="discussion"><h3><strong>01</strong>先聚焦哪一类评分？</h3><p>建议短答题与部分分规则起步。确认题目是否可拆成等价的加分与减分规则。</p></div>
+        <div class="discussion"><h3><strong>02</strong>如何定义可信参照？</h3><p>现有人工分数作为外部评估；A 提供训练监督时，明确校准、冻结与抽样复核方案。</p></div>
+        <div class="discussion"><h3><strong>03</strong>何种证据值得投入 RL？</h3><p>gap 超出随机波动，能反映评分问题，并且以 gap 驱动的 rubric 修改已在留出集显示收益。</p></div>
+      </div>
+    </div>
+    <div class="hero-bottom"><p>第一阶段的目标：验证信号是否存在，以及是否有用。</p><button class="start-btn" data-next>查看资料来源 →</button></div>
+  </section>
+
+  <section class="slide" id="slide-15" aria-labelledby="title-15" data-title="资料来源" data-subtitle="论文、数据与实现的可点击入口">
+    <div class="heading"><div class="eyebrow">15 / References &amp; provenance</div><h2 id="title-15">资料来源与证据边界</h2><p class="lead">研究提案与资源估算为本次讨论的设计建议；文献结果来自对应作者报告。</p></div>
+    <ol class="refs">
+      <li><a href="https://aclanthology.org/2026.conll-main.47/" target="_blank" rel="noopener">Reflect-and-Revise · CoNLL 2026 ↗</a><span>采用正式会议版本；QWK +0.403 为最佳组合增益。<a class="extra" href="https://github.com/kenoharada/Reflect-and-Revise" target="_blank" rel="noopener">代码</a></span></li>
+      <li><a href="https://arxiv.org/html/2608.29856v1" target="_blank" rel="noopener">GenRubric · arXiv:2608.29856v1 ↗</a><span>表 2 的 8B SFT / RL 对比与训练配置；排序参照由专家 rubric 诱导。<a class="extra" href="https://github.com/foggpoy/GenRubric" target="_blank" rel="noopener">仓库</a></span></li>
+      <li><a href="https://alignment.openai.com/argo/" target="_blank" rel="noopener">ARGO · Interpreting Black Box Reward Models ↗</a><span>OpenAI Alignment Research，2026 年 3 月；研究报告，目标为拟合参考 reward model。</span></li>
+      <li><a href="https://proceedings.mlr.press/v306/yang26n.html" target="_blank" rel="noopener">FairJudge · ICML 2026 正式版 ↗</a><span>采用正式版表 2 及附录 A.3；奖励基于对齐标签。<a class="extra" href="https://raw.githubusercontent.com/mlresearch/v306/main/assets/yang26n/yang26n.pdf" target="_blank" rel="noopener">PDF</a></span></li>
+      <li><a href="https://arxiv.org/html/2310.08491" target="_blank" rel="noopener">Prometheus · ICLR 2024 ↗</a><span>相关性来自 45 个实例的人工评测；GPU 配置为原论文全参数训练配置。</span></li>
+      <li><a href="https://www.kaggle.com/competitions/asap-sas/data" target="_blank" rel="noopener">ASAP-SAS · 原始数据入口 ↗</a><span>短答评分数据；双评分者等信息参见 <a class="extra" href="https://aclanthology.org/2022.naacl-main.14/" target="_blank" rel="noopener">NAACL 2022 数据使用说明</a>。检查下载条款与标签完整性。</span></li>
+      <li><a href="https://aclanthology.org/S13-2045/" target="_blank" rel="noopener">SemEval 2013 Task 7 · 原始任务论文 ↗</a><span>SciEntsBank / Beetle；正确性类别标签不能直接当作有序分数。</span></li>
+      <li><a href="https://github.com/scrosseye/ASAP_2.0" target="_blank" rel="noopener">ASAP 2.0 · 作者数据仓库 ↗</a><span>24,278 篇作文、7 个题目；CC BY 4.0。</span></li>
+      <li><a href="https://huggingface.co/datasets/prometheus-eval/Feedback-Collection" target="_blank" rel="noopener">Feedback Collection · 官方数据卡 ↗</a><span>约 10 万条 GPT-4 合成评分反馈；用于模型能力训练，非独立人工真值。</span></li>
+      <li><a href="https://huggingface.co/datasets/sojuL/RubricHub_v1" target="_blank" rel="noopener">RubricHub · 官方数据卡 ↗</a><span>通用 rubric 生成数据；使用时固定版本，规模不与其他论文的子集直接等同。</span></li>
+    </ol>
+    <p class="ref-bottom">更新日期：2026-10-30。第 2、4 页为构造示例，第 7 页矩阵为符号示意，第 12 页为调用量估算，第 13 页均为待测。本文件可离线演示，外部文献链接需要网络。</p>
+    <div class="section-foot"><p>按 ← / → 翻页，Home / End 跳转首尾；“讲稿备注”提供每页讲解提示；“打印 / PDF”输出全部页面。</p><span>END OF BRIEF</span></div>
+  </section>
+</main>
+<aside class="speaker-notes" id="speakerNotes" aria-label="当前页讲稿备注"><b>SPEAKER NOTES</b><p id="notesText"></p></aside>
+<footer class="bottom">
+  <div class="chapter" id="chapterName">研究问题</div>
+  <div class="progress" id="progressNav" aria-label="页码导航"></div>
+  <span class="footer-hint">← → 翻页</span>
+  <span class="page-num mono" id="pageNumber" aria-live="polite">01 / 15</span>
+  <button class="arrow" id="prevBtn" aria-label="上一页" disabled>←</button>
+  <button class="arrow" id="nextBtn" aria-label="下一页">→</button>
+</footer>
+<div class="overview" id="overview" role="dialog" aria-modal="true" aria-labelledby="overviewTitle">
+  <div class="overview-head"><h2 id="overviewTitle">汇报目录</h2><button class="tool key" id="closeOverview">关闭 ×</button></div><div class="overview-grid" id="overviewGrid"></div>
+</div>
+<div class="toast" id="toast" role="status"></div>
+<script>
+(function(){
+  'use strict';
+  var slides=Array.from(document.querySelectorAll('.slide'));
+  var current=0,reading=false,notesOn=false,toastTimer;
+  var notes=[
+    '开场先讲观察：同一份答案，给定相同 rubric，只改变“加分”或“减分”的执行方式，可能得到不同分数。我们还没有实测这个现象。研究问题是这种差距能否反映 rubric 的歧义，并成为训练信号。',
+    '先展示初始 rubric，再点击“细化后的 rubric”。强调所有分数都是构造示例，并非实验发现。例子把“未明确写出的判断”变成可执行规则，但数学等价并不保证 LLM 的理解与判定等价，后者才是实验要验证的部分。',
+    '明确训练对象：先只更新 Gθ，A、L+、L− 全部冻结。候选 rubric 对同一题的多份答案共享，不能为单份答案写入目标分数。平均分拟合加上一致性惩罚可以分别控制权重；A 必须独立于候选 rubric 预先评分并冻结。若换成两路分别对 A 做平方误差，目标本身已包含一致性项，消融时需注意权重。',
+    '先展示“全部给 5 分”：gap 为零但 MAE 为 2。切换到“准确且一致”，说明相同的一致性值可以对应不同准确性。我们不需要一个无所不知的 A，但需要独立外部标注来限制结论。人工参照也应保留分歧与争议复核。',
+    '建议重点讲 Reflect-and-Revise、GenRubric 与 FairJudge：分别对应教育 rubric 修订、rubric 的 RL 优化、评分协议一致性。ARGO 对应原始 A 的设想，Prometheus 对应强老师蒸馏。所有数值来自不同测试，不可横向比较。仓库状态只代表本轮检查，不能把论文宣称公开等同于已具备完整复现条件。',
+    "这篇证明了可通过误差反馈改善 rubric，但不更新模型参数。按评分误差选案例，结合评分理由反思，迭代修改文本。强调最高 +0.403 来自 ASAP 的 GPT-5 mini 组合，相对强基线只增加 0.035，而且 TOEFL11 上同一模型略有下降。复现时需固定标签和调用预算；对比 gap 提供了什么人工误差以外的信息。",
+    "矩阵仅为机制示意，不是数值结果。每一行是某份 rubric 引导出的答案，每一列是评估它的另一份 rubric。主奖励是行内归一化得分平均，包括对角线；不是让各列评分相等。完整方法还加入区分度与重复判定模式惩罚。我们的试卷固定、评分协议改变，因此可以借训练框架，但不能声称两种信号已被证明等价。700 个问题上的排序参照由专家 rubric 与固定 judge 共同产生，不是学生考试的人工总分。",
+    "采用 ICML 正式版。FairJudge 的 GRPO 以对齐参考标签奖励不同任务，并非直接把 pointwise 与 pairwise 输出差异放入奖励。三阶段整体改善不能全归于 GRPO。表 2 的真正 Qwen3-VL-8B 基座人类一致率是 69.63%，不同于主表中的 Qwen3-8B。训练监督包括教师生成数据；人工审计不能解释成全体样本由人工重标。若我们训练 L± 参数而不改 rubric，则更接近这一研究。",
+    "首先明确我们在此比较的版本是冻结 A 与 L±，训练 Gθ。A 的参考分预先生成；L± 看不到它。核心推导：把 S+、S− 写成 m 加减半个差值，两个到 A 的平方误差相加，交叉项抵消，得到 2 倍均值误差加半倍 gap 平方。因此不能把两路分别追 A 当成没有一致性作用的基线。应比较均值对齐、gap-only 和两者组合，独立调权。候选创新是 gap 的额外信息价值，而不是三个 agent 的组合形式本身。",
+    '在讨论 RL 前，先确认 gap 是真实协议效应而非随机采样差异。第二步检查它是否与评分问题相关。最后才检验优化它是否改善留出集。优化组应使用相近的调用和标签预算，并分别记录使用了多少人工监督。A-only 明确定义为均值对齐 A，以隔离新增 gap 惩罚的贡献。',
+    '建议从 ASAP-SAS 起步，因为已有题目、rubric 和人工分数。短板是题目只有 10 个；大量答案不能替代题目多样性。SciEntsBank 的类别需要另行制定分值，不能把矛盾、无关等标签机械地映射成大小关系。',
+    '演示估算器：初始 N=500、K=1、r=3，总计 3,000 次双向评分加 500 次 A 评分。如果已有人工标签而不使用 A，可以省去这 500 次。增加候选数会线性增加成本。估算没有计入改写、反思、重试及 token 长度，不能直接当作财务报价。',
+    '这里是计划填写的结果表，没有实验数字。成功必须同时看 gap、人工误差和泛化；不能只优化自己的训练奖励。对只有 10 题的数据，置信区间与逐题表现比单一平均值更重要。',
+    '请 mentor 帮忙对齐三个决策：题型范围、参照来源、进入 RL 的证据门槛。提议先批准一个 API pilot 与少量人工复核，拿到路径效应和误差关联后再投入参数训练。',
+    '可从这里打开原论文、代码和数据。声明资料整理日期，示例与实测的区别，以及不同论文版本和复现可用性的边界。'
+  ];
+  // Static translations are embedded so the presentation remains a single offline file.
+  var english={
+  "从评分分歧到明确的 Rubric · Research Brief": "From Grading Disagreement to Explicit Rubrics · Research Brief",
+  "演示工具": "Presentation tools",
+  "目录": "Contents",
+  "讲稿备注": "Speaker notes",
+  "连续阅读": "Reading mode",
+  "打印 / PDF": "Print / PDF",
+  "全屏 ↗": "Full screen ↗",
+  "研究问题": "Research question",
+  "从评分分歧到 rubric 的明确性": "From grading disagreement to clearer rubrics",
+  "尚未开展实验": "Experiments not yet conducted",
+  "同一份答案，": "One answer.",
+  "两条评分路径。": "Two grading paths.",
+  "能否打出同一分数？": "The same score?",
+  "用加分与减分评分器之间的分歧，": "Use disagreement between additive and deductive graders",
+  "学习更明确、可执行的评分标准。": "to learn clearer, more actionable scoring rules.",
+  "研究对象": "Research focus",
+  "Rubric 生成与修订": "Rubric generation & revision",
+  "候选方法": "Proposed approach",
+  "一致性信号 + RL": "Consistency signals + RL",
+  "应用场景": "Application",
+  "学生短答题评分": "Student short-answer grading",
+  "同一个 rubric R 输入两个评分器：L减从满分扣分，L加从零分加分。A 是可选的参考评分器。": "Two graders share rubric R: L− deducts from full marks; L+ adds from zero. A is an optional reference grader.",
+  "从满分扣分": "Deduct from full marks",
+  "从零分加分": "Add from zero",
+  "参考评分 · 待校准": "Reference · needs calibration",
+  "更小的 gap，能否带来更准确的评分？": "Can a smaller gap improve grading accuracy?",
+  "核心目标：": "Objective: ",
+  "降低评分对执行路径的敏感性，并用独立人工评分验证有效性。": "Reduce sensitivity to the grading path and validate against independent human scores.",
+  "开始汇报 →": "Start presentation →",
+  "现象与直觉": "Intuition",
+  "切换 rubric，观察两条路径的差距": "Switch rubrics to compare the two grading paths",
+  "分歧可能来自评分规则中未写明的判断。": "Disagreement may reveal unstated scoring rules.",
+  "同一题目、同一答案、同一模型；只改变评分方式。下面用一个构造示例说明直觉。": "Same question, answer, and model; only the grading protocol changes. This is a constructed example.",
+  "Question · 满分 10 分": "Question · Maximum score: 10",
+  "为什么实验需要设置对照组？": "Why does an experiment need a control group?",
+  "“有对照才能知道变化是不是": "“A control lets us tell whether the change",
+  "实验处理造成的。”": "was caused by the treatment.”",
+  "切换示例评分规则": "Switch the example rubric",
+  "初始 rubric": "Original rubric",
+  "细化后的 rubric": "Refined rubric",
+  "“解释对照组的作用，逻辑清楚。”": "“Explain the role of a control group clearly.”",
+  "未规定要点权重、隐含表达是否算分，以及遗漏要点如何处理。": "Weights, implicit credit, and rules for missing points are unspecified.",
+  "构造示例 · 不是模型实测结果": "Constructed example · Not measured model outputs",
+  "L+ 加分式": "L+ Additive",
+  "认可核心作用，认为解释尚不充分。": "Credits the main idea, but finds the explanation incomplete.",
+  "L− 减分式": "L− Deductive",
+  "未见明显错误，仅对解释不足扣分。": "Finds no clear error; deducts only for limited explanation.",
+  "路径差距 Δ = |S+ − S−|": "Path gap Δ = |S+ − S−|",
+  "分": "pts",
+  "两种评分方式都能给出解释，但采用了不同的默认假设。": "Both graders can justify their scores while using different default assumptions.",
+  "待验证的假设": "Hypothesis to test",
+  "明确得分点、部分分与遗漏规则后，两条评分路径的差距会缩小。": "Explicit criteria, partial credit, and omission rules may reduce the gap between paths.",
+  "加分、减分必须是同一评分政策的两种表达；L− 与 L+ 不自动构成分数的上下界。": "Addition and deduction must express the same scoring policy. L− and L+ are not automatically upper and lower bounds.",
+  "固定 A 与双向评分器，优化 rubric": "Freeze A and both graders; optimize the rubric",
+  "A 给参照，L+ 与 L− 暴露评分分歧。": "A anchors the score; L± expose disagreement.",
+  "本汇报主线：固定三个评分 agent，仅优化 rubric 生成器 Gθ；A 是有噪声的老师，独立人工评分负责验收。": "Freeze all three grading agents and optimize only Gθ. A is a noisy teacher; independent human scores validate the result.",
+  "A 用题目 q、固定标准 R₀ 和答卷 x 预先评分；不读取候选 rubric R，也不读取 L± 的输出。": "A scores q and answer x using fixed rubric R₀ in advance, without seeing candidate R or either L± output.",
+  "输入下方奖励项 ↓": " feeds into the reward below ↓",
+  "可训练": "Trainable",
+  "Gθ → 候选 rubric R": "Gθ → Candidate rubric R",
+  "输入题目 q、原始 rubric R₀": "Input: question q and original rubric R₀",
+  "补充权重、边界条件、部分分规则": "Specify weights, boundaries, and partial credit",
+  "每道题的 R 跨多份答案共享": "Share each question’s R across multiple answers",
+  "同一 q、x、候选 R": "Same q, x, and candidate R",
+  "L+ 从零分加分；L− 从满分扣分": "L+ adds from zero; L− deducts from full marks",
+  "独立会话，互不见分数及 t": "Separate contexts; neither sees scores or t",
+  "逐项判定，程序汇总分数": "Judge each criterion; compute totals in code",
+  "汇合 S+、S−、tA": "Combine S+, S−, tA",
+  "Gap + A 的参照误差": "Gap + error relative to A",
+  "控制两条路径的 gap": "Control the gap between paths",
+  "控制两路平均分对 t": "Align the mean score with t",
+  "的误差": "",
+  "约束 rubric 不改变考核要求": "Preserve the intended assessment criteria",
+  "↰ 汇总多份训练答案的反馈，更新 Gθ；测试时冻结 Gθ 与评分器": "↰ Aggregate feedback across training answers to update Gθ; freeze Gθ and all graders at test time",
+  "拟议目标 · 按题目满分归一化，再跨答卷取平均": "Proposed objective · Normalize by maximum score; average across answers",
+  "为预先冻结的 A 分数。": " is A’s precomputed, frozen score.",
+  "：分开控制 gap 与参照误差。": ": independently weight gap and reference error.",
+  "若用人工分数替代 t": "If human scores replace t",
+  "，应作为单独的监督设置报告。": ", report that supervision setting separately.",
+  "R 对同一题的多份答卷共享，不包含单份答卷的目标分数。": "R is shared across answers to a question; it must not encode any answer’s target score.",
+  "这里的 RL 更新 rubric 生成器参数；仅在 API 上反复改写 rubric 属于提示优化，可先用于低成本验证。": "RL updates the rubric generator’s parameters. Iterative API-based rubric rewriting is prompt optimization and offers a low-cost pilot.",
+  "A 与正确性": "A and validity",
+  "一致性不能替代外部参照": "Agreement cannot replace an independent reference",
+  "两个 agent 完全一致，也可能一起打错分。": "Two graders can agree and both be wrong.",
+  "强模型 A 可以提供低成本监督，但它的可靠性需要用独立人工标注校准。": "A strong model A offers affordable supervision, but its reliability must be calibrated against independent human labels.",
+  "Counterexample · 构造数据 / 满分 10 分": "Counterexample · Constructed data / Maximum: 10",
+  "切换一致性反例": "Switch the consistency counterexample",
+  "全部给 5 分": "Always score 5",
+  "准确且一致": "Accurate & consistent",
+  "答案": "Answer",
+  "人工参照": "Human reference",
+  "答案一": "Answer 1",
+  "答案二": "Answer 2",
+  "答案三": "Answer 3",
+  "平均 gap": "Mean gap",
+  "平均分相对人工的 MAE": "MAE of mean score vs. human reference",
+  "常数评分拿到了完美的一致性奖励，却丢失了区分答案质量的能力。": "Constant scores earn perfect consistency while losing the ability to distinguish answer quality.",
+  "有人工评分：优先作为外部参照": "Human scores: use as an external reference",
+  "保留双评分者信息；对争议样本复核。人工评分本身也可能有不确定性。": "Retain both raters’ scores and review disputed cases. Human judgments also carry uncertainty.",
+  "使用强模型 A：定位为有噪声的老师": "Strong model A: treat as a noisy teacher",
+  "A 使用固定评分标准，先评估其人工一致性，再生成训练监督；不要让它随候选 rubric 一起漂移。": "Evaluate A’s human agreement under a fixed rubric before generating supervision. Do not let A drift with candidate rubrics.",
+  "没有可靠参照：限制可得出的结论": "No reliable reference: narrow the claim",
+  "可以验证协议一致性改善；仅凭 gap 收敛，无法判断评分是否更正确。": "You can establish protocol consistency; a shrinking gap alone cannot establish greater accuracy.",
+  "建议将 A 放入消融实验：": "Ablate the role of A: ",
+  "gap-only / 均值对齐 A / gap + 均值对齐 A": "gap-only / mean-to-A / gap + mean-to-A",
+  "，最终都用未参与优化的人工标注评估。": ". Evaluate every setting against human labels excluded from optimization.",
+  "要研究的是“更稳定且有效的评分”，而不是把某个强模型的输出直接定义为真值。": "The objective is stable, valid grading. A strong model’s output is a reference, not an assumed truth.",
+  "相关工作": "Related work",
+  "已有证据、方法差异与复现成本": "Evidence, methodological differences, and reproduction costs",
+  "已有工作验证了部分机制，尚需检验加减分信号。": "Prior work supports parts of the idea; the L± signal remains untested.",
+  "以下是作者报告的结果；任务、参照和指标不同，数值不能直接横向排名。": "Results below are author-reported. Tasks, references, and metrics differ, so the numbers are not directly comparable.",
+  "工作": "Work",
+  "与你的想法的联系": "Connection to this proposal",
+  "已报告的结果": "Reported result",
+  "资源 / 复现情况": "Resources / reproducibility",
+  "CoNLL 2026 · 教育评分": "CoNLL 2026 · Educational grading",
+  "联系": "Connection",
+  "根据人工评分误差反思并修改 rubric；最重要的提示优化基线。": "Revises rubrics using errors against human scores; a key prompt-optimization baseline.",
+  "结果": "Result",
+  "QWK 最高 +0.403": "QWK gain up to +0.403",
+  "三套作文数据；最佳组合的增益，非平均。": "Three essay datasets; best combination, not an average.",
+  "资源": "Resources",
+  "无需权重训练；API 推理。": "No weight training; API inference.",
+  "实现代码 ↗": "Implementation ↗",
+  "2026 预印本 · rubric RL": "2026 preprint · Rubric RL",
+  "跨 rubric 交叉评估产生奖励，训练 rubric 生成器。": "Trains a rubric generator with rewards from cross-rubric evaluation.",
+  "8B，SFT → SFT+RL；对专家 rubric 所诱导排序的相关性。": "8B, SFT → SFT+RL; rank correlation against expert-rubric-induced rankings.",
+  "报告 2×H800；SFT 约 20.7 万条。": "Reports 2×H800; ~207K SFT examples.",
+  "仓库 ↗": "Repository ↗",
+  "有模型链接；检查时无训练脚本。": "Model links available; no training scripts at inspection.",
+  "2026 研究报告 · 参考模型": "2026 research report · Reference model",
+  "固定 judge，用 RL 学习 rubric，拟合参考 reward model。": "Uses RL to learn rubrics that approximate a reference reward model with a fixed judge.",
+  "留出集上参考模型偏好一致性改善。": "Improved agreement with reference-model preferences on held-out data.",
+  "目标是复现参考模型行为，不能据此认定更正确。": "Models reference behavior; this alone does not establish correctness.",
+  "内部偏好数据。": "Internal preference data.",
+  "报告未提供完整公开复现配置。": "No complete public reproduction setup in the report.",
+  "ICML 2026 · judge 训练": "ICML 2026 · Judge training",
+  "以对齐的参考标签训练评分器，改善单独打分与成对比较的一致性。": "Trains on aligned reference labels to improve pointwise–pairwise consistency.",
+  "8B，两种模式一致率；完整训练流程的收益。": "8B, cross-mode consistency; gain from the complete training pipeline.",
+  "SFT → DPO → GRPO，约 1.6 万条。": "SFT → DPO → GRPO; ~16K examples.",
+  "完整下载入口与训练算力尚未核实。": "Complete data access and training compute remain unverified.",
+  "ICLR 2024 · 强老师蒸馏": "ICLR 2024 · Teacher distillation",
+  "GPT-4 生成 rubric、反馈和分数，监督训练较小评分器。": "GPT-4 generates rubrics, feedback, and scores to supervise a smaller judge.",
+  "13B，45 个实例的人工评测；非学生考试成绩。": "13B, human evaluation of 45 instances; not student exam scores.",
+  "约 10 万条合成记录。": "~100K synthetic records.",
+  "原论文全参数训练 8×A100 80GB。": "Original full-parameter training: 8×A100 80GB.",
+  "候选贡献：": "Potential contribution: ",
+  "把“加分 / 减分”的协议差距作为歧义信号，并验证其能否改善学生评分的准确性与泛化。": "Test whether the additive–deductive gap reveals ambiguity and improves student grading accuracy and generalization.",
+  "截至本轮检索，未找到完全同构的加减分 gap 优化方法；这不是首创性证明，正式立项前仍需系统检索。": "This search found no exact additive–deductive gap optimization counterpart. That is not a novelty proof; a systematic review is still needed.",
+  "精读 · Reflect-and-Revise": "Deep dive · Reflect-and-Revise",
+  "从人工评分误差中改写 rubric": "Revise rubrics using errors against human scores",
+  "让模型从错分案例中修订评分规则。": "Revise scoring rules by learning from misgraded examples.",
+  "优化对象是 rubric 文本。通过“评分 → 找错 → 反思 → 改写”的循环，使模型更接近人工评分。": "Optimize rubric text through a score → diagnose → reflect → revise loop, aiming for closer agreement with human scores.",
+  "不更新模型权重": "No weight updates",
+  "需要人工分数": "Human scores required",
+  "用当前 rubric 给训练作文评分": "Score training essays with the current rubric",
+  "每个设置使用 100 篇带人工分数的作文，保留预测分数与评分理由。": "Use 100 human-scored essays per setting; retain predicted scores and grading rationales.",
+  "从错分案例提取规则缺口": "Identify missing rules from scoring errors",
+  "按人工分数分层抽取不一致案例；结合原文、分数差异与理由反思。": "Sample mismatches by human-score level; reflect on essay text, score discrepancies, and rationales.",
+  "生成并筛选候选 rubric": "Generate and select candidate rubrics",
+  "把模糊描述改成条件、阈值、封顶规则等；按训练集 QWK 保留前 3 个候选。": "Add conditions, thresholds, and score caps; retain the top 3 candidates by training QWK.",
+  "迭代 5 轮，再在留出集评估": "Repeat for 5 rounds; evaluate on held-out essays",
+  "测试标签不参与修改；检验改写是否能泛化到新的作文。": "Test labels stay outside revision. Check whether improvements transfer to new essays.",
+  "作者结果 · ASAP / GPT-5 mini / QWK ↑": "Author results · ASAP / GPT-5 mini / QWK ↑",
+  "评分设置": "Scoring setup",
+  "测试 QWK": "Test QWK",
+  "人工编写的原始 rubric": "Original human-authored rubric",
+  "AutoCalibrate 基线": "AutoCalibrate baseline",
+  "+0.403 是相对原始 rubric 的最佳组合增益；同一设置相对 AutoCalibrate 的增益为 +0.035。QWK 衡量有序评分一致性，并加重较大分差的惩罚。": "+0.403 is the best-case gain over the original rubric; the gain over AutoCalibrate here is +0.035. QWK measures ordinal agreement, penalizing larger score discrepancies more heavily.",
+  "对你的方案：必须比较的强基线": "For this proposal: a strong baseline to beat",
+  "先检验加入 L+ / L− 分歧后，能否比“仅用人工或 A 的误差反馈修订 rubric”更有效。固定标签与调用预算，才能识别 gap 的额外价值。": "Does L± disagreement add value beyond revising rubrics from human or A-based error feedback alone? Match label and API budgets to isolate the gap’s contribution.",
+  "收益并非普遍成立：TOEFL11 上 GPT-5 mini 的 QWK 为 0.526 → 0.506。ASAP、ASAP 2.0 的实验各只选一个题目，跨题结论有限。": "Gains are not universal: GPT-5 mini on TOEFL11 falls from 0.526 to 0.506 QWK. ASAP and ASAP 2.0 each use one prompt, limiting cross-question conclusions.",
+  "复现入口：": "Reproduction: ",
+  "正式论文 · §3–4、表 1 / 6 ↗": "Published paper · §3–4, Tables 1 / 6 ↗",
+  "作者代码 ↗": "Author code ↗",
+  "；主要资源为标注作文与模型推理调用。": "; requires labeled essays and model inference calls.",
+  "精读 · GenRubric": "Deep dive · GenRubric",
+  "用交叉评分产生奖励，训练 rubric 生成器": "Train the rubric generator with cross-evaluation rewards",
+  "好的 rubric，能引导出经得起其他规则检验的答案。": "A good rubric elicits answers that satisfy other rubrics.",
+  "优化 rubric 生成器 Gθ；固定答案生成器与 judge。主奖励来自不同 rubric 之间的交叉评估。": "Optimize Gθ with a fixed answer generator and judge. The main reward comes from evaluation across sampled rubrics.",
+  "2026 预印本": "2026 preprint",
+  "RL 阶段无新增人工标签": "No new human labels during RL",
+  "同一题生成多个 Rᵢ → 每个 Rᵢ 引导生成答案 aᵢ → 用所有 Rⱼ 逐项评 aᵢ。": "Sample Rᵢ for one question → generate aᵢ under each Rᵢ → score every aᵢ with all Rⱼ.",
+  "交叉评分的符号示意，非实验数据": "Symbolic cross-evaluation matrix; not experimental data",
+  "答案来源 ↓ / 评分标准 →": "Answer source ↓ / Rubric →",
+  "符号示意；论文实际每组采样 8 份 rubric。每项标准带权重，judge 判断是否满足后加权汇总。": "Symbolic illustration; the paper samples 8 rubrics per group. The judge checks each weighted criterion, then aggregates the score.",
+  "主奖励：": "Main reward: ",
+  "对每一行的归一化得分取平均，包含自身 rubric 的评分，衡量答案满足其他标准的程度。": "Average normalized scores across each row, including its own rubric, to measure how well the answer meets other criteria.",
+  "辅助奖励：": "Auxiliary rewards: ",
+  "答案区分度、标准区分度、重复判定模式惩罚；用 GRPO 变体更新 Gθ。": "Answer and criterion discrimination, plus a repeated-judgment-pattern penalty; update Gθ with a GRPO variant.",
+  "作者结果 · 8B / 排序 Spearman ρ ↑": "Author results · 8B / Ranking Spearman ρ ↑",
+  "训练设置": "Training setup",
+  "仅 SFT": "SFT only",
+  "SFT + 仅主奖励 RL": "SFT + main-reward-only RL",
+  "SFT + 完整 RL": "SFT + full RL",
+  "700 个问题、每题 8 个模型答案；比较生成 rubric 与专家 rubric 在固定 judge 下诱导的排序。这里没有直接测量学生试卷分数的准确性。": "700 questions, 8 model answers each; compare rankings induced by generated and expert rubrics under a fixed judge. This does not directly measure student-score accuracy.",
+  "对你的方案：最接近的训练框架": "For this proposal: the closest training framework",
+  "都训练 Gθ。但你的答案 x 固定，用同一 R 的加分 / 减分执行差异给奖励；GenRubric 改变 R 并生成新答案，奖励跨规则的满足程度。": "Both train Gθ. Here, answer x stays fixed and the same R is executed additively and deductively. GenRubric varies R, generates new answers, and rewards cross-rubric satisfaction.",
+  "SFT 使用约 20.7 万条数据；论文报告 2×H800，推理成本另计。仓库有模型入口；10 月 29 日检查时未见完整训练脚本。": "~207K SFT examples; reports 2×H800, with inference costs additional. Model links are available; no complete training scripts were found on Oct. 29.",
+  "论文 · 方法、主结果与消融 ↗": "Paper · Method, results, and ablations ↗",
+  "作者仓库 ↗": "Author repository ↗",
+  "；交叉评估仍依赖固定 judge 的判断，不能消除共同偏差。": "; cross-evaluation still depends on the fixed judge and does not eliminate shared bias.",
+  "精读 · FairJudge": "Deep dive · FairJudge",
+  "以对齐标签训练 judge，改善跨模式一致性": "Train a judge on aligned labels for cross-mode consistency",
+  "让评分器学会遵循标准，并减少跨模式矛盾。": "Train the judge to follow criteria and reduce contradictions.",
+  "训练 judge 参数，以对齐标签监督单独评分与成对比较；正式版奖励不直接匹配两种输出。": "Aligned labels supervise pointwise and pairwise judgments. The published reward does not directly match the two outputs.",
+  "学习按照给定 rubric 产生评分与判断。": "Learn rubric-conditioned scoring and judgments.",
+  "偏好无偏判断，抑制位置、格式等干扰。": "Prefer unbiased judgments over position, format, and other distractions.",
+  "依据不同任务的参考标签给予奖励。": "Reward predictions using task-specific reference labels.",
+  "正式版附录 A.3 · 奖励结构": "Published Appendix A.3 · Reward structure",
+  "任务": "Task",
+  "奖励": "Reward",
+  "成对比较": "Pairwise comparison",
+  "2 × 𝟙[偏好与 g₁、g₂ 排序一致]": "2 × 𝟙[preference matches order of g₁, g₂]",
+  "数值评分": "Numerical scoring",
+  "离散标签匹配": "Discrete label matching",
+  "g 为数据中的参考标签，c 为模型输出；无法有效匹配时奖励为 0。“Ground truth” 指训练参照，不意味着所有数据都是独立人工真值。": "g denotes reference labels and c the model output; invalid matches receive 0. “Ground truth” is training supervision, not necessarily independent human judgment.",
+  "相近问题，不同训练信号": "Related question, different training signal",
+  "论文通过对齐监督改善“单点评分 / 成对比较”一致性；你的方案显式测量“加分 / 减分”分歧，并将它用于优化 rubric。": "Aligned supervision improves pointwise–pairwise consistency. This proposal explicitly measures additive–deductive disagreement and uses it to optimize the rubric.",
+  "Qwen3-VL-8B 基座 → 完整训练流程": "Qwen3-VL-8B base → Full training pipeline",
+  "跨模式一致率": "Cross-mode consistency",
+  "内部测试集": "Internal test set",
+  "与人类偏好一致率": "Human preference agreement",
+  "PandaLM，正式版表 2": "PandaLM, published Table 2",
+  "是 SFT + DPO + GRPO 的整体收益，不能全部归因于一致性或 GRPO。内部测试集与训练数据采用相同生成流程，仅实例分离。": "These are gains from SFT + DPO + GRPO together, not solely from consistency or GRPO. The internal test set shares the training generation pipeline, with disjoint instances.",
+  "资源：FairJudge-16K，基于 JudgeLM 构建，涉及教师模型判断；训练 2B / 4B / 8B judge。完整数据入口及训练 GPU 预算尚未核实；论文中的 4090 测量是推理表现。": "FairJudge-16K builds on JudgeLM and includes teacher judgments; 2B / 4B / 8B judges are trained. Full data access and GPU training budget remain unverified; the 4090 measurements concern inference.",
+  "ICML 2026 正式版 ↗": "ICML 2026 published version ↗",
+  "表 2、跨模式评估、附录 A.3 ↗": "Table 2, cross-mode evaluation, Appendix A.3 ↗",
+  "。若你改为训练 L±，它会成为更直接的方法基线。": ". A closer baseline if L± parameters are trained instead.",
+  "与 A + L± 的对比": "Comparison with A + L±",
+  "分清训练对象、参照来源和 gap 的增量价值": "Separate the training target, reference, and incremental value of the gap",
+  "你的可检验贡献，是加减分差距的额外价值。": "The testable contribution is the added value of the L± gap.",
+  "此处比较“固定 A 与 L±、优化 Gθ”的版本。若选择训练 L±，应单独定义实验，避免同时改动规则与评分器。": "Compare the version that freezes A and L± and trains Gθ. Training L± should be a separate experiment, avoiding simultaneous changes to rules and graders.",
+  "方法": "Method",
+  "更新什么？": "What is updated?",
+  "信号从哪里来？": "Where does the signal come from?",
+  "与 A、L+、L− 的关系": "Relation to A, L+, and L−",
+  "对本项目的用途": "Role in this project",
+  "教育评分": "Educational grading",
+  "更新对象": "Update target",
+  "rubric 文本": "Rubric text",
+  "提示搜索，无参数训练": "Prompt search; no weight training",
+  "监督与奖励": "Supervision & reward",
+  "人工分数 + 错分案例与理由；按训练 QWK 筛选。": "Human scores, error cases, and rationales; select by training QWK.",
+  "A 与 L± 的关系": "Relation to A and L±",
+  "人工标签承担参照作用；没有加减分双路径。": "Human labels anchor scores; no additive–deductive pair.",
+  "回答“是否仅靠反思改写就足够”。": "Test whether reflection and rewriting alone suffice.",
+  "rubric 生成": "Rubric generation",
+  "rubric 生成器 Gθ": "Rubric generator Gθ",
+  "候选 R 引导答案，再跨 R 评分；加区分度与冗余奖励。": "R induces answers, then cross-rubric scoring; add discrimination and redundancy rewards.",
+  "固定 judge 提供内部反馈；没有 A 的固定目标分或 L±。": "Fixed judge supplies internal feedback; no frozen A target or L± pair.",
+  "借用训练框架，替换并消融奖励。": "Adapt the training framework; replace and ablate rewards.",
+  "评分器训练": "Judge training",
+  "judge 参数": "Judge parameters",
+  "对齐的任务参考标签；奖励正确评分 / 偏好判断。": "Aligned task labels reward correct scores and preference judgments.",
+  "参照作用类似老师监督；模式为单点评分 / 成对比较。": "Reference labels provide teacher-like supervision; modes are pointwise and pairwise.",
+  "训练 L± 时的近邻；提醒区分直接 gap 与标签监督。": "Closest when training L±; distinguish label supervision from a direct gap objective.",
+  "本汇报拟议版本 · 尚未实测": "Proposed version · Not yet tested",
+  "先提示优化，再考虑 RL": "Prompt optimization first, then consider RL",
+  "λc(S+ − S−)² + λa(m − tA)²；同时约束 rubric 语义。": "λc(S+ − S−)² + λa(m − tA)²; preserve rubric semantics.",
+  "A 给冻结参照 tA；L± 独立执行同一 R，产生协议差距。": "A supplies frozen tA; L± independently execute the same R to expose the protocol gap.",
+  "验证 gap 能否降低独立人工误差，并跨题泛化。": "Test lower error against independent human scores and transfer to unseen questions.",
+  "关键等式：分别追 A，已隐含 gap 惩罚": "Key identity: fitting each path to A already penalizes the gap",
+  "其中 m = (S+ + S−) / 2。对两路分别使用平方误差时，“A-only”本身就会压缩 gap。": "m = (S+ + S−) / 2. With a squared loss on each path, “A-only” already penalizes disagreement.",
+  "因此，消融要明确拆开两个作用": "Ablations must separate these two effects",
+  "均值对齐 A：": "Mean-to-A: ",
+  "仅优化 (m − tA)²。": "optimize only (m − tA)².",
+  "仅优化 (S+ − S−)²。": "optimize only (S+ − S−)².",
+  "组合：": "Combined: ",
+  "均值对齐 + 可独立调权的 gap。": "mean alignment + an independently weighted gap term.",
+  "用留出人工分数验收；A 的错误可能被两条路径共同继承。": "Evaluate on held-out human scores; both paths may inherit A’s errors.",
+  "前三行依据前页原文；对比、代数展开与实验建议为本提案分析。现有论文不构成“加减分 gap 可代表 rubric 歧义”的直接证据。": "The first three rows summarize the cited papers. The comparison, identity, and design advice are our analysis. Prior work does not directly validate L± gap as a rubric-ambiguity signal.",
+  "实验设计": "Experiment design",
+  "先验证信号，再训练模型": "Validate the signal before training",
+  "先回答三个问题，再决定 RL 是否值得投入。": "Answer three questions before investing in RL.",
+  "第一阶段固定同一个基础模型，隔离“评分协议”的影响；第二阶段再测试跨模型迁移。": "First hold the base model fixed to isolate the protocol effect; then test transfer across models.",
+  "路径分歧是否超出随机波动？": "Does the gap exceed sampling noise?",
+  "比较 L+ / L− 的差距与同协议重复评分的差距。控制输入、采样设置和输出格式。": "Compare L+/L− gaps with repeated scores under the same protocol. Control inputs, sampling, and output format.",
+  "分歧是否包含有用的误差信息？": "Does disagreement contain useful error information?",
+  "分析 gap 与人工评分误差的关系；复核高 gap 样本是否集中在部分分、遗漏与隐含表达。": "Relate gap to human-score error. Review high-gap cases for partial-credit, omission, and implicit-expression issues.",
+  "利用分歧能否改进未见样本？": "Does using the gap improve unseen examples?",
+  "优化后的 rubric 同时降低 gap 与人工评分误差，并保留对答案质量的区分能力。": "The optimized rubric should reduce gap and human-score error while preserving discrimination among answers.",
+  "Ablations · 保持相近搜索 / 调用预算": "Ablations · Match search / API budgets",
+  "实验组": "Condition",
+  "优化信号": "Optimization signal",
+  "作用": "Purpose",
+  "原始 rubric": "Original rubric",
+  "无": "None",
+  "基础参照": "Baseline reference",
+  "人工误差反馈": "Human-error feedback",
+  "强提示优化基线": "Strong prompt-optimization baseline",
+  "均值对齐 A": "Mean-to-A",
+  "不直接惩罚两路差距": "No direct gap penalty",
+  "检验退化与信号质量": "Check degeneration and signal quality",
+  "Gap + 均值对齐 A": "Gap + mean-to-A",
+  "检验 gap 的额外价值": "Test the gap’s added value",
+  "Controls · 必须保持的实验条件": "Controls · Hold these conditions fixed",
+  "语义等价：": "Semantic equivalence: ",
+  "相同考点与权重；明确部分分、遗漏和重复扣分规则。": "Use the same criteria and weights; specify partial credit, omissions, and repeated deductions.",
+  "独立评分：": "Independent grading: ",
+  "两路互不见对方分数；逐项返回证据，程序计算总分。": "Hide each path’s score from the other; return criterion-level evidence and total scores in code.",
+  "严格划分：": "Strict splits: ",
+  "先做题内答案留出，再做按题目留出；测试标签不进入修改流程。": "Hold out answers within questions, then entire questions. Never use test labels for revision.",
+  "正确归因：": "Attribution: ",
+  "增加等长度 rubric 与同协议重复评分对照；报告逐题结果和置信区间。": "Add length-matched rubrics and same-protocol repeat controls; report per-question results and confidence intervals.",
+  "A 监督与人工监督分别报告，不混用预算。ASAP-SAS 仅 10 道题，按题留出需逐题报告并说明不确定性。": "Report A-based and human supervision separately, with separate budgets. ASAP-SAS has only 10 questions; report per-question uncertainty for question-level splits.",
+  "数据选择": "Datasets",
+  "真实评分用于验证，合成 rubric 用于冷启动": "Real scores for validation; synthetic rubrics for initialization",
+  "从真实学生答案起步，再补充 rubric 训练数据。": "Start with student answers, then add rubric-training data.",
+  "先验证研究信号；大规模合成数据不能替代独立的人类评分测试集。": "Validate the research signal first. Large synthetic datasets cannot replace an independent human-scored test set.",
+  "数据集": "Dataset",
+  "包含内容": "Contents",
+  "在本研究中的角色": "Role in this study",
+  "主要限制": "Main limitation",
+  "首选 pilot": "Preferred pilot",
+  "内容": "Contents",
+  "10 道短答题，约 1.7 万条训练答案；题目 rubric、人工分数。": "10 short-answer questions, ~17K training answers; question rubrics and human scores.",
+  "通常为 0–2 / 0–3 分；原始数据有双评分者信息。": "Typically 0–2 / 0–3 points; original data include two raters.",
+  "用途": "Use",
+  "验证 gap、人工误差、题内与跨题泛化。": "Test gap, human-score error, and within-/cross-question generalization.",
+  "限制": "Limitation",
+  "题目数量少；获取时检查标签完整性。": "Few questions; verify label completeness when downloading.",
+  "科学短答题、参考答案；正确、部分正确、矛盾等人工类别标签。": "Science short answers and references; human labels such as correct, partly correct, and contradictory.",
+  "扩展题目与错误类型，研究知识点级分歧。": "Broaden question and error types; study criterion-level disagreement.",
+  "类别并非现成分数；需补充评分规则。": "Categories are not ready-made scores; scoring rules must be added.",
+  "作文扩展 · CC BY 4.0": "Essay extension · CC BY 4.0",
+  "24,278 篇作文、7 个题目；评分、rubric 和材料文本。": "24,278 essays, 7 prompts; scores, rubrics, and source texts.",
+  "后续测试作文场景；对比 Reflect-and-Revise。": "Extend to essays later; compare with Reflect-and-Revise.",
+  "整体质量分较难直接拆成加减得分点。": "Holistic quality scores are harder to decompose into points and deductions.",
+  "通用评分能力": "General judging ability",
+  "约 1,000 个 rubric、10 万条合成回答 / 反馈 / 分数。": "~1,000 rubrics and 100K synthetic responses, feedback items, and scores.",
+  "评分器 SFT 或强模型 A 的蒸馏实验。": "Judge SFT or teacher-A distillation experiments.",
+  "模型合成评分；不能当人工真值。": "Model-generated scores are not human ground truth.",
+  "Rubric 生成冷启动": "Rubric-generation initialization",
+  "通用任务及对应合成 rubric。": "General tasks with corresponding synthetic rubrics.",
+  "为 Gθ 提供结构化 rubric 的初始能力。": "Initialize Gθ’s ability to produce structured rubrics.",
+  "需固定数据版本；教育领域仍需验证。": "Pin the dataset version; educational transfer still needs validation.",
+  "学习“新题目的 rubric”时，独立题目数量比同一题的答案数量更关键。": "For learning rubrics for new questions, independent question count matters more than answer count per question.",
+  "ASAP-SAS 适合概念验证，广泛泛化仍需要更多题型。": "ASAP-SAS supports a proof of concept; broad generalization requires more question types.",
+  "下载入口不代表无访问限制：遵循各数据集条款；不将没有真实标签的镜像误作训练集。": "Download links do not guarantee unrestricted access. Follow dataset terms and verify real labels in mirrored copies.",
+  "资源预算": "Resource budget",
+  "先 API pilot，后参数训练": "API pilot first, parameter training later",
+  "第一阶段可以从零训练 GPU 开始。": "The first phase needs no training GPUs.",
+  "下方估算评分调用次数；费用取决于具体模型、输入长度、反馈长度与缓存策略。": "Estimate grading calls below. Cost depends on the model, input and feedback lengths, and caching.",
+  "Pilot call estimator · 可修改参数": "Pilot call estimator · Editable inputs",
+  "答案数量 N": "Number of answers N",
+  "每个 rubric 设置评估的答案": "Answers evaluated per rubric setting",
+  "Rubric 设置数 K": "Rubric settings K",
+  "基线或候选版本的数量": "Number of baseline or candidate versions",
+  "每方向重复次数 r": "Repeats per direction r",
+  "两个方向：加分 + 减分": "Two directions: additive + deductive",
+  "3,000 次双向评分 + 500 次固定 A 评分": "3,000 grading calls across both paths + 500 fixed-A calls",
+  "调用量 = 2 × N × K × r + N": "Calls = 2 × N × K × r + N",
+  "A 分数预先生成并复用；不包含 rubric 生成、反思及失败重试。": "Precompute and reuse A’s scores; excludes rubric generation, reflection, and retries.",
+  "阶段 1 · 发现信号": "Phase 1 · Detect the signal",
+  "普通电脑 + 模型 API + 已标注数据": "Laptop + model API + labeled data",
+  "同模型双协议，多次重复；估计 gap 是否超过随机波动，并分析与人工误差的关系。": "Repeat both protocols with the same model. Estimate whether gap exceeds noise and relates to human-score error.",
+  "阶段 2 · 优化基线": "Phase 2 · Optimization baselines",
+  "提示修改 + 独立测试 + 人工复核": "Prompt revision + held-out tests + human review",
+  "复现误差反馈式 rubric 修改。建议抽取 100–200 份争议或高 gap 答案复核；这是拟议规模，可随预算调整。": "Reproduce error-driven rubric revision. Review a proposed 100–200 disputed or high-gap answers; adjust to budget.",
+  "阶段 3 · 有条件投入 RL": "Phase 3 · Conditional RL investment",
+  "4B / 8B rubric 生成器 + 固定评分器": "4B / 8B rubric generator + fixed graders",
+  "GenRubric 报告 2×H800，可作为参考配置；不代表本项目的最低需求或完整 GPU 时预算。多次评分推理需另计。": "GenRubric reports 2×H800: a reference setup, not this project’s minimum requirement or a GPU-hour estimate. Repeated judge inference adds cost.",
+  "候选评估的放大效应：8 个 rubric × 16 份答案 × 2 个方向 =": "Candidate evaluation multiplies cost: 8 rubrics × 16 answers × 2 paths = ",
+  "256 次评分": "256 grading calls",
+  "，尚未计入重复采样。": ", before repeated sampling.",
+  "是否投入 RL，由前两阶段的证据决定。没有观察到有效信号时，不以增加训练规模替代问题诊断。": "Invest in RL only if the first two phases support it. More training cannot substitute for diagnosing a missing signal.",
+  "成功标准": "Success criteria",
+  "同时看一致性、准确性与泛化": "Measure consistency, accuracy, and generalization together",
+  "成功需要三个结果同时成立。": "Success requires all three outcomes.",
+  "gap 缩小、人工误差下降，以及改进在未见样本中保持。当前所有实验结果均为待测。": "Smaller gaps, lower human-score error, and gains on unseen data. All proposed experiment results remain unmeasured.",
+  "评估维度": "Evaluation dimension",
+  "指标 / 检查": "Metric / check",
+  "协议一致性": "Protocol consistency",
+  "归一化平均 gap": "Mean normalized gap",
+  "相对同协议重复评分差距": "Relative to same-protocol repeat gaps",
+  "待测": "Pending",
+  "人工评分有效性": "Validity against human scores",
+  "归一化 MAE、QWK": "Normalized MAE, QWK",
+  "分别报告 L+、L− 与平均分": "Report L+, L−, and their mean separately",
+  "泛化": "Generalization",
+  "留出答案 / 留出题目": "Held-out answers / questions",
+  "后续增加未见评分模型": "Later: unseen grading models",
+  "退化检查": "Degeneration checks",
+  "分数分布、排序、逐项证据": "Score distribution, ranking, criterion evidence",
+  "检测常数评分与rubric语义偏移": "Detect constant scores and rubric semantic drift",
+  "对同一测试集做成对比较；报告效应大小、逐题差异与置信区间。显著性阈值和样本量在 pilot 后预先确定。": "Use paired comparisons on the same test set. Report effect sizes, question-level differences, and confidence intervals. Prespecify thresholds and sample size after the pilot.",
+  "没有超出随机波动的路径差距": "No gap beyond sampling noise",
+  "先修正协议操纵与测量设计；暂不进入 RL。": "Revisit protocol manipulation and measurement before proceeding to RL.",
+  "gap 下降，但人工误差不变或上升": "Gap falls, but human-score error does not",
+  "不能支持“评分更准确”；检查奖励利用、分数塌缩与 A 的共同偏差。": "Do not claim improved accuracy. Check reward exploitation, score collapse, and shared bias from A.",
+  "组合信号在留出集优于强基线": "Combined signal beats strong held-out baselines",
+  "再测试跨题与跨模型迁移，判断收益来自可解释的 rubric 澄清，还是特定模型的适配。": "Test cross-question and cross-model transfer to distinguish interpretable rubric improvements from model-specific adaptation.",
+  "只有一致性改善时，研究结论应限定为“协议稳定性”；准确性与公平性需要各自独立的证据。": "Consistency gains alone support a protocol-stability claim. Accuracy and fairness each require independent evidence.",
+  "讨论与下一步": "Discussion & next steps",
+  "与 mentor 对齐研究贡献和第一阶段投入": "Align with the mentor on contribution and initial investment",
+  "能否把评分分歧，": "Can grading disagreement",
+  "转化成": "teach us to",
+  "澄清规则": "clarify the rules",
+  "的训练信号？": "?",
+  "潜在贡献是识别一种可操作的歧义信号，": "Identify a usable signal of ambiguity,",
+  "并验证它能否产生更稳定、更准确的评分。": "then test whether it makes grading more stable and accurate.",
+  "建议下一步：": "Proposed next step: ",
+  "ASAP-SAS 上先做 500 份答案的协议实验；若信号成立，进入 rubric 提示优化与消融，之后再评估 RL。": "Run a 500-answer protocol pilot on ASAP-SAS. If the signal holds, test rubric prompt optimization and ablations before considering RL.",
+  "先聚焦哪一类评分？": "Which grading task comes first?",
+  "建议短答题与部分分规则起步。确认题目是否可拆成等价的加分与减分规则。": "Start with short answers and partial-credit rules. Confirm that additive and deductive formulations can express the same policy.",
+  "如何定义可信参照？": "What counts as a credible reference?",
+  "现有人工分数作为外部评估；A 提供训练监督时，明确校准、冻结与抽样复核方案。": "Use existing human scores for external evaluation. Define calibration, freezing, and sample review before using A for supervision.",
+  "何种证据值得投入 RL？": "What evidence justifies RL?",
+  "gap 超出随机波动，能反映评分问题，并且以 gap 驱动的 rubric 修改已在留出集显示收益。": "Gap exceeds noise, relates to grading problems, and gap-driven rubric revision already improves held-out performance.",
+  "第一阶段的目标：验证信号是否存在，以及是否有用。": "Phase 1 objective: establish whether the signal exists and whether it is useful.",
+  "查看资料来源 →": "View sources →",
+  "资料来源": "Sources",
+  "论文、数据与实现的可点击入口": "Links to papers, datasets, and implementations",
+  "资料来源与证据边界": "Sources and limits of the evidence",
+  "研究提案与资源估算为本次讨论的设计建议；文献结果来自对应作者报告。": "The proposal and resource estimates are design recommendations. Literature results are reported by the respective authors.",
+  "采用正式会议版本；QWK +0.403 为最佳组合增益。": "Published conference version; +0.403 QWK is the best-case gain.",
+  "代码": "Code",
+  "表 2 的 8B SFT / RL 对比与训练配置；排序参照由专家 rubric 诱导。": "Table 2: 8B SFT vs. RL and training setup; expert rubrics induce the reference rankings.",
+  "仓库": "Repository",
+  "OpenAI Alignment Research，2026 年 3 月；研究报告，目标为拟合参考 reward model。": "OpenAI Alignment Research, March 2026; research report on approximating a reference reward model.",
+  "FairJudge · ICML 2026 正式版 ↗": "FairJudge · ICML 2026 published version ↗",
+  "采用正式版表 2 及附录 A.3；奖励基于对齐标签。": "Published Table 2 and Appendix A.3; rewards use aligned labels.",
+  "相关性来自 45 个实例的人工评测；GPU 配置为原论文全参数训练配置。": "Correlation from a 45-instance human evaluation; GPU setup is for original full-parameter training.",
+  "ASAP-SAS · 原始数据入口 ↗": "ASAP-SAS · Original data source ↗",
+  "短答评分数据；双评分者等信息参见": "Short-answer grading data; two-rater details appear in the ",
+  "NAACL 2022 数据使用说明": "NAACL 2022 dataset description",
+  "。检查下载条款与标签完整性。": ". Check access terms and label completeness.",
+  "SemEval 2013 Task 7 · 原始任务论文 ↗": "SemEval 2013 Task 7 · Original task paper ↗",
+  "SciEntsBank / Beetle；正确性类别标签不能直接当作有序分数。": "SciEntsBank / Beetle; correctness categories cannot directly serve as ordinal scores.",
+  "ASAP 2.0 · 作者数据仓库 ↗": "ASAP 2.0 · Author dataset repository ↗",
+  "24,278 篇作文、7 个题目；CC BY 4.0。": "24,278 essays, 7 prompts; CC BY 4.0.",
+  "Feedback Collection · 官方数据卡 ↗": "Feedback Collection · Official dataset card ↗",
+  "约 10 万条 GPT-4 合成评分反馈；用于模型能力训练，非独立人工真值。": "~100K GPT-4-generated grading feedback records; training data, not independent human truth.",
+  "RubricHub · 官方数据卡 ↗": "RubricHub · Official dataset card ↗",
+  "通用 rubric 生成数据；使用时固定版本，规模不与其他论文的子集直接等同。": "General rubric-generation data. Pin the version; do not equate its size with subsets used in other papers.",
+  "更新日期：2026-10-30。第 2、4 页为构造示例，第 7 页矩阵为符号示意，第 12 页为调用量估算，第 13 页均为待测。本文件可离线演示，外部文献链接需要网络。": "Updated Oct. 30, 2026. Slides 2 and 4 are constructed examples; slide 7 is symbolic; slide 12 estimates calls; slide 13 is unmeasured. Works offline; source links require internet.",
+  "按 ← / → 翻页，Home / End 跳转首尾；“讲稿备注”提供每页讲解提示；“打印 / PDF”输出全部页面。": "Use ← / → to navigate and Home / End to jump. Speaker notes provide talking points; Print / PDF exports all slides in the selected language.",
+  "当前页讲稿备注": "Speaker notes for the current slide",
+  "页码导航": "Slide navigation",
+  "← → 翻页": "← → Navigate",
+  "上一页": "Previous slide",
+  "下一页": "Next slide",
+  "汇报目录": "Presentation contents",
+  "关闭 ×": "Close ×",
+  "开场先讲观察：同一份答案，给定相同 rubric，只改变“加分”或“减分”的执行方式，可能得到不同分数。我们还没有实测这个现象。研究问题是这种差距能否反映 rubric 的歧义，并成为训练信号。": "Open with the observation: the same answer and rubric may receive different scores when the model adds points rather than deducts them. We have not measured this effect yet. The question is whether this gap reveals ambiguity in the rubric and can provide a useful training signal.",
+  "先展示初始 rubric，再点击“细化后的 rubric”。强调所有分数都是构造示例，并非实验发现。例子把“未明确写出的判断”变成可执行规则，但数学等价并不保证 LLM 的理解与判定等价，后者才是实验要验证的部分。": "Show the original rubric, then switch to the refined version. All scores are constructed examples, not experimental findings. Explicit rules replace unstated judgments, but mathematical equivalence does not guarantee equivalent interpretation by an LLM. That is what the experiment must test.",
+  "明确训练对象：先只更新 Gθ，A、L+、L− 全部冻结。候选 rubric 对同一题的多份答案共享，不能为单份答案写入目标分数。平均分拟合加上一致性惩罚可以分别控制权重；A 必须独立于候选 rubric 预先评分并冻结。若换成两路分别对 A 做平方误差，目标本身已包含一致性项，消融时需注意权重。": "Specify the training target: update only Gθ while freezing A, L+, and L−. Share each candidate rubric across multiple answers to a question; never encode one answer’s target score. Mean alignment and consistency can be weighted separately. Precompute and freeze A’s scores independently of candidate rubrics. Fitting both paths separately to A with squared losses already includes a consistency term, so take care when defining ablations.",
+  "先展示“全部给 5 分”：gap 为零但 MAE 为 2。切换到“准确且一致”，说明相同的一致性值可以对应不同准确性。我们不需要一个无所不知的 A，但需要独立外部标注来限制结论。人工参照也应保留分歧与争议复核。": "Start with the always-score-5 example: gap is zero, but MAE is 2. Switch to accurate and consistent scores to show that identical consistency can coexist with different accuracy. A need not be infallible, but independent labels are necessary to support validity claims. Preserve human disagreement and review disputed cases.",
+  "建议重点讲 Reflect-and-Revise、GenRubric 与 FairJudge：分别对应教育 rubric 修订、rubric 的 RL 优化、评分协议一致性。ARGO 对应原始 A 的设想，Prometheus 对应强老师蒸馏。所有数值来自不同测试，不可横向比较。仓库状态只代表本轮检查，不能把论文宣称公开等同于已具备完整复现条件。": "Focus on Reflect-and-Revise, GenRubric, and FairJudge: educational rubric revision, RL for rubric generation, and consistency across evaluation protocols. ARGO relates to the original reference-agent A idea; Prometheus illustrates teacher distillation. Results come from different tests and cannot be ranked directly. Repository observations describe the inspection date; a publication’s availability claim does not guarantee full reproducibility.",
+  "这篇证明了可通过误差反馈改善 rubric，但不更新模型参数。按评分误差选案例，结合评分理由反思，迭代修改文本。强调最高 +0.403 来自 ASAP 的 GPT-5 mini 组合，相对强基线只增加 0.035，而且 TOEFL11 上同一模型略有下降。复现时需固定标签和调用预算；对比 gap 提供了什么人工误差以外的信息。": "Reflect-and-Revise shows that error feedback can improve rubric text without updating model parameters. Select scoring errors, reflect using rationales, and revise iteratively. The maximum +0.403 gain is the ASAP/GPT-5 mini combination; its advantage over the stronger baseline is only +0.035. The same model declines slightly on TOEFL11. Match label and API budgets, and ask what information gap adds beyond ordinary error feedback.",
+  "矩阵仅为机制示意，不是数值结果。每一行是某份 rubric 引导出的答案，每一列是评估它的另一份 rubric。主奖励是行内归一化得分平均，包括对角线；不是让各列评分相等。完整方法还加入区分度与重复判定模式惩罚。我们的试卷固定、评分协议改变，因此可以借训练框架，但不能声称两种信号已被证明等价。700 个问题上的排序参照由专家 rubric 与固定 judge 共同产生，不是学生考试的人工总分。": "The matrix illustrates the mechanism, not measured results. Each row is an answer induced by one rubric; each column is a rubric used to evaluate it. The main reward averages normalized scores within a row, including the diagonal. It does not force columns to agree. Auxiliary rewards address discrimination and repeated judgment patterns. Our answers are fixed while protocols change, so the framework is reusable but the signals are not proven equivalent. Expert rubrics and a fixed judge jointly produce the ranking reference on 700 questions; it is not a set of human exam grades.",
+  "采用 ICML 正式版。FairJudge 的 GRPO 以对齐参考标签奖励不同任务，并非直接把 pointwise 与 pairwise 输出差异放入奖励。三阶段整体改善不能全归于 GRPO。表 2 的真正 Qwen3-VL-8B 基座人类一致率是 69.63%，不同于主表中的 Qwen3-8B。训练监督包括教师生成数据；人工审计不能解释成全体样本由人工重标。若我们训练 L± 参数而不改 rubric，则更接近这一研究。": "Use the published ICML version. FairJudge’s GRPO rewards task predictions against aligned reference labels; it does not directly reward matching pointwise and pairwise outputs. Gains from the entire pipeline cannot all be attributed to GRPO. Table 2 gives 69.63% human agreement for the actual Qwen3-VL-8B base, distinct from Qwen3-8B in the main table. Supervision includes teacher-generated data; human auditing does not mean every example was relabeled by humans. Training L± parameters instead of rubrics would bring our work closer to FairJudge.",
+  "首先明确我们在此比较的版本是冻结 A 与 L±，训练 Gθ。A 的参考分预先生成；L± 看不到它。核心推导：把 S+、S− 写成 m 加减半个差值，两个到 A 的平方误差相加，交叉项抵消，得到 2 倍均值误差加半倍 gap 平方。因此不能把两路分别追 A 当成没有一致性作用的基线。应比较均值对齐、gap-only 和两者组合，独立调权。候选创新是 gap 的额外信息价值，而不是三个 agent 的组合形式本身。": "This comparison freezes A and L± and trains Gθ. A’s scores are precomputed and hidden from L±. Write S+ and S− as the mean plus or minus half the gap: summing their squared errors to A cancels cross terms, leaving twice the mean error plus half the squared gap. Fitting each path to A is therefore not a baseline without consistency pressure. Compare mean alignment, gap-only, and their independently weighted combination. The potential contribution is the gap’s additional information, not merely assembling three agents.",
+  "在讨论 RL 前，先确认 gap 是真实协议效应而非随机采样差异。第二步检查它是否与评分问题相关。最后才检验优化它是否改善留出集。优化组应使用相近的调用和标签预算，并分别记录使用了多少人工监督。A-only 明确定义为均值对齐 A，以隔离新增 gap 惩罚的贡献。": "Before RL, establish that the gap reflects a protocol effect rather than sampling noise. Then test whether it relates to grading errors. Only then test whether optimizing it improves held-out results. Match API and label budgets and report human supervision separately. Define A-only as aligning the mean score with A to isolate the added gap penalty.",
+  "建议从 ASAP-SAS 起步，因为已有题目、rubric 和人工分数。短板是题目只有 10 个；大量答案不能替代题目多样性。SciEntsBank 的类别需要另行制定分值，不能把矛盾、无关等标签机械地映射成大小关系。": "Start with ASAP-SAS because it provides questions, rubrics, and human scores. Its main limitation is having only 10 questions: many answers do not substitute for question diversity. SciEntsBank categories require an explicit scoring policy; labels such as contradictory and irrelevant should not be mechanically treated as ordered scores.",
+  "演示估算器：初始 N=500、K=1、r=3，总计 3,000 次双向评分加 500 次 A 评分。如果已有人工标签而不使用 A，可以省去这 500 次。增加候选数会线性增加成本。估算没有计入改写、反思、重试及 token 长度，不能直接当作财务报价。": "Demonstrate the estimator: N=500, K=1, r=3 yields 3,000 grading calls across both paths plus 500 A calls. If existing human labels replace A, those 500 calls are unnecessary. Candidate count increases cost linearly. The estimate excludes rewriting, reflection, retries, and token length; it is not a financial quote.",
+  "这里是计划填写的结果表，没有实验数字。成功必须同时看 gap、人工误差和泛化；不能只优化自己的训练奖励。对只有 10 题的数据，置信区间与逐题表现比单一平均值更重要。": "This is a planned results table, with no experimental measurements. Success requires improved gap, human-score error, and generalization; optimizing the training reward alone is insufficient. With only 10 questions, per-question behavior and confidence intervals matter more than a single average.",
+  "请 mentor 帮忙对齐三个决策：题型范围、参照来源、进入 RL 的证据门槛。提议先批准一个 API pilot 与少量人工复核，拿到路径效应和误差关联后再投入参数训练。": "Align with the mentor on three decisions: task scope, reference source, and the evidence threshold for RL. Propose an API pilot and limited human review first. Measure the protocol effect and its relationship to errors before investing in parameter training.",
+  "可从这里打开原论文、代码和数据。声明资料整理日期，示例与实测的区别，以及不同论文版本和复现可用性的边界。": "Use these links to open the original papers, code, and data. State the review date, distinguish illustrations from measured evidence, and explain the limits of paper versions and reproduction resources. Printing exports the currently selected language.",
+  "；t": "; t",
+  "、λ": ", λ",
+  "Gap-only：": "Gap-only: ",
+  "逐页演示": "Slide mode",
+  "退出全屏 ↙": "Exit full screen ↙",
+  "此浏览器不支持页面全屏，请使用浏览器全屏功能。": "Full screen is unavailable here. Use your browser’s full-screen mode.",
+  "未能进入全屏，请使用浏览器全屏功能。": "Could not enter full screen. Use your browser’s full-screen mode.",
+  "核心作用 6 + 表达清楚 2 = 8。": "Main role: 6 + clear expression: 2 = 8.",
+  "10 − 未明确说明排除其他因素 2 = 8。": "10 − 2 for not explicitly ruling out other factors = 8.",
+  "说明比较实验处理的效果：6 分。": "Explain comparison of the treatment effect: 6 points.",
+  "明确说明排除其他因素：2 分。": "Explicitly state that other factors are ruled out: 2 points.",
+  "表达清楚：2 分。": "Clear expression: 2 points.",
+  "本例约定：隐含表达不计第 2 项分；遗漏只在对应项扣分。": "Example policy: implicit wording earns no credit for item 2; omissions are deducted only under the relevant item.",
+  "两条路径遵循相同的条目判定与权重；结果一致仍需外部验证。": "Both paths use the same criterion judgments and weights; agreement still requires external validation.",
+  "同样是 gap = 0，只有独立参照才能区分“准确一致”和“共同出错”。": "Both cases have gap = 0. Only an independent reference distinguishes accurate agreement from shared error.",
+  "请输入范围内的正整数。": "Enter positive whole numbers within the allowed ranges."
+};
+  var language='zh',rubricClear=false,counterCorrect=false;
+  var textBindings=[],attributeBindings=[];
+  var dynamicSelector='#languageBtn,#readingBtn,#fullscreenBtn,#chapterName,#notesText,#rubricText,#plusReason,#minusReason,#exampleNote,#counterBody,#counterCaption,#callTotal,#callBreakdown';
+  var walker=document.createTreeWalker(document.documentElement,NodeFilter.SHOW_TEXT);
+  var node;
+  while((node=walker.nextNode())){
+    if(node.parentElement&&!node.parentElement.closest('script,style,'+dynamicSelector)&&Object.prototype.hasOwnProperty.call(english,node.data.trim()))textBindings.push({node:node,source:node.data});
+  }
+  document.querySelectorAll('[aria-label],[title],[data-label],[data-title],[data-subtitle]').forEach(function(el){
+    if(el.id==='languageBtn')return;
+    ['aria-label','title','data-label','data-title','data-subtitle'].forEach(function(name){
+      if(el.hasAttribute(name)&&Object.prototype.hasOwnProperty.call(english,el.getAttribute(name).trim()))attributeBindings.push({node:el,name:name,source:el.getAttribute(name)});
+    });
+  });
+  function t(source){
+    if(language!=='en')return source;
+    var key=source.trim();
+    return Object.prototype.hasOwnProperty.call(english,key)?source.slice(0,source.indexOf(key))+english[key]+source.slice(source.indexOf(key)+key.length):source;
+  }
+  function localizeHTML(source){
+    var template=document.createElement('template');template.innerHTML=source;
+    var textWalker=document.createTreeWalker(template.content,NodeFilter.SHOW_TEXT),item;
+    while((item=textWalker.nextNode()))item.data=t(item.data);
+    return template.innerHTML;
+  }
+  function refreshChrome(){
+    document.getElementById('readingBtn').textContent=t(reading?'逐页演示':'连续阅读');
+    document.getElementById('fullscreenBtn').textContent=t(document.fullscreenElement?'退出全屏 ↙':'全屏 ↗');
+    document.querySelectorAll('.step').forEach(function(b,i){b.setAttribute('aria-label',(language==='en'?'Slide '+(i+1)+': ':'第 '+(i+1)+' 页：')+slides[i].dataset.title)});
+    document.querySelectorAll('.overview-card').forEach(function(b,i){b.querySelector('strong').textContent=slides[i].dataset.title;b.querySelector('small').textContent=slides[i].dataset.subtitle});
+  }
+  function applyLanguage(next,persist){
+    language=next==='en'?'en':'zh';
+    document.documentElement.lang=language==='en'?'en':'zh-CN';
+    textBindings.forEach(function(binding){binding.node.data=t(binding.source)});
+    attributeBindings.forEach(function(binding){binding.node.setAttribute(binding.name,t(binding.source))});
+    var button=document.getElementById('languageBtn');
+    button.setAttribute('aria-label',language==='en'?'切换到中文':'Switch to English');
+    button.title=language==='en'?'切换到中文':'Switch to English';
+    button.setAttribute('aria-pressed',String(language==='en'));
+    button.querySelectorAll('[data-lang-code]').forEach(function(label){label.classList.toggle('selected',label.dataset.langCode===language)});
+    if(persist!==false){try{localStorage.setItem('rubric-brief-language',language)}catch(e){}}
+    refreshChrome();setRubric(rubricClear);setCounter(counterCorrect);updateCost();setPage(current,false);
+  }
+  document.getElementById('languageBtn').addEventListener('click',function(){applyLanguage(language==='en'?'zh':'en')});
+
+  function pad(n){return String(n).padStart(2,'0')}
+  function announce(message){var t=document.getElementById('toast');t.textContent=message;t.classList.add('visible');clearTimeout(toastTimer);toastTimer=setTimeout(function(){t.classList.remove('visible')},3000)}
+  function setPage(index,scroll){
+    current=Math.min(slides.length-1,Math.max(0,index));
+    slides.forEach(function(s,i){s.classList.toggle('active',i===current);s.setAttribute('aria-hidden',String(!reading&&i!==current))});
+    document.getElementById('pageNumber').textContent=pad(current+1)+' / '+pad(slides.length);
+    document.getElementById('chapterName').textContent=slides[current].dataset.title;
+    document.getElementById('prevBtn').disabled=current===0;
+    document.getElementById('nextBtn').disabled=current===slides.length-1;
+    document.getElementById('notesText').textContent=t(notes[current]);
+    document.querySelectorAll('.step').forEach(function(b,i){b.classList.toggle('current',i===current);b.classList.toggle('done',i<current);if(i===current)b.setAttribute('aria-current','page');else b.removeAttribute('aria-current')});
+    document.querySelectorAll('.overview-card').forEach(function(b,i){b.setAttribute('aria-current',String(i===current))});
+    try{history.replaceState(null,'','#'+(current+1))}catch(e){}
+    if(scroll!==false){if(reading)slides[current].scrollIntoView({block:'start'});else window.scrollTo(0,0)}
+  }
+  slides.forEach(function(s,i){
+    var b=document.createElement('button');b.className='step';b.setAttribute('aria-label','第 '+(i+1)+' 页：'+s.dataset.title);b.addEventListener('click',function(){setPage(i)});document.getElementById('progressNav').appendChild(b);
+    var c=document.createElement('button');c.className='overview-card';var n=document.createElement('span');n.textContent=pad(i+1);var title=document.createElement('strong');title.textContent=s.dataset.title;var sub=document.createElement('small');sub.textContent=s.dataset.subtitle;c.append(n,title,sub);c.addEventListener('click',function(){toggleOverview(false);setPage(i)});document.getElementById('overviewGrid').appendChild(c);
+  });
+  document.getElementById('prevBtn').addEventListener('click',function(){setPage(current-1)});
+  document.getElementById('nextBtn').addEventListener('click',function(){setPage(current+1)});
+  document.querySelectorAll('[data-next]').forEach(function(b){b.addEventListener('click',function(){setPage(current+1)})});
+  function toggleOverview(force){var el=document.getElementById('overview');var on=force===undefined?!el.classList.contains('visible'):force;el.classList.toggle('visible',on);document.getElementById('overviewBtn').setAttribute('aria-expanded',String(on));document.getElementById('stage').inert=on;document.querySelector('.bottom').inert=on;document.querySelector('.topbar').inert=on;document.getElementById('speakerNotes').inert=on;if(on)document.getElementById('closeOverview').focus();else document.getElementById('overviewBtn').focus()}
+  document.getElementById('overviewBtn').addEventListener('click',function(){toggleOverview()});
+  document.getElementById('closeOverview').addEventListener('click',function(){toggleOverview(false)});
+  document.getElementById('notesBtn').addEventListener('click',function(){notesOn=!notesOn;this.setAttribute('aria-pressed',String(notesOn));document.getElementById('speakerNotes').classList.toggle('visible',notesOn);if(notesOn)document.getElementById('speakerNotes').scrollIntoView({block:'nearest'})});
+  document.getElementById('readingBtn').addEventListener('click',function(){reading=!reading;this.setAttribute('aria-pressed',String(reading));this.textContent=t(reading?'逐页演示':'连续阅读');document.body.classList.toggle('reading',reading);setPage(current)});
+  document.getElementById('printBtn').addEventListener('click',function(){window.print()});
+  document.getElementById('fullscreenBtn').addEventListener('click',async function(){try{if(document.fullscreenElement)await document.exitFullscreen();else if(document.documentElement.requestFullscreen)await document.documentElement.requestFullscreen();else announce(t('此浏览器不支持页面全屏，请使用浏览器全屏功能。'))}catch(e){announce(t('未能进入全屏，请使用浏览器全屏功能。'))}});
+  document.addEventListener('fullscreenchange',refreshChrome);
+  document.addEventListener('keydown',function(e){
+    var overview=document.getElementById('overview');
+    if(overview.classList.contains('visible')){
+      if(e.key==='Escape'){e.preventDefault();toggleOverview(false)}
+      if(e.key==='Tab'){var buttons=Array.from(overview.querySelectorAll('button'));var first=buttons[0],last=buttons[buttons.length-1];if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus()}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus()}}
+      return;
+    }
+    if(e.target.closest('input,textarea,select')||e.ctrlKey||e.metaKey||e.altKey)return;
+    if(e.key==='ArrowRight'||e.key==='PageDown'){e.preventDefault();setPage(current+1)}
+    if(e.key==='ArrowLeft'||e.key==='PageUp'){e.preventDefault();setPage(current-1)}
+    if(e.key==='Home'){e.preventDefault();setPage(0)}
+    if(e.key==='End'){e.preventDefault();setPage(slides.length-1)}
+  });
+  function setRubric(clear){
+    rubricClear=clear;
+    document.getElementById('vagueBtn').setAttribute('aria-pressed',String(!clear));document.getElementById('clearBtn').setAttribute('aria-pressed',String(clear));
+    document.getElementById('plusScore').textContent=clear?'8':'7';document.getElementById('minusScore').textContent=clear?'8':'9';document.getElementById('gapScore').textContent=clear?'0':'2';
+    document.getElementById('plusReason').textContent=t(clear?'核心作用 6 + 表达清楚 2 = 8。':'认可核心作用，认为解释尚不充分。');
+    document.getElementById('minusReason').textContent=t(clear?'10 − 未明确说明排除其他因素 2 = 8。':'未见明显错误，仅对解释不足扣分。');
+    document.getElementById('rubricText').innerHTML=localizeHTML(clear?'<ol><li>说明比较实验处理的效果：6 分。</li><li>明确说明排除其他因素：2 分。</li><li>表达清楚：2 分。</li></ol><p class="muted small" style="margin-top:8px">本例约定：隐含表达不计第 2 项分；遗漏只在对应项扣分。</p>':'“解释对照组的作用，逻辑清楚。”<p class="muted small" style="margin-top:12px">未规定要点权重、隐含表达是否算分，以及遗漏要点如何处理。</p>');
+    document.getElementById('exampleNote').textContent=t(clear?'两条路径遵循相同的条目判定与权重；结果一致仍需外部验证。':'两种评分方式都能给出解释，但采用了不同的默认假设。');
+  }
+  document.getElementById('vagueBtn').addEventListener('click',function(){setRubric(false)});document.getElementById('clearBtn').addEventListener('click',function(){setRubric(true)});
+  function setCounter(correct){
+    counterCorrect=correct;
+    document.getElementById('collapseBtn').setAttribute('aria-pressed',String(!correct));document.getElementById('correctBtn').setAttribute('aria-pressed',String(correct));
+    var labels=['答案一','答案二','答案三'].map(t),gold=[2,5,8];document.getElementById('counterBody').innerHTML=gold.map(function(n,i){var s=correct?n:5;return '<tr><td>'+labels[i]+'</td><td>'+n+'</td><td>'+s+'</td><td>'+s+'</td></tr>'}).join('');
+    document.getElementById('counterMae').textContent=correct?'0.0':'2.0';document.getElementById('counterCaption').textContent=t(correct?'同样是 gap = 0，只有独立参照才能区分“准确一致”和“共同出错”。':'常数评分拿到了完美的一致性奖励，却丢失了区分答案质量的能力。');
+  }
+  document.getElementById('collapseBtn').addEventListener('click',function(){setCounter(false)});document.getElementById('correctBtn').addEventListener('click',function(){setCounter(true)});
+  function updateCost(){
+    var fields=['sampleN','rubricK','repeatR'].map(function(id){return document.getElementById(id)});
+    if(fields.some(function(f){return !f.validity.valid||f.value===''})){document.getElementById('callTotal').textContent='—';document.getElementById('callBreakdown').textContent=t('请输入范围内的正整数。');return}
+    var n=Number(fields[0].value),k=Number(fields[1].value),r=Number(fields[2].value),grade=2*n*k*r;
+    document.getElementById('callTotal').textContent=(grade+n).toLocaleString('en-US');
+    document.getElementById('callBreakdown').textContent=language==='en'?grade.toLocaleString('en-US')+' grading calls across both paths + '+n.toLocaleString('en-US')+' fixed-A calls':grade.toLocaleString('en-US')+' 次双向评分 + '+n.toLocaleString('en-US')+' 次固定 A 评分';
+  }
+  ['sampleN','rubricK','repeatR'].forEach(function(id){document.getElementById(id).addEventListener('input',updateCost)});
+  window.addEventListener('hashchange',function(){var n=Number(location.hash.slice(1));if(Number.isInteger(n)&&n>=1&&n<=slides.length)setPage(n-1)});
+  var initial=Number(location.hash.slice(1));current=Number.isInteger(initial)&&initial>=1&&initial<=slides.length?initial-1:0;
+  var savedLanguage='zh';try{savedLanguage=localStorage.getItem('rubric-brief-language')||'zh'}catch(e){}
+  applyLanguage(savedLanguage,false);
+})();
+</script>
+</body>
+</html>
