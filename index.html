@@ -75,12 +75,25 @@ html[lang=en] .closing h2{font-size:40px;line-height:1.25}html[lang=en] .discuss
 .dense .data-table td{padding-top:10px!important;padding-bottom:10px!important}.dense .data-callout{margin-top:14px}.dense .resource-stage{padding:11px 0}
 @media screen and (min-width:721px) and (max-height:850px){.dense .lit-table td,.dense .comparison-table td{padding-top:6px!important;padding-bottom:6px!important}.dense .lead{margin-top:6px}.dense .heading{margin-bottom:12px}.dense .comparison-bottom h3{margin-bottom:4px}}
 .check-block h3{font-size:17px}.check-block ul{font-size:13px}
+
+body[data-version=v1] .slide[data-ver=v2],body[data-version=v2] .slide[data-ver=v1]{display:none!important}
+.version-toggle{font-size:11px;letter-spacing:.02em;display:inline-flex;align-items:center;gap:5px;position:relative}
+.version-toggle [data-ver-code]{color:var(--muted);font-weight:400}.version-toggle .selected{color:var(--orange);font-weight:700}
+.version-toggle[aria-pressed=true],.version-toggle[aria-pressed=true]:hover{background:var(--warm);color:var(--orange)}
+.version-toggle.differs::after{content:"";position:absolute;top:-4px;right:-4px;width:9px;height:9px;border-radius:50%;background:var(--orange);border:2px solid var(--paper)}
+.step.changed::after{background:#e6cfb9}.step.changed.done::after{background:#c99a72}.step.changed.current::after{background:var(--orange)}
+.overview-card.changed{border-left:3px solid var(--orange)}
+.eyebrow .tag{letter-spacing:.04em;text-transform:none}
+.change-table td:first-child{width:11%;font-weight:600}.change-table td:nth-child(2){width:26%;color:var(--muted)}.change-table td:nth-child(3){width:31%}
+@media(max-width:720px){.version-toggle{font-size:10px;gap:3px}}
+@media print{.eyebrow .tag{font-size:8px}}
 </style>
 </head>
 <body>
 <header class="topbar">
   <div class="brand"><div class="brand-symbol" aria-hidden="true">R</div><div><div class="brand-name">RUBRIC / RESEARCH BRIEF</div><div class="brand-sub">A PROPOSAL FOR DISCUSSION · 2026.11</div></div></div>
   <nav class="tools" aria-label="演示工具">
+    <button class="tool key version-toggle" id="versionBtn" type="button" aria-label="切换方案版本（V 键）" title="切换方案版本（V 键）" aria-pressed="false"><span data-ver-code="v1" class="selected">V1</span><span aria-hidden="true"> / </span><span data-ver-code="v2">V2</span></button>
     <button class="tool key language-toggle" id="languageBtn" type="button" aria-label="Switch to English" title="Switch to English" aria-pressed="false"><span data-lang-code="zh" lang="zh-CN" class="selected">中文</span><span aria-hidden="true"> / </span><span data-lang-code="en" lang="en">EN</span></button>
     <button class="tool" id="overviewBtn" aria-expanded="false">目录</button>
     <button class="tool" id="notesBtn" aria-pressed="false">讲稿备注</button>
@@ -90,7 +103,7 @@ html[lang=en] .closing h2{font-size:40px;line-height:1.25}html[lang=en] .discuss
   </nav>
 </header>
 <main class="stage" id="stage">
-  <section class="slide active" id="slide-1" aria-labelledby="title-1" data-title="研究问题" data-subtitle="从评分分歧到 rubric 的明确性">
+  <section class="slide active" id="slide-1" data-ver="v1" aria-labelledby="title-1" data-title="研究问题" data-subtitle="从评分分歧到 rubric 的明确性">
     <div class="hero-grid">
       <div>
         <div class="eyebrow hero-kicker">01 / Research proposal <span class="tag neutral">尚未开展实验</span></div>
@@ -108,6 +121,26 @@ html[lang=en] .closing h2{font-size:40px;line-height:1.25}html[lang=en] .discuss
       </div>
     </div>
     <div class="hero-bottom"><p><strong>核心目标：</strong>降低评分对执行路径的敏感性，并用独立人工评分验证有效性。</p><button class="start-btn" data-next>开始汇报 →</button></div>
+  </section>
+
+  <section class="slide" id="slide-1-v2" data-ver="v2" aria-labelledby="title-1-v2" data-title="研究问题" data-subtitle="哪种评分分歧指向 rubric 缺陷">
+    <div class="hero-grid">
+      <div>
+        <div class="eyebrow hero-kicker">01 / Research proposal <span class="tag neutral">尚未开展实验</span><span class="tag warm">V2 修订</span></div>
+        <h1 id="title-1-v2">同一份答案，<br>换一种评分方式。<br><span class="accent">哪种分歧值得相信？</span></h1>
+        <p class="hero-desc">比较多种无标签的评分分歧信号，<br>检验它们能否在人工标签很少时改进 rubric。</p>
+        <div class="hero-meta"><div>研究对象<b>Rubric 诊断与修订</b></div><div>候选方法<b>分歧定位 + 少量人工标签</b></div><div>应用场景<b>学生短答题评分</b></div></div>
+      </div>
+      <div class="hero-art" role="img" aria-label="同一个 rubric R 输入两个评分器：L减默认给分，L加默认不给分。H 是少量人工标签。">
+        <div class="orbit"></div><div class="orbit second"></div>
+        <div class="core"><strong>R</strong><span>SHARED RUBRIC</span></div>
+        <div class="agent-orbit orbit-minus"><b>L−</b><span>默认给分，见错才扣</span></div>
+        <div class="agent-orbit orbit-plus"><b>L+</b><span>默认不给，见证据才加</span></div>
+        <div class="agent-orbit orbit-a"><b>H</b><span>少量人工标签 · 锚点</span></div>
+        <div class="orbit-question">加减分分歧，比其他扰动更有信息吗？</div>
+      </div>
+    </div>
+    <div class="hero-bottom"><p><strong>核心目标：</strong>找出能预测人工误差的无标签信号，并用它提高少标签下的 rubric 修订效果。</p><button class="start-btn" data-next>开始汇报 →</button></div>
   </section>
 
   <section class="slide" id="slide-2" aria-labelledby="title-2" data-title="现象与直觉" data-subtitle="切换 rubric，观察两条路径的差距">
@@ -135,7 +168,7 @@ html[lang=en] .closing h2{font-size:40px;line-height:1.25}html[lang=en] .discuss
     <div class="section-foot"><p>加分、减分必须是同一评分政策的两种表达；L− 与 L+ 不自动构成分数的上下界。</p><span>HYPOTHESIS, NOT EVIDENCE</span></div>
   </section>
 
-  <section class="slide method-slide" id="slide-3" aria-labelledby="title-3" data-title="A + L+ + L−" data-subtitle="固定 A 与双向评分器，优化 rubric">
+  <section class="slide method-slide" id="slide-3" data-ver="v1" aria-labelledby="title-3" data-title="A + L+ + L−" data-subtitle="固定 A 与双向评分器，优化 rubric">
     <div class="heading"><div class="eyebrow">03 / Proposed method</div><h2 id="title-3">A 给参照，L+ 与 L− 暴露评分分歧。</h2><p class="lead">本汇报主线：固定三个评分 agent，仅优化 rubric 生成器 Gθ；A 是有噪声的老师，独立人工评分负责验收。</p></div>
     <div class="agent-reference"><strong>A → t<sub>A</sub></strong><p>A 用题目 q、固定标准 R₀ 和答卷 x 预先评分；不读取候选 rubric R，也不读取 L± 的输出。</p><span class="to-reward">t<sub>A</sub> 输入下方奖励项 ↓</span></div>
     <div class="flow">
@@ -151,6 +184,24 @@ html[lang=en] .closing h2{font-size:40px;line-height:1.25}html[lang=en] .discuss
       <div class="math-key"><div><b>m = (S+ + S−) / 2</b>；t<sub>A</sub> 为预先冻结的 A 分数。</div><div><b>λ<sub>c</sub>、λ<sub>a</sub></b>：分开控制 gap 与参照误差。</div><div>若用人工分数替代 t<sub>A</sub>，应作为单独的监督设置报告。</div><div>R 对同一题的多份答卷共享，不包含单份答卷的目标分数。</div></div>
     </div>
     <div class="section-foot"><p>这里的 RL 更新 rubric 生成器参数；仅在 API 上反复改写 rubric 属于提示优化，可先用于低成本验证。</p><span>TRAIN ONE COMPONENT FIRST</span></div>
+  </section>
+
+  <section class="slide method-slide" id="slide-3-v2" data-ver="v2" aria-labelledby="title-3-v2" data-title="少量标签 + 分歧定位" data-subtitle="分歧定位到条款，人工标签选择候选">
+    <div class="heading"><div class="eyebrow">03 / Proposed method <span class="tag warm">V2 修订</span></div><h2 id="title-3-v2">分歧定位到条款，少量人工标签做选择。</h2><p class="lead">V2 主线：不训练模型参数，不再依赖模型 A。无标签答卷上的分歧决定改写哪一条，n 个人工标签决定保留哪个候选。</p></div>
+    <div class="agent-reference"><strong>H → h</strong><p>只有 n 份答卷的人工分数进入修订流程（n = 20 / 50 / 100）；其余人工分数全部留作测试。</p><span class="to-reward">h 用于选择候选 rubric ↓</span></div>
+    <div class="flow">
+      <div class="flow-node train"><span class="tag">被修改的对象</span><h3>rubric 文本 R</h3><p>从原始 rubric R₀ 出发<br>只改写被分歧定位到的条款<br>每道题的 R 跨多份答案共享</p></div>
+      <div class="flow-arrow" aria-hidden="true">→</div>
+      <div class="flow-node"><span class="tag neutral">同一 q、x、R · 无标签答卷</span><h3>L+ &amp; L− → 逐条判定</h3><p>L+：有明确证据才给分<br>L−：有明确错误或缺失才扣分<br>每条输出：满足 / 不满足 / 未规定</p></div>
+      <div class="flow-arrow" aria-hidden="true">→</div>
+      <div class="flow-node eval"><span class="tag blue-tag">定位 + 选择</span><h3>分歧条款 → 改写 → 用 h 选择</h3><p>按条款统计两路分歧率<br>改写分歧最高的条款，补上默认规则<br>候选 R 按 n 个标签上的 QWK 筛选</p></div>
+    </div>
+    <div class="loop-line">↰ 重复若干轮；测试时冻结 R，由第三种中性协议 N 评分</div>
+    <div class="math-band">
+      <div><div class="label">条款级分歧 · 在无标签答卷上统计</div><div class="equation">d<sub>k</sub> = Pr<sub>x</sub> [ L+<sub>k</sub>(x) ≠ L−<sub>k</sub>(x) ]</div></div>
+      <div class="math-key"><div><b>条款 k</b>：rubric 中一个可以独立判定的得分点。</div><div><b>整体 gap − 逐条 gap</b>：估计纯锚定效应的部分。</div><div>测试分数来自中性协议 N，不来自 L+ 或 L−。</div><div>R 对同一题的多份答卷共享，不包含单份答卷的目标分数。</div></div>
+    </div>
+    <div class="section-foot"><p>V2 全部为 API 上的 rubric 文本优化；训练 rubric 生成器的 RL 移至后续工作。</p><span>LOCALIZE, THEN REWRITE</span></div>
   </section>
 
   <section class="slide" id="slide-4" aria-labelledby="title-4" data-title="A 与正确性" data-subtitle="一致性不能替代外部参照">
@@ -273,7 +324,7 @@ html[lang=en] .closing h2{font-size:40px;line-height:1.25}html[lang=en] .discuss
     <div class="section-foot"><p><a href="https://arxiv.org/abs/2610.13303" target="_blank" rel="noopener">论文 · 方法与表 3 ↗</a>；129,770 次 judge 请求，评估费用 236.69 美元。</p><span>CONSENSUS ≠ VALIDITY</span></div>
   </section>
 
-  <section class="slide paper-slide dense" id="slide-10" aria-labelledby="title-10" data-title="与 A + L± 的对比" data-subtitle="分清训练对象、参照来源和 gap 的增量价值">
+  <section class="slide paper-slide dense" id="slide-10" data-ver="v1" aria-labelledby="title-10" data-title="与 A + L± 的对比" data-subtitle="分清训练对象、参照来源和 gap 的增量价值">
     <div class="heading"><div class="eyebrow">10 / Method comparison</div><h2 id="title-10">你的可检验贡献，是加减分差距的额外价值。</h2><p class="lead">此处比较“固定 A 与 L±、优化 Gθ”的版本。若选择训练 L±，应单独定义实验，避免同时改动规则与评分器。</p></div>
     <table class="comparison-table"><thead><tr><th>方法</th><th>更新什么？</th><th>信号从哪里来？</th><th>与 A、L+、L− 的关系</th><th>对本项目的用途</th></tr></thead><tbody>
       <tr><td>Reflect-and-Revise<span class="sub">教育评分</span></td><td data-label="更新对象">rubric 文本<span class="sub">提示搜索，无参数训练</span></td><td data-label="监督与奖励">人工分数 + 错分案例与理由；按训练 QWK 筛选。</td><td data-label="A 与 L± 的关系">人工标签承担参照作用；没有加减分双路径。</td><td data-label="对本项目的用途">回答“是否仅靠反思改写就足够”。</td></tr>
@@ -289,7 +340,23 @@ html[lang=en] .closing h2{font-size:40px;line-height:1.25}html[lang=en] .discuss
     <div class="section-foot"><p>前三行依据前页原文；对比、代数展开与实验建议为本提案分析。现有论文不构成“加减分 gap 可代表 rubric 歧义”的直接证据。</p><span>CONSISTENCY + EXTERNAL VALIDATION</span></div>
   </section>
 
-  <section class="slide dense" id="slide-11" aria-labelledby="title-11" data-title="实验设计" data-subtitle="先验证信号，再训练模型">
+  <section class="slide paper-slide dense" id="slide-10-v2" data-ver="v2" aria-labelledby="title-10-v2" data-title="与 V2 方案的对比" data-subtitle="加减分分歧只是五种无标签信号之一">
+    <div class="heading"><div class="eyebrow">10 / Method comparison <span class="tag warm">V2 修订</span></div><h2 id="title-10-v2">可检验的贡献：加减分分歧相对其他信号的增量。</h2><p class="lead">前四行与 V1 相同。最后一行改为 V2：不训练参数，锚点是少量人工标签，加减分分歧只是五种无标签信号之一。</p></div>
+    <table class="comparison-table"><thead><tr><th>方法</th><th>更新什么？</th><th>信号从哪里来？</th><th>与 L+、L− 的关系</th><th>对本项目的用途</th></tr></thead><tbody>
+      <tr><td>Reflect-and-Revise<span class="sub">教育评分</span></td><td data-label="更新对象">rubric 文本<span class="sub">提示搜索，无参数训练</span></td><td data-label="监督与奖励">人工分数 + 错分案例与理由；按训练 QWK 筛选。</td><td data-label="与 L± 的关系">人工标签承担参照作用；没有加减分双路径。</td><td data-label="对本项目的用途">相同 n 下的主要基线。</td></tr>
+      <tr><td>GenRubric<span class="sub">rubric 生成</span></td><td data-label="更新对象">rubric 生成器 Gθ<span class="sub">SFT + RL</span></td><td data-label="监督与奖励">候选 R 引导答案，再跨 R 评分；加区分度与冗余奖励。</td><td data-label="与 L± 的关系">固定 judge 提供内部反馈；没有 L±。</td><td data-label="对本项目的用途">后续工作的训练框架；V2 不使用。</td></tr>
+      <tr><td>FairJudge<span class="sub">评分器训练</span></td><td data-label="更新对象">judge 参数<span class="sub">SFT + DPO + GRPO</span></td><td data-label="监督与奖励">对齐的任务参考标签；奖励正确评分 / 偏好判断。</td><td data-label="与 L± 的关系">模式为单点评分 / 成对比较，不是加分 / 扣分。</td><td data-label="对本项目的用途">说明跨协议一致性可以被训练；V2 不训练评分器。</td></tr>
+      <tr><td>Agreement Without Alignment<span class="sub">通用 NLG 评测</span></td><td data-label="更新对象">rubric 条款文本<span class="sub">一次性改写，无训练</span></td><td data-label="监督与奖励">5 个 judge 的逐条分歧率；不使用人工标签。</td><td data-label="与 L± 的关系">分歧来自不同模型；不区分加分 / 减分。</td><td data-label="对本项目的用途">负结果与对照设计；作为五种信号之一直接比较。</td></tr>
+      <tr class="proposed"><td>少量标签 + 分歧定位<span class="sub">V2 拟议版本 · 尚未实测</span></td><td data-label="更新对象">rubric 条款文本<span class="sub">提示优化，无参数训练</span></td><td data-label="监督与奖励">无标签答卷上的条款级分歧决定改写位置；n 个人工标签选择候选。</td><td data-label="与 L± 的关系">L± 逐条判定，只在默认规则上不同；不再需要 A。</td><td data-label="对本项目的用途">检验加减分分歧是否比其他扰动更能预测人工误差，并提高标签效率。</td></tr>
+    </tbody></table>
+    <div class="comparison-bottom">
+      <div><h3>为什么不再以模型 A 为锚</h3><p>A 只是一次模型调用，并不比两次 L 调用贵，“gap 不需要标签”相对 A 不构成优势。<br>换成人工标签后，无标签信号的价值可以用标签效率曲线直接衡量。<br>V1 的恒等式仍然成立：两路分别对齐参照，已隐含 gap 惩罚。</p></div>
+      <div><h3>相对 Han &amp; Kim，需要多回答什么</h3><p>他们用跨模型分歧定位条款：共识上升，人工一致性未变。<br>V2 把跨模型分歧作为对照臂，与加减分分歧直接比较。<br>V2 另加 n 个人工标签做候选选择，这是他们没有的环节。</p></div>
+    </div>
+    <div class="section-foot"><p>前四行依据前页原文；最后一行与下方两栏为本提案分析，尚无实验支持。</p><span>ONE SIGNAL AMONG FIVE</span></div>
+  </section>
+
+  <section class="slide dense" id="slide-11" data-ver="v1" aria-labelledby="title-11" data-title="实验设计" data-subtitle="先验证信号，再训练模型">
     <div class="heading"><div class="eyebrow">11 / Experimental design</div><h2 id="title-11">先回答三个问题，再决定 RL 是否值得投入。</h2><p class="lead">第一阶段固定同一个基础模型，隔离“评分协议”的影响；第二阶段再测试跨模型迁移。</p></div>
     <div class="h-grid">
       <div class="hypothesis"><span class="h-label">H₁</span><h3>gap 是否系统存在？A 是否落在两路之间？</h3><p>比较 L+ / L− 差距与同协议重复评分的波动；统计 tA ∈ [S+, S−] 的比例，以及 S+ < S− 的方向是否稳定。</p></div>
@@ -303,7 +370,21 @@ html[lang=en] .closing h2{font-size:40px;line-height:1.25}html[lang=en] .discuss
     <div class="section-foot"><p>A 监督与人工监督分别报告，不混用预算。ASAP-SAS 仅 10 道题，按题留出需逐题报告并说明不确定性。</p><span>KEEP SIGNALS SEPARATE</span></div>
   </section>
 
-  <section class="slide" id="slide-12" aria-labelledby="title-12" data-title="区分三种解释" data-subtitle="gap 管歧义，A 管偏差？">
+  <section class="slide dense" id="slide-11-v2" data-ver="v2" aria-labelledby="title-11-v2" data-title="实验设计" data-subtitle="三个问题，每一步都有停止条件">
+    <div class="heading"><div class="eyebrow">11 / Experimental design <span class="tag warm">V2 修订</span></div><h2 id="title-11-v2">按顺序回答三个问题，每一步都有停止条件。</h2><p class="lead">除跨模型分歧一臂外，全程固定同一个基础模型。全部实验只需要 API 调用和已有的人工分数。</p></div>
+    <div class="h-grid">
+      <div class="hypothesis"><span class="h-label">Q₁</span><h3>gap 是否随 rubric 清晰度变化？</h3><p>同一道题准备三版 rubric：故意写模糊的、原版、手工补全默认规则的。若 gap 不随清晰度单调下降，它测的是框架偏差而非 rubric，项目停止。</p></div>
+      <div class="hypothesis"><span class="h-label">Q₂</span><h3>加减分分歧是否比其他扰动更能预测人工误差？</h3><p>在 rubric 变体上比较五种无标签信号对人工误差的增量解释力（见下一页）。</p></div>
+      <div class="hypothesis"><span class="h-label">Q₃</span><h3>标签很少时，分歧定位是否提高修订效果？</h3><p>在 n = 20 / 50 / 100 个人工标签下，比较 Reflect-and-Revise 与“相同 n + 分歧定位改写”的留出集 QWK。</p></div>
+    </div>
+    <div class="exp-lower">
+      <div><div class="label">Signals · 五种无标签分歧信号</div><table class="ablation-table"><thead><tr><th>信号</th><th>扰动方式</th><th>作用</th></tr></thead><tbody><tr><td>同协议重复</td><td>相同提示多次采样</td><td>噪声基线</td></tr><tr><td>rubric 同义改写</td><td>改措辞，不改规则</td><td>通用扰动对照</td></tr><tr><td>评分点顺序</td><td>打乱条款顺序</td><td>通用扰动对照</td></tr><tr><td>跨模型分歧</td><td>不同 judge 模型</td><td>对照 Han & Kim 的信号</td></tr><tr><td><strong>加分 / 扣分</strong></td><td>默认不给分 vs. 默认给分</td><td>待检验的信号</td></tr></tbody></table></div>
+      <div><div class="label">Controls · 必须保持的实验条件</div><ol class="protocol-list"><li><strong>协议定义：</strong>两路都逐条判定、程序求和，只在默认规则上不同；另跑整体打分版本，估计锚定效应。</li><li><strong>中性裁判：</strong>因变量取第三种协议 N 的人工误差，避免 gap 机械地出现在因变量中。</li><li><strong>答案固定效应：</strong>比较同一答案在不同 rubric 变体下的变化，排除答案难度的混淆。</li><li><strong>严格划分：</strong>n 个标签之外的人工分数只用于测试；先题内留出，再按题留出。</li></ol></div>
+    </div>
+    <div class="section-foot"><p>粗略估计，调用量约为 V1 的 3–4 倍：多出改写、打乱、跨模型和中性协议各一路。第 15 页估算器仍按 V1 公式。</p><span>COMPARE SIGNALS</span></div>
+  </section>
+
+  <section class="slide" id="slide-12" data-ver="v1" aria-labelledby="title-12" data-title="区分三种解释" data-subtitle="gap 管歧义，A 管偏差？">
     <div class="heading"><div class="eyebrow">12 / Discriminating experiment</div><h2 id="title-12">gap 变小，是不是 rubric 真的变好了？</h2><p class="lead">评分误差可粗分为偏差（规则定错）与歧义（规则没写清）。gap 主要测歧义；两路同侧偏离时 gap 测不到偏差。用人工分数当裁判，区分三种可能。</p></div>
     <div class="disc-layout">
       <div class="anchor-options">
@@ -327,7 +408,31 @@ html[lang=en] .closing h2{font-size:40px;line-height:1.25}html[lang=en] .discuss
     <div class="section-foot"><p>A 冻结且不读 R，不存在“A 走向 L”。变体包括改写措辞、删减部分分规则、加入边界说明、调整权重，需通过语义等价检查。</p><span>AMBIGUITY VS. BIAS</span></div>
   </section>
 
-  <section class="slide" id="slide-13" aria-labelledby="title-13" data-title="实验前准备" data-subtitle="开始 pilot 之前需要补齐的信息">
+  <section class="slide" id="slide-12-v2" data-ver="v2" aria-labelledby="title-12-v2" data-title="信号对比" data-subtitle="哪种分歧能预测人工误差">
+    <div class="heading"><div class="eyebrow">12 / Discriminating experiment <span class="tag warm">V2 修订</span></div><h2 id="title-12-v2">哪种分歧，真的指向 rubric 的缺陷？</h2><p class="lead">V1 把 gap 与 A 距离对比。V2 把加减分分歧与其他无标签信号对比，并修正两个统计问题：机械相关与答案难度混淆。</p></div>
+    <div class="disc-layout">
+      <div class="anchor-options">
+        <div class="anchor-option"><h3><span class="num">a</span>加减分分歧有额外信息</h3><p>控制其他四种信号后仍能预测人工误差：它捕捉到“默认规则未写明”这类特定歧义。</p></div>
+        <div class="anchor-option"><h3><span class="num">b</span>任何扰动都差不多</h3><p>解释力不高于同义改写或顺序打乱：它只是通用的不稳定性度量，加减分设计没有特殊价值。</p></div>
+        <div class="anchor-option"><h3><span class="num">c</span>都不预测人工误差</h3><p>分歧反映的是模型自身的不稳定，与 rubric 质量无关；与 Han &amp; Kim 的结论一致。</p></div>
+        <div class="principle">三种结果都可以报告。只有 (a) 支持继续做分歧定位改写；(b) 说明应改用更便宜的扰动；(c) 则到此为止。</div>
+      </div>
+      <div class="paper-panel">
+        <div class="label">分析 · rubric 变体回归（不需训练）</div>
+        <p class="reg-line"><span>N 的人工误差</span> ~ Σ β<sub>j</sub>·信号<sub>j</sub> + <span>答案固定效应</span></p>
+        <table class="quad" aria-label="V1 与 V2 回归设计的差别"><thead><tr><th></th><th>V1</th><th>V2</th></tr></thead><tbody><tr><th>因变量</th><td>L± 自身的人工误差</td><td class="key-cell">中性协议 N 的人工误差</td></tr><tr><th>对照项</th><td>与 A 的距离</td><td class="key-cell">其他四种无标签信号</td></tr><tr><th>分析单位</th><td>rubric 变体</td><td class="key-cell">（答案，变体），加答案固定效应</td></tr></tbody></table>
+        <ol class="read-list">
+          <li><b>加减分的 β 在控制其他信号后仍显著</b> → 支持 (a)</li>
+          <li><b>各信号的增量解释力相近</b> → 支持 (b)</li>
+          <li><b>全部不显著</b> → 支持 (c)</li>
+          <li>条款级验证：在有逐条人工标签的数据上，检查分歧率高的条款是否就是模型判定出错的条款。</li>
+        </ol>
+      </div>
+    </div>
+    <div class="section-foot"><p>为什么换因变量：L+ 与 L− 对人工分数 h 的平方误差之和恒等于 2(m − h)² + ½·gap²，gap 会机械地出现在因变量里。</p><span>WHICH DISAGREEMENT MATTERS</span></div>
+  </section>
+
+  <section class="slide" id="slide-13" data-ver="v1" aria-labelledby="title-13" data-title="实验前准备" data-subtitle="开始 pilot 之前需要补齐的信息">
     <div class="heading"><div class="eyebrow">13 / Before the pilot</div><h2 id="title-13">开跑之前，先补齐四类信息。</h2><p class="lead">橙色为阻塞项。最小起步：一道题、几百份答卷，先回答“gap 是否超出噪声”和“tA 是否落在两路之间”。</p></div>
     <div class="check-grid">
       <div class="check-block blocker"><span class="tag">阻塞项 · 数据与规则</span><h3>ASAP-SAS 与可拆分性</h3><ul><li>每题满分、分数分布与标签完整性</li><li>双评分者 QWK：人工噪声的上限</li><li>逐题检查能否写成等价的加分 / 减分规则</li><li>原始 rubric 是否已列明得分点</li></ul></div>
@@ -339,7 +444,19 @@ html[lang=en] .closing h2{font-size:40px;line-height:1.25}html[lang=en] .discuss
     <div class="section-foot"><p>前两列完成后即可开始 H₁；后两列可在 pilot 中并行补齐。</p><span>CHECKLIST BEFORE H₁</span></div>
   </section>
 
-  <section class="slide dense" id="slide-14" aria-labelledby="title-14" data-title="数据选择" data-subtitle="真实评分用于验证，合成 rubric 用于冷启动">
+  <section class="slide" id="slide-13-v2" data-ver="v2" aria-labelledby="title-13-v2" data-title="实验前准备" data-subtitle="先跑操纵检验，再补清单">
+    <div class="heading"><div class="eyebrow">13 / Before the pilot <span class="tag warm">V2 修订</span></div><h2 id="title-13-v2">先跑操纵检验，再补清单。</h2><p class="lead">橙色为阻塞项。V2 把“先补齐信息”改为“先跑一个一天内能完成的实验”：它直接决定项目是否继续。</p></div>
+    <div class="check-grid">
+      <div class="check-block blocker"><span class="tag">阻塞项 · 第一天</span><h3>操纵检验</h3><ul><li>一道题、200 份答卷、三版 rubric：模糊 / 原版 / 手工补全</li><li>两种协议各重复 5 次；逐条与整体两种模板都跑</li><li>通过：gap 随清晰度单调下降，且超过同协议重复的波动</li><li>不通过：项目停止，或改用其他扰动</li></ul></div>
+      <div class="check-block blocker"><span class="tag">阻塞项 · 协议</span><h3>L± 与中性协议 N 的模板</h3><ul><li>L+：有明确证据才给分；L−：有明确错误或缺失才扣分</li><li>每条输出：满足 / 不满足 / 未规定，并引用答卷原文</li><li>N：逐条判定，不指定默认方向</li><li>温度与重复次数 r；独立会话</li></ul></div>
+      <div class="check-block"><span class="tag">Q₂ 之前</span><h3>数据与 rubric 变体</h3><ul><li>主数据集需有 5 分以上分值，或逐条人工标签</li><li>核对满分、分数分布与评分者一致率</li><li>变体类型与数量；语义等价检查，防止通过改考点“作弊”</li><li>检查模型是否见过数据：ASAP-SAS 自 2012 年公开</li></ul></div>
+      <div class="check-block"><span class="tag">Q₃ 之前</span><h3>划分、指标与成本</h3><ul><li>n 个标签的抽样方式与随机种子数</li><li>唯一主指标；回归形式、聚类标准误与效应阈值</li><li>Reflect-and-Revise 基线使用相同的 n 与调用预算</li><li>先跑 1–2 题、200 份测 token，再推全量费用</li></ul></div>
+    </div>
+    <div class="data-callout"><strong>1 天 · 1 题</strong><p>操纵检验的调用量：200 份 × 3 版 rubric × 2 种协议 × 5 次重复 × 2 种模板 = 12,000 次评分。</p></div>
+    <div class="section-foot"><p>预注册与文献精读移到操纵检验之后；协议模板必须在跑之前定稿。</p><span>KILL TEST FIRST</span></div>
+  </section>
+
+  <section class="slide dense" id="slide-14" data-ver="v1" aria-labelledby="title-14" data-title="数据选择" data-subtitle="真实评分用于验证，合成 rubric 用于冷启动">
     <div class="heading"><div class="eyebrow">14 / Data strategy</div><h2 id="title-14">从真实学生答案起步，再补充 rubric 训练数据。</h2><p class="lead">先验证研究信号；大规模合成数据不能替代独立的人类评分测试集。</p></div>
     <table class="data-table"><thead><tr><th>数据集</th><th>包含内容</th><th>在本研究中的角色</th><th>主要限制</th></tr></thead><tbody>
       <tr><td><a href="https://www.kaggle.com/competitions/asap-sas/data" target="_blank" rel="noopener">ASAP-SAS ↗</a><span class="sub">首选 pilot</span></td><td data-label="内容">10 道短答题，约 1.7 万条训练答案；题目 rubric、人工分数。<span class="sub">通常为 0–2 / 0–3 分；原始数据有双评分者信息。</span></td><td data-label="用途">验证 gap、人工误差、题内与跨题泛化。</td><td data-label="限制">题目数量少；获取时检查标签完整性。</td></tr>
@@ -350,6 +467,18 @@ html[lang=en] .closing h2{font-size:40px;line-height:1.25}html[lang=en] .discuss
     </tbody></table>
     <div class="data-callout"><strong>10 ≠ 17k</strong><p>学习“新题目的 rubric”时，独立题目数量比同一题的答案数量更关键。<br>ASAP-SAS 适合概念验证，广泛泛化仍需要更多题型。</p></div>
     <div class="section-foot"><p>下载入口不代表无访问限制：遵循各数据集条款；不将没有真实标签的镜像误作训练集。</p><span>HUMAN LABELS FOR EXTERNAL VALIDATION</span></div>
+  </section>
+
+  <section class="slide dense" id="slide-14-v2" data-ver="v2" aria-labelledby="title-14-v2" data-title="数据选择" data-subtitle="优先条款级标签与更高分值">
+    <div class="heading"><div class="eyebrow">14 / Data strategy <span class="tag warm">V2 修订</span></div><h2 id="title-14-v2">主数据集换成有条款级标签或更高分值的题目。</h2><p class="lead">ASAP-SAS 为 0–2 / 0–3 分，gap 几乎只有 0 或 1。V2 优先选择能在条款级验证分歧的数据。规模数字来自原论文或数据卡，使用前需核对。</p></div>
+    <table class="data-table"><thead><tr><th>数据集</th><th>包含内容</th><th>在本研究中的角色</th><th>主要限制</th></tr></thead><tbody>
+      <tr><td><a href="https://arxiv.org/abs/2404.14316" target="_blank" rel="noopener">RiceChem ↗</a><span class="sub">首选 pilot · 条款级标签</span></td><td data-label="内容">大学化学长答题：4 道题、27 个 rubric 条款、1,264 份答卷。<span class="sub">每个条款有助教标注的 TRUE / FALSE。</span></td><td data-label="用途">操纵检验与条款级验证：分歧高的条款是否就是判定出错的条款。</td><td data-label="限制">只有 4 道题；单一学科。</td></tr>
+      <tr><td><a href="https://aclanthology.org/P11-1076/" target="_blank" rel="noopener">Mohler ↗</a><span class="sub">题目多样性 · 0–5 分</span></td><td data-label="内容">数据结构课程短答题：约 80 道题、2,273 份答卷；人工 0–5 分。</td><td data-label="用途">信号对比回归与按题留出。</td><td data-label="限制">只有参考答案，没有分项 rubric；需先撰写。</td></tr>
+      <tr><td><a href="https://arxiv.org/abs/2505.07247" target="_blank" rel="noopener">SAS-Bench ↗</a><span class="sub">跨题泛化 · 步骤级标注</span></td><td data-label="内容">高考题：9 个学科、1,030 道题、4,109 份答卷；专家逐步评分并标注错因。</td><td data-label="用途">后续检验跨学科、跨题迁移。</td><td data-label="限制">中文；每题答卷很少，不适合单题 rubric 优化。</td></tr>
+      <tr><td><a href="https://www.kaggle.com/competitions/asap-sas/data" target="_blank" rel="noopener">ASAP-SAS ↗</a><span class="sub">次要验证 · 与文献可比</span></td><td data-label="内容">10 道短答题，约 1.7 万条训练答案；题目 rubric、人工分数。<span class="sub">通常为 0–2 / 0–3 分；原始数据有双评分者信息。</span></td><td data-label="用途">与已有论文的结果对照。</td><td data-label="限制">分值离散；自 2012 年公开，模型可能见过。</td></tr>
+    </tbody></table>
+    <div class="data-callout"><strong>条款 &gt; 总分</strong><p>V2 的信号是条款级的，验证也应在条款级进行。<br>有逐条人工标签的数据，比答卷数量更重要。</p></div>
+    <div class="section-foot"><p>Feedback Collection 与 RubricHub 只用于参数训练，V2 不再需要。下载入口不代表无访问限制：遵循各数据集条款。</p><span>ITEM-LEVEL LABELS FIRST</span></div>
   </section>
 
   <section class="slide dense" id="slide-15" aria-labelledby="title-15" data-title="资源预算" data-subtitle="先 API pilot，后参数训练">
@@ -372,7 +501,7 @@ html[lang=en] .closing h2{font-size:40px;line-height:1.25}html[lang=en] .discuss
     <div class="section-foot"><p>是否投入 RL，由前两阶段的证据决定。没有观察到有效信号时，不以增加训练规模替代问题诊断。</p><span>ESTIMATE, NOT A QUOTE</span></div>
   </section>
 
-  <section class="slide" id="slide-16" aria-labelledby="title-16" data-title="成功标准" data-subtitle="同时看一致性、准确性与泛化">
+  <section class="slide" id="slide-16" data-ver="v1" aria-labelledby="title-16" data-title="成功标准" data-subtitle="同时看一致性、准确性与泛化">
     <div class="heading"><div class="eyebrow">16 / Success &amp; failure criteria</div><h2 id="title-16">成功需要三个结果同时成立。</h2><p class="lead">gap 缩小、人工误差下降，以及改进在未见样本中保持。当前所有实验结果均为待测。</p></div>
     <div class="results-layout">
       <div>
@@ -393,7 +522,28 @@ html[lang=en] .closing h2{font-size:40px;line-height:1.25}html[lang=en] .discuss
     <div class="section-foot"><p>只有一致性改善时，研究结论应限定为“协议稳定性”；准确性与公平性需要各自独立的证据。</p><span>PREDEFINE THE CLAIM BEFORE TRAINING</span></div>
   </section>
 
-  <section class="slide" id="slide-17" aria-labelledby="title-17" data-title="讨论与下一步" data-subtitle="与 mentor 对齐研究贡献和第一阶段投入">
+  <section class="slide" id="slide-16-v2" data-ver="v2" aria-labelledby="title-16-v2" data-title="成功标准" data-subtitle="三道关卡与标签效率">
+    <div class="heading"><div class="eyebrow">16 / Success &amp; failure criteria <span class="tag warm">V2 修订</span></div><h2 id="title-16-v2">三道关卡，每一道都可能让项目停下。</h2><p class="lead">V2 的成功标准是标签效率：人工标签数相同，留出集上更准。当前所有实验结果均为待测。</p></div>
+    <div class="results-layout">
+      <div>
+        <table class="results-table"><thead><tr><th>评估维度</th><th>指标 / 检查</th><th>结果</th></tr></thead><tbody>
+          <tr><td><strong>操纵检验</strong></td><td>gap 随 rubric 清晰度的变化<br><span class="small muted">相对同协议重复评分差距</span></td><td class="pending">待测</td></tr>
+          <tr><td><strong>信号有效性</strong></td><td>各信号对人工误差的增量解释力<br><span class="small muted">因变量为中性协议 N 的误差</span></td><td class="pending">待测</td></tr>
+          <tr><td><strong>标签效率</strong></td><td>n = 20 / 50 / 100 时的留出集 QWK<br><span class="small muted">对比相同 n 的 Reflect-and-Revise</span></td><td class="pending">待测</td></tr>
+          <tr><td><strong>退化检查</strong></td><td>分数分布、排序、逐项证据<br><span class="small muted">检测常数评分与rubric语义偏移</span></td><td class="pending">待测</td></tr>
+        </tbody></table>
+        <p class="note-line">对同一测试集做成对比较；报告效应大小、逐题差异与置信区间。显著性阈值和样本量在 pilot 后预先确定。</p>
+      </div>
+      <div>
+        <div class="decision"><div class="label">Gate 01</div><h3>gap 不随 rubric 清晰度变化</h3><p>gap 测的是模型的框架偏差。项目停止，或改用其他扰动。</p></div>
+        <div class="decision"><div class="label">Gate 02</div><h3>加减分分歧不优于通用扰动</h3><p>报告信号对比结果；后续改用更便宜的信号，不再强调加减分设计。</p></div>
+        <div class="decision"><div class="label">Gate 03</div><h3>小 n 时分歧定位优于 Reflect-and-Revise</h3><p>再测试按题留出与跨模型迁移；此时才讨论是否值得训练 rubric 生成器。</p></div>
+      </div>
+    </div>
+    <div class="section-foot"><p>本提案的判断：较可能停在 Gate 02 或更早，因为 Han &amp; Kim 的跨模型分歧未能提高人工一致性。三种结果都按预先写好的结论报告。</p><span>EVERY GATE CAN STOP THE PROJECT</span></div>
+  </section>
+
+  <section class="slide" id="slide-17" data-ver="v1" aria-labelledby="title-17" data-title="讨论与下一步" data-subtitle="与 mentor 对齐研究贡献和第一阶段投入">
     <div class="eyebrow">17 / Discussion</div>
     <div class="closing">
       <div><h2 id="title-17">能否把评分分歧，<br>转化成<span class="accent">澄清规则</span><br>的训练信号？</h2><p class="big-q">From disagreement to explicit criteria.</p><p class="lead" style="margin-top:21px">潜在贡献是识别一种可操作的歧义信号，<br>并验证它能否产生更稳定、更准确的评分。</p><div class="closing-box"><strong>建议下一步：</strong>补齐阻塞项后，在 ASAP-SAS 上先做 1 道题、数百份答案的协议实验与 rubric 变体回归；若 gap 有独立信息，再进入提示优化与消融，之后评估 RL。</div></div>
@@ -404,6 +554,19 @@ html[lang=en] .closing h2{font-size:40px;line-height:1.25}html[lang=en] .discuss
       </div>
     </div>
     <div class="hero-bottom"><p>第一阶段的目标：验证信号是否存在，以及是否有用。</p><button class="start-btn" data-next>查看资料来源 →</button></div>
+  </section>
+
+  <section class="slide" id="slide-17-v2" data-ver="v2" aria-labelledby="title-17-v2" data-title="讨论与下一步" data-subtitle="V1 还是 V2，以及负结果是否可接受">
+    <div class="eyebrow">17 / Discussion <span class="tag warm">V2 修订</span></div>
+    <div class="closing">
+      <div><h2 id="title-17-v2">哪种评分分歧，<br>能指出 rubric<br><span class="accent">哪一条没写清</span>？</h2><p class="big-q">From disagreement to the unclear clause.</p><p class="lead" style="margin-top:21px">潜在贡献从“一个新奖励”变为“一次信号对比”：<br>无论加减分分歧是否有效，结果都有信息量。</p><div class="closing-box"><strong>建议下一步：</strong>定稿 L± 与 N 的模板后，先用一道题、200 份答卷跑操纵检验；通过后做五种信号的对比回归，再做标签效率实验。RL 不在本阶段范围内。</div></div>
+      <div>
+        <div class="discussion"><h3><strong>01</strong>选 V1 还是 V2？</h3><p>V1 保留 RL 与模型 A 的叙事，风险集中在最后；V2 放弃 RL，换来每一步都有停止条件。</p></div>
+        <div class="discussion"><h3><strong>02</strong>锚点用人工标签还是模型 A？</h3><p>V2 用 n 个人工标签；A 可保留为一条蒸馏对照臂。需要确认数据集已有标签是否够用。</p></div>
+        <div class="discussion"><h3><strong>03</strong>负结果是否可以接受？</h3><p>若停在 Gate 01 或 02，产出是一份信号对比报告。需要事先对齐这是否算完成。</p></div>
+      </div>
+    </div>
+    <div class="hero-bottom"><p>第一阶段的目标：一天内知道这个信号是否值得继续。</p><button class="start-btn" data-next>查看资料来源 →</button></div>
   </section>
 
   <section class="slide dense" id="slide-18" aria-labelledby="title-18" data-title="资料来源" data-subtitle="论文、数据与实现的可点击入口">
@@ -424,6 +587,21 @@ html[lang=en] .closing h2{font-size:40px;line-height:1.25}html[lang=en] .discuss
     <p class="ref-bottom">更新日期：2026-11-05。第 2、4 页为构造示例，第 7 页矩阵为符号示意，第 12 页为分析设计，第 15 页为调用量估算，第 16 页均为待测。本文件可离线演示，外部文献链接需要网络。</p>
     <div class="section-foot"><p>按 ← / → 翻页，Home / End 跳转首尾；“讲稿备注”提供每页讲解提示；“打印 / PDF”输出全部页面。</p><span>END OF BRIEF</span></div>
   </section>
+
+  <section class="slide dense" id="slide-19-v2" data-ver="v2" aria-labelledby="title-19-v2" data-title="V1 → V2 变更对照" data-subtitle="改了什么，为什么">
+    <div class="heading"><div class="eyebrow">19 / What changed <span class="tag warm">仅 V2</span></div><h2 id="title-19-v2">V1 → V2：改了什么，为什么。</h2><p class="lead">V2 是对 V1 的评审修订，尚未经过讨论确认。按 V 键或点击顶部按钮，可在同一页码上对照两个版本。</p></div>
+    <table class="data-table change-table"><thead><tr><th>项目</th><th>V1</th><th>V2</th><th>修改原因</th></tr></thead><tbody>
+      <tr><td>研究问题</td><td data-label="V1">加减分 gap 能否作为奖励，训练 rubric 生成器。</td><td data-label="V2">哪种无标签分歧能预测人工误差，并提高标签效率。</td><td data-label="修改原因">无论 gap 是否有效，结果都有信息量。</td></tr>
+      <tr><td>锚点</td><td data-label="V1">强模型 A 的冻结分数。</td><td data-label="V2">n 个人工标签（20 / 50 / 100）。</td><td data-label="修改原因">A 的调用成本与 L 相近，“无标签”优势不成立。</td></tr>
+      <tr><td>L± 协议</td><td data-label="V1">从零加分 / 从满分扣分，逐项判定。</td><td data-label="V2">逐条判定，只在默认规则上不同；输出含“未规定”。</td><td data-label="修改原因">逐项判定下两路几乎等价；分歧定位到条款才能指导改写。</td></tr>
+      <tr><td>第一个实验</td><td data-label="V1">gap 是否超出噪声。</td><td data-label="V2">gap 是否随 rubric 清晰度变化。</td><td data-label="修改原因">超出噪声也可能只是锚定效应。</td></tr>
+      <tr><td>回归分析</td><td data-label="V1">人工误差 ~ gap + A 距离。</td><td data-label="V2">N 的人工误差 ~ 五种信号 + 答案固定效应。</td><td data-label="修改原因">避免 gap 机械进入因变量；排除答案难度混淆。</td></tr>
+      <tr><td>主数据集</td><td data-label="V1">ASAP-SAS（0–2 / 0–3 分）。</td><td data-label="V2">RiceChem、Mohler；ASAP-SAS 降为次要。</td><td data-label="修改原因">分值太低时 gap 几乎只有 0 或 1。</td></tr>
+      <tr><td>优化方式</td><td data-label="V1">先提示优化，之后 RL。</td><td data-label="V2">只做提示优化。</td><td data-label="修改原因">题目数量不足以训练生成器。</td></tr>
+    </tbody></table>
+    <div class="data-callout"><strong>9 + 1</strong><p>V2 修订第 1、3、10–14、16、17 页，新增本页；其余页面两版相同。<br>代价：失去“RL 训练 rubric 生成器”的叙事，调用量粗略估计为 V1 的 3–4 倍。</p></div>
+    <div class="section-foot"><p>V2 的全部内容为设计建议，没有实验结果。</p><span>V2 · PROPOSED REVISION</span></div>
+  </section>
 </main>
 <aside class="speaker-notes" id="speakerNotes" aria-label="当前页讲稿备注"><b>SPEAKER NOTES</b><p id="notesText"></p></aside>
 <footer class="bottom">
@@ -441,7 +619,10 @@ html[lang=en] .closing h2{font-size:40px;line-height:1.25}html[lang=en] .discuss
 <script>
 (function(){
   'use strict';
-  var slides=Array.from(document.querySelectorAll('.slide'));
+  var allSlides=Array.from(document.querySelectorAll('.slide'));
+  var version='v1';
+  function inVersion(s){return !s.dataset.ver||s.dataset.ver===version}
+  var slides=allSlides.filter(inVersion);
   var current=0,reading=false,notesOn=false,toastTimer;
   var notes=[
     '开场先讲观察：同一份答案，给定相同 rubric，只改变“加分”或“减分”的执行方式，可能得到不同分数。我们还没有实测这个现象。研究问题是这种差距能否反映 rubric 的歧义，并成为训练信号。',
@@ -463,6 +644,20 @@ html[lang=en] .closing h2{font-size:40px;line-height:1.25}html[lang=en] .discuss
     '请 mentor 帮忙对齐三个决策：题型范围、参照来源、进入 RL 的证据门槛。提议先批准一个 API pilot 与少量人工复核，拿到路径效应和误差关联后再投入参数训练。',
     '可从这里打开原论文、代码和数据。声明资料整理日期，示例与实测的区别，以及不同论文版本和复现可用性的边界。'
   ];
+  var notesV2={
+  "slide-1-v2": "V2 的开场：问题从“加减分 gap 能否当奖励”改为“哪种无标签的评分分歧指向 rubric 缺陷”。加减分仍是主角，但它需要和其他扰动比较。所有内容仍是提案，没有实验结果。",
+  "slide-3-v2": "三处变化：锚点从模型 A 换成 n 个人工标签；L± 改为逐条判定、只在默认规则上不同；分歧用于定位要改写的条款，而不是作为标量奖励。测试分数由第三种中性协议给出。不训练任何模型参数。",
+  "slide-10-v2": "表格前四行与 V1 相同，只改了最后一行和下方两栏。重点讲为什么不再用 A：A 的成本与 L 相近，无标签的优势只有相对人工标签才成立。再讲与 Han & Kim 的关系：把他们的信号作为一条对照臂。",
+  "slide-11-v2": "三个问题按顺序做，前一个不通过就停。Q₁ 是操纵检验，一天内可完成。Q₂ 是信号对比，下一页展开。Q₃ 是标签效率曲线，对比相同 n 的 Reflect-and-Revise。调用量比 V1 多，3–4 倍是粗略估计。",
+  "slide-12-v2": "先讲底部的恒等式：如果因变量取 L± 自身的误差，gap 一定显著，这是 V1 回归的问题。所以因变量换成中性协议 N 的误差，并加答案固定效应。然后讲三种结果各自意味着什么，三种都可以报告。",
+  "slide-13-v2": "V1 的清单是先补齐信息再跑；V2 认为第一个实验足够便宜，应该先跑。唯一必须事先定稿的是协议模板，因为它决定 gap 是否有意义。12,000 次调用是按页面上的参数算出的，不含重试。",
+  "slide-14-v2": "RiceChem 有逐条人工标签，可以直接验证“分歧高的条款是否就是判定出错的条款”，但只有 4 道题。Mohler 题目多、0–5 分，但需要自己写分项 rubric。规模数字来自论文和数据卡，尚未下载核对。",
+  "slide-16-v2": "V2 的成功标准是标签效率。强调每一道关卡都可能让项目停下，并且较可能停在 Gate 02 或更早，这是本提案的判断而非数据。请听众事先确认负结果是否可接受。",
+  "slide-17-v2": "需要对齐三个决定：选 V1 还是 V2；锚点用人工标签还是模型 A；负结果是否算完成。可以按 V 键回到 V1 的同一页对照。",
+  "slide-19-v2": "这页只在 V2 中出现，用于逐项对照。每行的第四列是修改原因。说明 V2 是评审后的修订建议，尚未经过讨论确认；V2 的代价是失去 RL 叙事和更多的调用量。"
+};
+  allSlides.filter(function(s){return s.dataset.ver!=='v2'}).forEach(function(s,i){s._note=notes[i]});
+  allSlides.forEach(function(s){if(s.dataset.ver==='v2')s._note=notesV2[s.id]||''});
   // Static translations are embedded so the presentation remains a single offline file.
   var english={
   "从评分分歧到明确的 Rubric · Research Brief": "From Grading Disagreement to Explicit Rubrics · Research Brief",
@@ -1056,11 +1251,273 @@ html[lang=en] .closing h2{font-size:40px;line-height:1.25}html[lang=en] .discuss
   "用偏差与歧义的分解说明三种猜想并不互斥。核心是用人工分数而非 A 当裁判，否则 (a) 永远显得成立。重点讲右上角关键格：gap 变小但离 A 更远时，人工误差是否仍下降。这个分析只需 API 调用和已有人工分数，可作为阶段 1 的核心实验，结果决定 λc 与 λa 的设定。": "Use the bias–ambiguity decomposition to show the three explanations are not mutually exclusive. Human scores, not A, must adjudicate; otherwise (a) always appears to win. Focus on the key cell: when the gap shrinks but distance to A grows, does human error still fall? The analysis needs only API calls and existing human scores, so it can anchor phase 1 and inform λc and λa.",
   "这页是开跑前的清单。橙色两列是阻塞项：数据与可拆分性、A 的可靠性与评分协议。特别提醒：ASAP-SAS 分数很离散，需要 logprob 或多次采样把 gap 连续化；A 与人工的一致率要和人工之间的一致率对比。建议先用一道题、几百份答卷回答两个问题，再扩展。": "This is the pre-run checklist. The two orange columns are blockers: data and decomposability, and A’s reliability plus the grading protocol. Note that ASAP-SAS scores are coarse, so use logprobs or repeated sampling to make the gap continuous, and compare A–human agreement with human–human agreement. Start with one question and a few hundred answers to answer two questions before scaling up.",
   "新增第一行 Agreement Without Alignment 是目前最接近的工作：用多个 judge 的分歧改写 rubric，结果共识上升而人工一致性不变。下一页精读。建议重点讲 Reflect-and-Revise、GenRubric 与 FairJudge：分别对应教育 rubric 修订、rubric 的 RL 优化、评分协议一致性。ARGO 对应原始 A 的设想，Prometheus 对应强老师蒸馏。所有数值来自不同测试，不可横向比较。仓库状态只代表本轮检查，不能把论文宣称公开等同于已具备完整复现条件。": "The new first row, Agreement Without Alignment, is the closest work: it rewrites rubrics using disagreement among several judges and raises consensus without improving human agreement. The next slide reads it closely. Focus on Reflect-and-Revise, GenRubric, and FairJudge: educational rubric revision, RL for rubric generation, and consistency across evaluation protocols. ARGO relates to the original reference-agent A idea; Prometheus illustrates teacher distillation. Results come from different tests and cannot be ranked directly. Repository observations describe the inspection date; a publication’s availability claim does not guarantee full reproducibility.",
-  "请输入范围内的正整数。": "Enter positive whole numbers within the allowed ranges."
+  "请输入范围内的正整数。": "Enter positive whole numbers within the allowed ranges.",
+  "哪种评分分歧指向 rubric 缺陷": "Which grading disagreement points to a rubric flaw",
+  "V2 修订": "V2 revision",
+  "换一种评分方式。": "A different way to grade it.",
+  "哪种分歧值得相信？": "Which disagreement can be trusted?",
+  "比较多种无标签的评分分歧信号，": "Compare several label-free disagreement signals,",
+  "检验它们能否在人工标签很少时改进 rubric。": "and test whether they improve rubrics when human labels are scarce.",
+  "Rubric 诊断与修订": "Rubric diagnosis & revision",
+  "分歧定位 + 少量人工标签": "Disagreement localization + few labels",
+  "同一个 rubric R 输入两个评分器：L减默认给分，L加默认不给分。H 是少量人工标签。": "One rubric R feeds two graders: L-minus awards credit by default, L-plus withholds it by default. H is a small set of human labels.",
+  "默认给分，见错才扣": "Credit by default; deduct on error",
+  "默认不给，见证据才加": "No credit by default; add on evidence",
+  "少量人工标签 · 锚点": "A few human labels · anchor",
+  "加减分分歧，比其他扰动更有信息吗？": "Is the add/deduct split more informative than other perturbations?",
+  "找出能预测人工误差的无标签信号，并用它提高少标签下的 rubric 修订效果。": "Find a label-free signal that predicts human-score error, and use it to improve rubric revision when labels are few.",
+  "少量标签 + 分歧定位": "Few labels + localization",
+  "分歧定位到条款，人工标签选择候选": "Disagreement locates the clause; human labels select the candidate",
+  "分歧定位到条款，少量人工标签做选择。": "Disagreement locates the clause; a few human labels choose.",
+  "V2 主线：不训练模型参数，不再依赖模型 A。无标签答卷上的分歧决定改写哪一条，n 个人工标签决定保留哪个候选。": "V2 in brief: no parameter training and no reliance on model A. Disagreement on unlabeled answers decides which clause to rewrite; n human labels decide which candidate to keep.",
+  "只有 n 份答卷的人工分数进入修订流程（n = 20 / 50 / 100）；其余人工分数全部留作测试。": "Only n human-scored answers enter the revision loop (n = 20 / 50 / 100); all other human scores are held out for testing.",
+  "h 用于选择候选 rubric ↓": "h selects among candidate rubrics ↓",
+  "被修改的对象": "What gets edited",
+  "rubric 文本 R": "Rubric text R",
+  "从原始 rubric R₀ 出发": "Start from the original rubric R₀",
+  "只改写被分歧定位到的条款": "Rewrite only the clauses flagged by disagreement",
+  "同一 q、x、R · 无标签答卷": "Same q, x, R · unlabeled answers",
+  "L+ & L− → 逐条判定": "L+ & L− → per-clause judgments",
+  "L+：有明确证据才给分": "L+: award only on explicit evidence",
+  "L−：有明确错误或缺失才扣分": "L−: deduct only on an explicit error or omission",
+  "每条输出：满足 / 不满足 / 未规定": "Per clause: met / not met / unspecified",
+  "定位 + 选择": "Localize + select",
+  "分歧条款 → 改写 → 用 h 选择": "Flagged clause → rewrite → select with h",
+  "按条款统计两路分歧率": "Compute the L+/L− disagreement rate per clause",
+  "改写分歧最高的条款，补上默认规则": "Rewrite the top clauses; add the missing default rule",
+  "候选 R 按 n 个标签上的 QWK 筛选": "Select candidate R by QWK on the n labels",
+  "↰ 重复若干轮；测试时冻结 R，由第三种中性协议 N 评分": "↰ Repeat for a few rounds; at test time freeze R and grade with a third, neutral protocol N",
+  "条款级分歧 · 在无标签答卷上统计": "Clause-level disagreement · measured on unlabeled answers",
+  "条款 k": "Clause k",
+  "：rubric 中一个可以独立判定的得分点。": ": one scoring point in the rubric that can be judged on its own.",
+  "整体 gap − 逐条 gap": "Holistic gap − itemized gap",
+  "：估计纯锚定效应的部分。": ": estimates the part that is pure anchoring.",
+  "测试分数来自中性协议 N，不来自 L+ 或 L−。": "Test scores come from the neutral protocol N, not from L+ or L−.",
+  "V2 全部为 API 上的 rubric 文本优化；训练 rubric 生成器的 RL 移至后续工作。": "V2 is rubric-text optimization over an API throughout; RL for a rubric generator moves to future work.",
+  "与 V2 方案的对比": "Comparison with V2",
+  "加减分分歧只是五种无标签信号之一": "The add/deduct split is one of five label-free signals",
+  "可检验的贡献：加减分分歧相对其他信号的增量。": "The testable contribution: what the add/deduct split adds over other signals.",
+  "前四行与 V1 相同。最后一行改为 V2：不训练参数，锚点是少量人工标签，加减分分歧只是五种无标签信号之一。": "The first four rows match V1. The last row is V2: no parameter training, a few human labels as the anchor, and the add/deduct split as one of five label-free signals.",
+  "与 L+、L− 的关系": "Relation to L+ and L−",
+  "与 L± 的关系": "Relation to L±",
+  "相同 n 下的主要基线。": "The main baseline at matched n.",
+  "固定 judge 提供内部反馈；没有 L±。": "A fixed judge supplies internal feedback; no L± pair.",
+  "后续工作的训练框架；V2 不使用。": "A training framework for future work; unused in V2.",
+  "模式为单点评分 / 成对比较，不是加分 / 扣分。": "Modes are pointwise and pairwise, not additive and deductive.",
+  "说明跨协议一致性可以被训练；V2 不训练评分器。": "Shows cross-protocol consistency can be trained; V2 trains no judge.",
+  "分歧来自不同模型；不区分加分 / 减分。": "Disagreement comes from different models; no additive/deductive split.",
+  "负结果与对照设计；作为五种信号之一直接比较。": "Negative result and control design; compared directly as one of the five signals.",
+  "V2 拟议版本 · 尚未实测": "V2 proposal · Not yet tested",
+  "提示优化，无参数训练": "Prompt optimization; no training",
+  "无标签答卷上的条款级分歧决定改写位置；n 个人工标签选择候选。": "Clause-level disagreement on unlabeled answers picks what to rewrite; n human labels select the candidate.",
+  "L± 逐条判定，只在默认规则上不同；不再需要 A。": "L± judge clause by clause and differ only in the default rule; A is no longer needed.",
+  "检验加减分分歧是否比其他扰动更能预测人工误差，并提高标签效率。": "Test whether the add/deduct split predicts human-score error better than other perturbations, and improves label efficiency.",
+  "为什么不再以模型 A 为锚": "Why model A is no longer the anchor",
+  "A 只是一次模型调用，并不比两次 L 调用贵，“gap 不需要标签”相对 A 不构成优势。": "A is a single model call, no costlier than two L calls, so “the gap needs no labels” is no advantage over A.",
+  "换成人工标签后，无标签信号的价值可以用标签效率曲线直接衡量。": "With human labels as the anchor, a label-efficiency curve measures the value of a label-free signal directly.",
+  "V1 的恒等式仍然成立：两路分别对齐参照，已隐含 gap 惩罚。": "V1’s identity still holds: fitting each path to a reference already penalizes the gap.",
+  "相对 Han & Kim，需要多回答什么": "What must be answered beyond Han & Kim",
+  "他们用跨模型分歧定位条款：共识上升，人工一致性未变。": "They located clauses by cross-model disagreement: consensus rose, human agreement did not.",
+  "V2 把跨模型分歧作为对照臂，与加减分分歧直接比较。": "V2 keeps cross-model disagreement as a control arm and compares it directly with the add/deduct split.",
+  "V2 另加 n 个人工标签做候选选择，这是他们没有的环节。": "V2 also selects candidates with n human labels, a step their pipeline lacks.",
+  "前四行依据前页原文；最后一行与下方两栏为本提案分析，尚无实验支持。": "The first four rows summarize the cited papers. The last row and the two boxes are our analysis, with no experimental support yet.",
+  "三个问题，每一步都有停止条件": "Three questions, each with a stopping rule",
+  "按顺序回答三个问题，每一步都有停止条件。": "Answer three questions in order; each has a stopping rule.",
+  "除跨模型分歧一臂外，全程固定同一个基础模型。全部实验只需要 API 调用和已有的人工分数。": "The base model stays fixed throughout, except in the cross-model arm. Every experiment needs only API calls and existing human scores.",
+  "gap 是否随 rubric 清晰度变化？": "Does the gap move with rubric clarity?",
+  "同一道题准备三版 rubric：故意写模糊的、原版、手工补全默认规则的。若 gap 不随清晰度单调下降，它测的是框架偏差而非 rubric，项目停止。": "Write three rubrics for one question: deliberately vague, original, and hand-completed with default rules. If the gap does not fall monotonically with clarity, it measures framing bias rather than the rubric, and the project stops.",
+  "加减分分歧是否比其他扰动更能预测人工误差？": "Does the add/deduct split predict human-score error better than other perturbations?",
+  "在 rubric 变体上比较五种无标签信号对人工误差的增量解释力（见下一页）。": "Across rubric variants, compare how much each of five label-free signals adds in explaining human-score error (next slide).",
+  "标签很少时，分歧定位是否提高修订效果？": "With few labels, does localization improve revision?",
+  "在 n = 20 / 50 / 100 个人工标签下，比较 Reflect-and-Revise 与“相同 n + 分歧定位改写”的留出集 QWK。": "At n = 20 / 50 / 100 human labels, compare held-out QWK for Reflect-and-Revise against the same n plus disagreement-localized rewriting.",
+  "Signals · 五种无标签分歧信号": "Signals · Five label-free disagreement signals",
+  "信号": "Signal",
+  "扰动方式": "Perturbation",
+  "同协议重复": "Same-protocol repeats",
+  "相同提示多次采样": "Resample the same prompt",
+  "噪声基线": "Noise baseline",
+  "rubric 同义改写": "Rubric paraphrase",
+  "改措辞，不改规则": "Reword without changing rules",
+  "通用扰动对照": "Generic-perturbation control",
+  "评分点顺序": "Criterion order",
+  "打乱条款顺序": "Shuffle the clauses",
+  "不同 judge 模型": "Different judge models",
+  "加分 / 扣分": "Additive / deductive",
+  "默认不给分 vs. 默认给分": "No credit by default vs. credit by default",
+  "待检验的信号": "The signal under test",
+  "协议定义：": "Protocol definition:",
+  "两路都逐条判定、程序求和，只在默认规则上不同；另跑整体打分版本，估计锚定效应。": "Both paths judge clause by clause, total in code, and differ only in the default rule. Also run a holistic version to estimate anchoring.",
+  "中性裁判：": "Neutral judge:",
+  "因变量取第三种协议 N 的人工误差，避免 gap 机械地出现在因变量中。": "The outcome is the human-score error of a third protocol N, so the gap cannot enter the outcome mechanically.",
+  "答案固定效应：": "Answer fixed effects:",
+  "比较同一答案在不同 rubric 变体下的变化，排除答案难度的混淆。": "Compare the same answer across rubric variants to rule out confounding by answer difficulty.",
+  "n 个标签之外的人工分数只用于测试；先题内留出，再按题留出。": "Human scores beyond the n labels are for testing only. Hold out answers within questions, then entire questions.",
+  "粗略估计，调用量约为 V1 的 3–4 倍：多出改写、打乱、跨模型和中性协议各一路。第 15 页估算器仍按 V1 公式。": "As a rough estimate, calls are 3–4× V1: one extra pass each for paraphrase, shuffle, cross-model, and the neutral protocol. The estimator on slide 15 still uses V1’s formula.",
+  "信号对比": "Signal comparison",
+  "哪种分歧能预测人工误差": "Which disagreement predicts human-score error",
+  "哪种分歧，真的指向 rubric 的缺陷？": "Which disagreement actually points to a rubric flaw?",
+  "V1 把 gap 与 A 距离对比。V2 把加减分分歧与其他无标签信号对比，并修正两个统计问题：机械相关与答案难度混淆。": "V1 set the gap against distance to A. V2 sets the add/deduct split against other label-free signals and fixes two statistical problems: mechanical correlation and confounding by answer difficulty.",
+  "加减分分歧有额外信息": "The add/deduct split carries extra information",
+  "控制其他四种信号后仍能预测人工误差：它捕捉到“默认规则未写明”这类特定歧义。": "It still predicts human-score error after controlling for the other four signals: it captures a specific ambiguity, the unstated default rule.",
+  "任何扰动都差不多": "Any perturbation does about as well",
+  "解释力不高于同义改写或顺序打乱：它只是通用的不稳定性度量，加减分设计没有特殊价值。": "It explains no more than paraphrasing or shuffling: a generic instability measure, with no special value in the add/deduct design.",
+  "都不预测人工误差": "None predicts human-score error",
+  "分歧反映的是模型自身的不稳定，与 rubric 质量无关；与 Han & Kim 的结论一致。": "Disagreement reflects the model’s own instability, unrelated to rubric quality; consistent with Han & Kim.",
+  "三种结果都可以报告。只有 (a) 支持继续做分歧定位改写；(b) 说明应改用更便宜的扰动；(c) 则到此为止。": "All three outcomes are reportable. Only (a) supports localized rewriting; (b) says to switch to a cheaper perturbation; (c) ends the project.",
+  "N 的人工误差": "Human error of N",
+  "·信号": "·signal",
+  "答案固定效应": "answer fixed effects",
+  "V1 与 V2 回归设计的差别": "How the V1 and V2 regression designs differ",
+  "因变量": "Outcome",
+  "L± 自身的人工误差": "Human error of L± themselves",
+  "中性协议 N 的人工误差": "Human error of neutral protocol N",
+  "对照项": "Control term",
+  "与 A 的距离": "Distance to A",
+  "其他四种无标签信号": "The other four label-free signals",
+  "分析单位": "Unit of analysis",
+  "rubric 变体": "Rubric variant",
+  "（答案，变体），加答案固定效应": "(answer, variant), with answer fixed effects",
+  "加减分的 β 在控制其他信号后仍显著": "The add/deduct β stays significant after controlling for other signals",
+  "→ 支持 (a)": "→ supports (a)",
+  "各信号的增量解释力相近": "All signals add about the same explanatory power",
+  "全部不显著": "None is significant",
+  "→ 支持 (c)": "→ supports (c)",
+  "条款级验证：在有逐条人工标签的数据上，检查分歧率高的条款是否就是模型判定出错的条款。": "Clause-level check: on data with per-clause human labels, test whether high-disagreement clauses are the ones the model misjudges.",
+  "为什么换因变量：L+ 与 L− 对人工分数 h 的平方误差之和恒等于 2(m − h)² + ½·gap²，gap 会机械地出现在因变量里。": "Why the outcome changes: the summed squared errors of L+ and L− against human score h equal 2(m − h)² + ½·gap², so the gap would sit inside the outcome by construction.",
+  "先跑操纵检验，再补清单": "Run the manipulation check first, then the checklist",
+  "先跑操纵检验，再补清单。": "Run the manipulation check first, then fill in the checklist.",
+  "橙色为阻塞项。V2 把“先补齐信息”改为“先跑一个一天内能完成的实验”：它直接决定项目是否继续。": "Orange items are blockers. V2 replaces “collect information first” with “run a one-day experiment first”: it decides whether the project continues.",
+  "阻塞项 · 第一天": "Blocker · Day one",
+  "操纵检验": "Manipulation check",
+  "一道题、200 份答卷、三版 rubric：模糊 / 原版 / 手工补全": "One question, 200 answers, three rubrics: vague / original / hand-completed",
+  "两种协议各重复 5 次；逐条与整体两种模板都跑": "5 repeats per protocol; run both itemized and holistic templates",
+  "通过：gap 随清晰度单调下降，且超过同协议重复的波动": "Pass: the gap falls monotonically with clarity and exceeds same-protocol repeat variation",
+  "不通过：项目停止，或改用其他扰动": "Fail: stop, or switch to another perturbation",
+  "阻塞项 · 协议": "Blocker · Protocol",
+  "L± 与中性协议 N 的模板": "Templates for L± and neutral protocol N",
+  "L+：有明确证据才给分；L−：有明确错误或缺失才扣分": "L+: award only on explicit evidence; L−: deduct only on an explicit error or omission",
+  "每条输出：满足 / 不满足 / 未规定，并引用答卷原文": "Per clause: met / not met / unspecified, quoting the answer",
+  "N：逐条判定，不指定默认方向": "N: itemized judgments with no default direction",
+  "温度与重复次数 r；独立会话": "Temperature and repeats r; separate sessions",
+  "Q₂ 之前": "Before Q₂",
+  "数据与 rubric 变体": "Data and rubric variants",
+  "主数据集需有 5 分以上分值，或逐条人工标签": "The main dataset needs a scale of 5+ points or per-clause human labels",
+  "核对满分、分数分布与评分者一致率": "Verify maximum scores, score distributions, and inter-rater agreement",
+  "检查模型是否见过数据：ASAP-SAS 自 2012 年公开": "Check for training-data exposure: ASAP-SAS has been public since 2012",
+  "Q₃ 之前": "Before Q₃",
+  "n 个标签的抽样方式与随机种子数": "How the n labels are sampled, and how many seeds",
+  "Reflect-and-Revise 基线使用相同的 n 与调用预算": "Give the Reflect-and-Revise baseline the same n and call budget",
+  "1 天 · 1 题": "1 day · 1 question",
+  "操纵检验的调用量：200 份 × 3 版 rubric × 2 种协议 × 5 次重复 × 2 种模板 = 12,000 次评分。": "Calls for the manipulation check: 200 answers × 3 rubrics × 2 protocols × 5 repeats × 2 templates = 12,000 grading calls.",
+  "预注册与文献精读移到操纵检验之后；协议模板必须在跑之前定稿。": "Preregistration and the literature read move after the manipulation check; the protocol templates must be final before it runs.",
+  "优先条款级标签与更高分值": "Prefer clause-level labels and wider score scales",
+  "主数据集换成有条款级标签或更高分值的题目。": "Move the main dataset to questions with clause-level labels or wider scales.",
+  "ASAP-SAS 为 0–2 / 0–3 分，gap 几乎只有 0 或 1。V2 优先选择能在条款级验证分歧的数据。规模数字来自原论文或数据卡，使用前需核对。": "ASAP-SAS uses 0–2 / 0–3 scales, so the gap is almost always 0 or 1. V2 prefers data where disagreement can be validated per clause. Sizes come from the papers or dataset cards; verify before use.",
+  "首选 pilot · 条款级标签": "Preferred pilot · Clause-level labels",
+  "大学化学长答题：4 道题、27 个 rubric 条款、1,264 份答卷。": "College chemistry long answers: 4 questions, 27 rubric items, 1,264 responses.",
+  "每个条款有助教标注的 TRUE / FALSE。": "Each rubric item has a TA-assigned TRUE / FALSE label.",
+  "操纵检验与条款级验证：分歧高的条款是否就是判定出错的条款。": "Manipulation check and clause-level validation: are high-disagreement clauses the misjudged ones?",
+  "只有 4 道题；单一学科。": "Only 4 questions; one subject.",
+  "题目多样性 · 0–5 分": "Question diversity · 0–5 scale",
+  "数据结构课程短答题：约 80 道题、2,273 份答卷；人工 0–5 分。": "Data-structures short answers: about 80 questions, 2,273 responses; human scores 0–5.",
+  "信号对比回归与按题留出。": "Signal-comparison regression and leave-one-question-out.",
+  "只有参考答案，没有分项 rubric；需先撰写。": "Reference answers only, no itemized rubric; one must be written first.",
+  "跨题泛化 · 步骤级标注": "Cross-question transfer · Step-level labels",
+  "高考题：9 个学科、1,030 道题、4,109 份答卷；专家逐步评分并标注错因。": "Gaokao questions: 9 subjects, 1,030 questions, 4,109 responses; experts score each step and tag error causes.",
+  "后续检验跨学科、跨题迁移。": "Later tests of cross-subject and cross-question transfer.",
+  "中文；每题答卷很少，不适合单题 rubric 优化。": "Chinese; few responses per question, unsuited to per-question rubric optimization.",
+  "次要验证 · 与文献可比": "Secondary check · Comparable to prior work",
+  "与已有论文的结果对照。": "Compare against published results.",
+  "分值离散；自 2012 年公开，模型可能见过。": "Coarse scales; public since 2012, so models may have seen it.",
+  "条款 > 总分": "Clause > total",
+  "V2 的信号是条款级的，验证也应在条款级进行。": "V2’s signal is clause-level, so validation should be clause-level too.",
+  "有逐条人工标签的数据，比答卷数量更重要。": "Per-clause human labels matter more than the number of answers.",
+  "Feedback Collection 与 RubricHub 只用于参数训练，V2 不再需要。下载入口不代表无访问限制：遵循各数据集条款。": "Feedback Collection and RubricHub serve parameter training only, which V2 drops. Download links do not guarantee unrestricted access; follow each dataset’s terms.",
+  "三道关卡与标签效率": "Three gates and label efficiency",
+  "三道关卡，每一道都可能让项目停下。": "Three gates; any one can stop the project.",
+  "V2 的成功标准是标签效率：人工标签数相同，留出集上更准。当前所有实验结果均为待测。": "V2 succeeds on label efficiency: the same number of human labels, better held-out accuracy. All experiment results remain unmeasured.",
+  "gap 随 rubric 清晰度的变化": "Change in gap with rubric clarity",
+  "信号有效性": "Signal validity",
+  "各信号对人工误差的增量解释力": "Each signal’s added explanatory power for human-score error",
+  "因变量为中性协议 N 的误差": "Outcome: error of neutral protocol N",
+  "标签效率": "Label efficiency",
+  "n = 20 / 50 / 100 时的留出集 QWK": "Held-out QWK at n = 20 / 50 / 100",
+  "对比相同 n 的 Reflect-and-Revise": "Against Reflect-and-Revise at the same n",
+  "gap 不随 rubric 清晰度变化": "The gap does not move with rubric clarity",
+  "gap 测的是模型的框架偏差。项目停止，或改用其他扰动。": "The gap measures the model’s framing bias. Stop, or switch to another perturbation.",
+  "加减分分歧不优于通用扰动": "The add/deduct split is no better than generic perturbations",
+  "报告信号对比结果；后续改用更便宜的信号，不再强调加减分设计。": "Report the signal comparison; continue with the cheaper signal and drop the emphasis on the add/deduct design.",
+  "小 n 时分歧定位优于 Reflect-and-Revise": "At small n, localization beats Reflect-and-Revise",
+  "再测试按题留出与跨模型迁移；此时才讨论是否值得训练 rubric 生成器。": "Then test leave-one-question-out and cross-model transfer; only now consider training a rubric generator.",
+  "本提案的判断：较可能停在 Gate 02 或更早，因为 Han & Kim 的跨模型分歧未能提高人工一致性。三种结果都按预先写好的结论报告。": "Our judgment: stopping at Gate 02 or earlier is the likelier outcome, since Han & Kim’s cross-model disagreement did not raise human agreement. Each outcome is reported with its pre-written conclusion.",
+  "V1 还是 V2，以及负结果是否可接受": "V1 or V2, and whether a negative result is acceptable",
+  "哪种评分分歧，": "Which grading disagreement",
+  "能指出 rubric": "shows which rubric",
+  "哪一条没写清": "clause is unclear",
+  "潜在贡献从“一个新奖励”变为“一次信号对比”：": "The potential contribution shifts from “a new reward” to “a signal comparison”:",
+  "无论加减分分歧是否有效，结果都有信息量。": "the result is informative whether or not the add/deduct split works.",
+  "定稿 L± 与 N 的模板后，先用一道题、200 份答卷跑操纵检验；通过后做五种信号的对比回归，再做标签效率实验。RL 不在本阶段范围内。": "Once the L± and N templates are final, run the manipulation check on one question and 200 answers. If it passes, run the five-signal regression, then the label-efficiency experiment. RL is out of scope for this phase.",
+  "选 V1 还是 V2？": "V1 or V2?",
+  "V1 保留 RL 与模型 A 的叙事，风险集中在最后；V2 放弃 RL，换来每一步都有停止条件。": "V1 keeps the RL and model-A story, with the risk concentrated at the end. V2 gives up RL in exchange for a stopping rule at every step.",
+  "锚点用人工标签还是模型 A？": "Human labels or model A as the anchor?",
+  "V2 用 n 个人工标签；A 可保留为一条蒸馏对照臂。需要确认数据集已有标签是否够用。": "V2 uses n human labels; A can stay as a distillation control arm. Confirm that the datasets’ existing labels suffice.",
+  "负结果是否可以接受？": "Is a negative result acceptable?",
+  "若停在 Gate 01 或 02，产出是一份信号对比报告。需要事先对齐这是否算完成。": "Stopping at Gate 01 or 02 yields a signal-comparison report. Agree in advance whether that counts as done.",
+  "第一阶段的目标：一天内知道这个信号是否值得继续。": "Phase 1 objective: know within a day whether the signal is worth pursuing.",
+  "V1 → V2 变更对照": "V1 → V2 changes",
+  "改了什么，为什么": "What changed, and why",
+  "仅 V2": "V2 only",
+  "V1 → V2：改了什么，为什么。": "V1 → V2: what changed, and why.",
+  "V2 是对 V1 的评审修订，尚未经过讨论确认。按 V 键或点击顶部按钮，可在同一页码上对照两个版本。": "V2 is a review-driven revision of V1 and has not been agreed in discussion. Press V or use the button at the top to compare both versions on the same page number.",
+  "项目": "Item",
+  "修改原因": "Reason",
+  "加减分 gap 能否作为奖励，训练 rubric 生成器。": "Can the add/deduct gap serve as a reward to train a rubric generator?",
+  "哪种无标签分歧能预测人工误差，并提高标签效率。": "Which label-free disagreement predicts human-score error and improves label efficiency?",
+  "无论 gap 是否有效，结果都有信息量。": "The result is informative whether or not the gap works.",
+  "锚点": "Anchor",
+  "强模型 A 的冻结分数。": "Frozen scores from strong model A.",
+  "n 个人工标签（20 / 50 / 100）。": "n human labels (20 / 50 / 100).",
+  "A 的调用成本与 L 相近，“无标签”优势不成立。": "A costs about as much per call as L, so the “label-free” advantage does not hold.",
+  "L± 协议": "L± protocol",
+  "从零加分 / 从满分扣分，逐项判定。": "Add from zero / deduct from full marks, judged per criterion.",
+  "逐条判定，只在默认规则上不同；输出含“未规定”。": "Per-clause judgments that differ only in the default rule; outputs include “unspecified”.",
+  "逐项判定下两路几乎等价；分歧定位到条款才能指导改写。": "Under itemized judging the two paths are nearly equivalent; only clause-level disagreement can guide a rewrite.",
+  "第一个实验": "First experiment",
+  "gap 是否超出噪声。": "Does the gap exceed noise?",
+  "gap 是否随 rubric 清晰度变化。": "Does the gap move with rubric clarity?",
+  "超出噪声也可能只是锚定效应。": "A gap above noise may still be anchoring alone.",
+  "回归分析": "Regression",
+  "人工误差 ~ gap + A 距离。": "Human error ~ gap + distance to A.",
+  "N 的人工误差 ~ 五种信号 + 答案固定效应。": "Human error of N ~ five signals + answer fixed effects.",
+  "避免 gap 机械进入因变量；排除答案难度混淆。": "Keeps the gap out of the outcome by construction; rules out answer-difficulty confounding.",
+  "主数据集": "Main dataset",
+  "ASAP-SAS（0–2 / 0–3 分）。": "ASAP-SAS (0–2 / 0–3 scales).",
+  "RiceChem、Mohler；ASAP-SAS 降为次要。": "RiceChem and Mohler; ASAP-SAS becomes secondary.",
+  "分值太低时 gap 几乎只有 0 或 1。": "On narrow scales the gap is almost always 0 or 1.",
+  "优化方式": "Optimization",
+  "先提示优化，之后 RL。": "Prompt optimization first, then RL.",
+  "只做提示优化。": "Prompt optimization only.",
+  "题目数量不足以训练生成器。": "Too few questions to train a generator.",
+  "V2 修订第 1、3、10–14、16、17 页，新增本页；其余页面两版相同。": "V2 revises slides 1, 3, 10–14, 16, and 17 and adds this one; all other slides are identical.",
+  "代价：失去“RL 训练 rubric 生成器”的叙事，调用量粗略估计为 V1 的 3–4 倍。": "The cost: no “RL-trained rubric generator” story, and roughly 3–4× V1’s grading calls.",
+  "V2 的全部内容为设计建议，没有实验结果。": "Everything in V2 is a design recommendation; there are no experimental results.",
+  "切换方案版本（V 键）": "Switch proposal version (V key)",
+  "V2 的开场：问题从“加减分 gap 能否当奖励”改为“哪种无标签的评分分歧指向 rubric 缺陷”。加减分仍是主角，但它需要和其他扰动比较。所有内容仍是提案，没有实验结果。": "Opening for V2: the question shifts from “can the add/deduct gap serve as a reward” to “which label-free grading disagreement points to a rubric flaw”. The add/deduct split is still the lead, but it must be compared with other perturbations. Everything remains a proposal, with no experimental results.",
+  "三处变化：锚点从模型 A 换成 n 个人工标签；L± 改为逐条判定、只在默认规则上不同；分歧用于定位要改写的条款，而不是作为标量奖励。测试分数由第三种中性协议给出。不训练任何模型参数。": "Three changes: the anchor moves from model A to n human labels; L± judge clause by clause and differ only in the default rule; disagreement locates the clause to rewrite instead of serving as a scalar reward. Test scores come from a third, neutral protocol. No model parameters are trained.",
+  "表格前四行与 V1 相同，只改了最后一行和下方两栏。重点讲为什么不再用 A：A 的成本与 L 相近，无标签的优势只有相对人工标签才成立。再讲与 Han & Kim 的关系：把他们的信号作为一条对照臂。": "The first four rows match V1; only the last row and the two boxes changed. Explain why A is dropped: A costs about as much as L, so a label-free signal is an advantage only relative to human labels. Then the relation to Han & Kim: their signal becomes a control arm.",
+  "三个问题按顺序做，前一个不通过就停。Q₁ 是操纵检验，一天内可完成。Q₂ 是信号对比，下一页展开。Q₃ 是标签效率曲线，对比相同 n 的 Reflect-and-Revise。调用量比 V1 多，3–4 倍是粗略估计。": "The three questions run in order; stop if one fails. Q₁ is the manipulation check, doable in a day. Q₂ is the signal comparison, detailed on the next slide. Q₃ is the label-efficiency curve against Reflect-and-Revise at the same n. Calls exceed V1; 3–4× is a rough estimate.",
+  "先讲底部的恒等式：如果因变量取 L± 自身的误差，gap 一定显著，这是 V1 回归的问题。所以因变量换成中性协议 N 的误差，并加答案固定效应。然后讲三种结果各自意味着什么，三种都可以报告。": "Start with the identity at the bottom: if the outcome is the error of L± themselves, the gap is significant by construction, which is the problem with V1’s regression. So the outcome becomes the error of neutral protocol N, with answer fixed effects. Then explain what each of the three outcomes means; all three are reportable.",
+  "V1 的清单是先补齐信息再跑；V2 认为第一个实验足够便宜，应该先跑。唯一必须事先定稿的是协议模板，因为它决定 gap 是否有意义。12,000 次调用是按页面上的参数算出的，不含重试。": "V1’s checklist collects information before running; V2 holds that the first experiment is cheap enough to run first. Only the protocol templates must be final beforehand, because they decide whether the gap means anything. The 12,000 calls follow from the parameters on the slide and exclude retries.",
+  "RiceChem 有逐条人工标签，可以直接验证“分歧高的条款是否就是判定出错的条款”，但只有 4 道题。Mohler 题目多、0–5 分，但需要自己写分项 rubric。规模数字来自论文和数据卡，尚未下载核对。": "RiceChem has per-clause human labels, so it can directly test whether high-disagreement clauses are the misjudged ones, but it has only 4 questions. Mohler has many questions on a 0–5 scale but needs an itemized rubric written for it. Sizes come from the papers and dataset cards and have not been checked against a download.",
+  "V2 的成功标准是标签效率。强调每一道关卡都可能让项目停下，并且较可能停在 Gate 02 或更早，这是本提案的判断而非数据。请听众事先确认负结果是否可接受。": "V2 succeeds on label efficiency. Stress that any gate can stop the project and that stopping at Gate 02 or earlier is the likelier outcome; this is our judgment, not data. Ask the audience to confirm in advance whether a negative result is acceptable.",
+  "需要对齐三个决定：选 V1 还是 V2；锚点用人工标签还是模型 A；负结果是否算完成。可以按 V 键回到 V1 的同一页对照。": "Three decisions to align on: V1 or V2; human labels or model A as the anchor; whether a negative result counts as done. Press V to compare with the same page in V1.",
+  "这页只在 V2 中出现，用于逐项对照。每行的第四列是修改原因。说明 V2 是评审后的修订建议，尚未经过讨论确认；V2 的代价是失去 RL 叙事和更多的调用量。": "This slide appears only in V2, for item-by-item comparison. The fourth column gives the reason for each change. Make clear that V2 is a revision proposed after review and not yet agreed; its cost is the loss of the RL story and more grading calls.",
+  "已切换到 V2 · 修订方案": "Switched to V2 · Revised proposal",
+  "已切换到 V1 · 原方案": "Switched to V1 · Original proposal"
 };
   var language='zh',rubricClear=false,counterCorrect=false;
   var textBindings=[],attributeBindings=[];
-  var dynamicSelector='#languageBtn,#readingBtn,#fullscreenBtn,#chapterName,#notesText,#rubricText,#plusReason,#minusReason,#exampleNote,#counterBody,#counterCaption,#callTotal,#callBreakdown';
+  var dynamicSelector='#languageBtn,#versionBtn,#readingBtn,#fullscreenBtn,#chapterName,#notesText,#rubricText,#plusReason,#minusReason,#exampleNote,#counterBody,#counterCaption,#callTotal,#callBreakdown';
   var walker=document.createTreeWalker(document.documentElement,NodeFilter.SHOW_TEXT);
   var node;
   while((node=walker.nextNode())){
@@ -1107,21 +1564,25 @@ html[lang=en] .closing h2{font-size:40px;line-height:1.25}html[lang=en] .discuss
   function announce(message){var t=document.getElementById('toast');t.textContent=message;t.classList.add('visible');clearTimeout(toastTimer);toastTimer=setTimeout(function(){t.classList.remove('visible')},3000)}
   function setPage(index,scroll){
     current=Math.min(slides.length-1,Math.max(0,index));
-    slides.forEach(function(s,i){s.classList.toggle('active',i===current);s.setAttribute('aria-hidden',String(!reading&&i!==current))});
+    allSlides.forEach(function(s){var on=s===slides[current];s.classList.toggle('active',on);s.setAttribute('aria-hidden',String(!inVersion(s)||(!reading&&!on)))});
+    document.getElementById('versionBtn').classList.toggle('differs',!!slides[current].dataset.ver);
     document.getElementById('pageNumber').textContent=pad(current+1)+' / '+pad(slides.length);
     document.getElementById('chapterName').textContent=slides[current].dataset.title;
     document.getElementById('prevBtn').disabled=current===0;
     document.getElementById('nextBtn').disabled=current===slides.length-1;
-    document.getElementById('notesText').textContent=t(notes[current]);
+    document.getElementById('notesText').textContent=t(slides[current]._note);
     document.querySelectorAll('.step').forEach(function(b,i){b.classList.toggle('current',i===current);b.classList.toggle('done',i<current);if(i===current)b.setAttribute('aria-current','page');else b.removeAttribute('aria-current')});
     document.querySelectorAll('.overview-card').forEach(function(b,i){b.setAttribute('aria-current',String(i===current))});
-    try{history.replaceState(null,'','#'+(current+1))}catch(e){}
+    try{history.replaceState(null,'',(version==='v2'?'?v=2':location.pathname)+'#'+(current+1))}catch(e){}
     if(scroll!==false){if(reading)slides[current].scrollIntoView({block:'start'});else window.scrollTo(0,0)}
   }
+  function buildNav(){
+  document.getElementById('progressNav').textContent='';document.getElementById('overviewGrid').textContent='';
   slides.forEach(function(s,i){
-    var b=document.createElement('button');b.className='step';b.setAttribute('aria-label','第 '+(i+1)+' 页：'+s.dataset.title);b.addEventListener('click',function(){setPage(i)});document.getElementById('progressNav').appendChild(b);
-    var c=document.createElement('button');c.className='overview-card';var n=document.createElement('span');n.textContent=pad(i+1);var title=document.createElement('strong');title.textContent=s.dataset.title;var sub=document.createElement('small');sub.textContent=s.dataset.subtitle;c.append(n,title,sub);c.addEventListener('click',function(){toggleOverview(false);setPage(i)});document.getElementById('overviewGrid').appendChild(c);
-  });
+    var b=document.createElement('button');b.className='step'+(s.dataset.ver?' changed':'');b.setAttribute('aria-label','第 '+(i+1)+' 页：'+s.dataset.title);b.addEventListener('click',function(){setPage(i)});document.getElementById('progressNav').appendChild(b);
+    var c=document.createElement('button');c.className='overview-card'+(s.dataset.ver?' changed':'');var n=document.createElement('span');n.textContent=pad(i+1);var title=document.createElement('strong');title.textContent=s.dataset.title;var sub=document.createElement('small');sub.textContent=s.dataset.subtitle;c.append(n,title,sub);c.addEventListener('click',function(){toggleOverview(false);setPage(i)});document.getElementById('overviewGrid').appendChild(c);
+  });}
+  buildNav();
   document.getElementById('prevBtn').addEventListener('click',function(){setPage(current-1)});
   document.getElementById('nextBtn').addEventListener('click',function(){setPage(current+1)});
   document.querySelectorAll('[data-next]').forEach(function(b){b.addEventListener('click',function(){setPage(current+1)})});
@@ -1143,6 +1604,7 @@ html[lang=en] .closing h2{font-size:40px;line-height:1.25}html[lang=en] .discuss
     if(e.target.closest('input,textarea,select')||e.ctrlKey||e.metaKey||e.altKey)return;
     if(e.key==='ArrowRight'||e.key==='PageDown'){e.preventDefault();setPage(current+1)}
     if(e.key==='ArrowLeft'||e.key==='PageUp'){e.preventDefault();setPage(current-1)}
+    if(e.key==='v'||e.key==='V'){e.preventDefault();setVersion(version==='v2'?'v1':'v2')}
     if(e.key==='Home'){e.preventDefault();setPage(0)}
     if(e.key==='End'){e.preventDefault();setPage(slides.length-1)}
   });
@@ -1171,9 +1633,23 @@ html[lang=en] .closing h2{font-size:40px;line-height:1.25}html[lang=en] .discuss
     document.getElementById('callBreakdown').textContent=language==='en'?grade.toLocaleString('en-US')+' grading calls across both paths + '+n.toLocaleString('en-US')+' fixed-A calls':grade.toLocaleString('en-US')+' 次双向评分 + '+n.toLocaleString('en-US')+' 次固定 A 评分';
   }
   ['sampleN','rubricK','repeatR'].forEach(function(id){document.getElementById(id).addEventListener('input',updateCost)});
+  function setVersion(next,quiet){
+    version=next==='v2'?'v2':'v1';
+    document.body.dataset.version=version;
+    slides=allSlides.filter(inVersion);
+    buildNav();
+    var button=document.getElementById('versionBtn');
+    button.setAttribute('aria-pressed',String(version==='v2'));
+    button.querySelectorAll('[data-ver-code]').forEach(function(label){label.classList.toggle('selected',label.dataset.verCode===version)});
+    refreshChrome();setPage(current,false);
+    if(!quiet)announce(t(version==='v2'?'已切换到 V2 · 修订方案':'已切换到 V1 · 原方案'));
+  }
+  document.getElementById('versionBtn').addEventListener('click',function(){setVersion(version==='v2'?'v1':'v2')});
+  if(/^v?2$/i.test(new URLSearchParams(location.search).get('v')||'')){version='v2';slides=allSlides.filter(inVersion)}
   window.addEventListener('hashchange',function(){var n=Number(location.hash.slice(1));if(Number.isInteger(n)&&n>=1&&n<=slides.length)setPage(n-1)});
   var initial=Number(location.hash.slice(1));current=Number.isInteger(initial)&&initial>=1&&initial<=slides.length?initial-1:0;
   applyLanguage('en');
+  setVersion(version,true);
 })();
 </script>
 </body>
