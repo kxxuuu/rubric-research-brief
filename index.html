@@ -373,7 +373,7 @@ body[data-version=v1] .slide[data-ver=v2],body[data-version=v2] .slide[data-ver=
   <section class="slide dense" id="slide-11-v2" data-ver="v2" aria-labelledby="title-11-v2" data-title="实验设计" data-subtitle="三个问题，每一步都有停止条件">
     <div class="heading"><div class="eyebrow">11 / Experimental design <span class="tag warm">V2 修订</span></div><h2 id="title-11-v2">按顺序回答三个问题，每一步都有停止条件。</h2><p class="lead">除跨模型分歧一臂外，全程固定同一个基础模型。全部实验只需要 API 调用和已有的人工分数。</p></div>
     <div class="h-grid">
-      <div class="hypothesis"><span class="h-label">Q₁</span><h3>gap 是否随 rubric 清晰度变化？</h3><p>同一道题准备三版 rubric：故意写模糊的、原版、手工补全默认规则的。若 gap 不随清晰度单调下降，它测的是框架偏差而非 rubric，项目停止。</p></div>
+      <div class="hypothesis"><span class="h-label">Q₁</span><h3>gap 是否随 rubric 清晰度变化？</h3><p>每道题准备三版 rubric：只写主题的模糊版、原版、手工补全默认规则的。若 gap 不随清晰度单调下降，它测的是框架偏差而非 rubric，项目停止。</p></div>
       <div class="hypothesis"><span class="h-label">Q₂</span><h3>加减分分歧是否比其他扰动更能预测人工误差？</h3><p>在 rubric 变体上比较五种无标签信号对人工误差的增量解释力（见下一页）。</p></div>
       <div class="hypothesis"><span class="h-label">Q₃</span><h3>标签很少时，分歧定位是否提高修订效果？</h3><p>在 n = 20 / 50 / 100 个人工标签下，比较 Reflect-and-Revise 与“相同 n + 分歧定位改写”的留出集 QWK。</p></div>
     </div>
@@ -447,12 +447,12 @@ body[data-version=v1] .slide[data-ver=v2],body[data-version=v2] .slide[data-ver=
   <section class="slide" id="slide-13-v2" data-ver="v2" aria-labelledby="title-13-v2" data-title="实验前准备" data-subtitle="先跑操纵检验，再补清单">
     <div class="heading"><div class="eyebrow">13 / Before the pilot <span class="tag warm">V2 修订</span></div><h2 id="title-13-v2">先跑操纵检验，再补清单。</h2><p class="lead">橙色为阻塞项。V2 把“先补齐信息”改为“先跑一个一天内能完成的实验”：它直接决定项目是否继续。</p></div>
     <div class="check-grid">
-      <div class="check-block blocker"><span class="tag">阻塞项 · 第一天</span><h3>操纵检验</h3><ul><li>一道题、200 份答卷、三版 rubric：模糊 / 原版 / 手工补全</li><li>两种协议各重复 5 次；逐条与整体两种模板都跑</li><li>通过：gap 随清晰度单调下降，且超过同协议重复的波动</li><li>不通过：项目停止，或改用其他扰动</li></ul></div>
+      <div class="check-block blocker"><span class="tag">阻塞项 · 第一天</span><h3>操纵检验</h3><ul><li>Mohler 的 7 道题、199 份答卷；每题三版 rubric：模糊 / 原版 / 手工补全</li><li>两种协议各重复 5 次；逐条与整体两种模板都跑</li><li>通过：gap 随清晰度单调下降，且超过同协议重复的波动</li><li>不通过：项目停止，或改用其他扰动</li></ul></div>
       <div class="check-block blocker"><span class="tag">阻塞项 · 协议</span><h3>L± 与中性协议 N 的模板</h3><ul><li>L+：有明确证据才给分；L−：有明确错误或缺失才扣分</li><li>每条输出：满足 / 不满足 / 未规定，并引用答卷原文</li><li>N：逐条判定，不指定默认方向</li><li>温度与重复次数 r；独立会话</li></ul></div>
-      <div class="check-block"><span class="tag">Q₂ 之前</span><h3>数据与 rubric 变体</h3><ul><li>主数据集需有 5 分以上分值，或逐条人工标签</li><li>核对满分、分数分布与评分者一致率</li><li>变体类型与数量；语义等价检查，防止通过改考点“作弊”</li><li>检查模型是否见过数据：ASAP-SAS 自 2012 年公开</li></ul></div>
+      <div class="check-block"><span class="tag">Q₂ 之前</span><h3>数据与 rubric 变体</h3><ul><li>补全版规则由助手起草，需人工审阅：只澄清，不改考点</li><li>核对满分、分数分布与评分者一致率</li><li>变体类型与数量；语义等价检查，防止通过改考点“作弊”</li><li>检查模型是否见过数据：ASAP-SAS 自 2012 年公开</li></ul></div>
       <div class="check-block"><span class="tag">Q₃ 之前</span><h3>划分、指标与成本</h3><ul><li>n 个标签的抽样方式与随机种子数</li><li>唯一主指标；回归形式、聚类标准误与效应阈值</li><li>Reflect-and-Revise 基线使用相同的 n 与调用预算</li><li>先跑 1–2 题、200 份测 token，再推全量费用</li></ul></div>
     </div>
-    <div class="data-callout"><strong>1 天 · 1 题</strong><p>操纵检验的调用量：200 份 × 3 版 rubric × 2 种协议 × 5 次重复 × 2 种模板 = 12,000 次评分。</p></div>
+    <div class="data-callout"><strong>1 天 · 7 题</strong><p>操纵检验的调用量：199 份 × 3 版 rubric × 2 种协议 × 5 次重复 × 2 种模板 = 11,940 次评分。</p></div>
     <div class="section-foot"><p>预注册与文献精读移到操纵检验之后；协议模板必须在跑之前定稿。</p><span>KILL TEST FIRST</span></div>
   </section>
 
@@ -470,14 +470,14 @@ body[data-version=v1] .slide[data-ver=v2],body[data-version=v2] .slide[data-ver=
   </section>
 
   <section class="slide dense" id="slide-14-v2" data-ver="v2" aria-labelledby="title-14-v2" data-title="数据选择" data-subtitle="优先条款级标签与更高分值">
-    <div class="heading"><div class="eyebrow">14 / Data strategy <span class="tag warm">V2 修订</span></div><h2 id="title-14-v2">主数据集换成有条款级标签或更高分值的题目。</h2><p class="lead">ASAP-SAS 为 0–2 / 0–3 分，gap 几乎只有 0 或 1。V2 优先选择能在条款级验证分歧的数据。规模数字来自原论文或数据卡，使用前需核对。</p></div>
+    <div class="heading"><div class="eyebrow">14 / Data strategy <span class="tag warm">V2 修订</span></div><h2 id="title-14-v2">pilot 从公开的 Mohler 起步，RiceChem 申请后做条款级验证。</h2><p class="lead">ASAP-SAS 为 0–2 / 0–3 分，gap 几乎只有 0 或 1。RiceChem 有条款级标签，但数据需向作者申请，pilot 先用公开的 Mohler。Mohler 的数字已对照下载的数据核对，其余来自论文或数据卡。</p></div>
     <table class="data-table"><thead><tr><th>数据集</th><th>包含内容</th><th>在本研究中的角色</th><th>主要限制</th></tr></thead><tbody>
-      <tr><td><a href="https://arxiv.org/abs/2404.14316" target="_blank" rel="noopener">RiceChem ↗</a><span class="sub">首选 pilot · 条款级标签</span></td><td data-label="内容">大学化学长答题：4 道题、27 个 rubric 条款、1,264 份答卷。<span class="sub">每个条款有助教标注的 TRUE / FALSE。</span></td><td data-label="用途">操纵检验与条款级验证：分歧高的条款是否就是判定出错的条款。</td><td data-label="限制">只有 4 道题；单一学科。</td></tr>
-      <tr><td><a href="https://aclanthology.org/P11-1076/" target="_blank" rel="noopener">Mohler ↗</a><span class="sub">题目多样性 · 0–5 分</span></td><td data-label="内容">数据结构课程短答题：约 80 道题、2,273 份答卷；人工 0–5 分。</td><td data-label="用途">信号对比回归与按题留出。</td><td data-label="限制">只有参考答案，没有分项 rubric；需先撰写。</td></tr>
+      <tr><td><a href="https://huggingface.co/datasets/nkazi/MohlerASAG" target="_blank" rel="noopener">Mohler ↗</a><span class="sub">首选 pilot · 公开 · CC BY 4.0</span></td><td data-label="内容">数据结构课程短答题：81 道开放题、2,273 份答卷；两位评分者。<span class="sub">作业题 0–5 分，两场考试的题 0–10 分。</span></td><td data-label="用途">操纵检验，之后做信号对比回归与按题留出。</td><td data-label="限制">每题只有 24–31 份答卷；只有参考答案，分项 rubric 需自行撰写。</td></tr>
+      <tr><td><a href="https://arxiv.org/abs/2404.14316" target="_blank" rel="noopener">RiceChem ↗</a><span class="sub">条款级验证 · 需申请</span></td><td data-label="内容">大学化学长答题：4 道题、27 个 rubric 条款、1,264 份答卷。<span class="sub">每个条款有助教标注的 TRUE / FALSE。</span></td><td data-label="用途">条款级验证：分歧高的条款是否就是判定出错的条款。</td><td data-label="限制">数据不公开，需向作者填表申请；只有 4 道题。</td></tr>
       <tr><td><a href="https://arxiv.org/abs/2505.07247" target="_blank" rel="noopener">SAS-Bench ↗</a><span class="sub">跨题泛化 · 步骤级标注</span></td><td data-label="内容">高考题：9 个学科、1,030 道题、4,109 份答卷；专家逐步评分并标注错因。</td><td data-label="用途">后续检验跨学科、跨题迁移。</td><td data-label="限制">中文；每题答卷很少，不适合单题 rubric 优化。</td></tr>
       <tr><td><a href="https://www.kaggle.com/competitions/asap-sas/data" target="_blank" rel="noopener">ASAP-SAS ↗</a><span class="sub">次要验证 · 与文献可比</span></td><td data-label="内容">10 道短答题，约 1.7 万条训练答案；题目 rubric、人工分数。<span class="sub">通常为 0–2 / 0–3 分；原始数据有双评分者信息。</span></td><td data-label="用途">与已有论文的结果对照。</td><td data-label="限制">分值离散；自 2012 年公开，模型可能见过。</td></tr>
     </tbody></table>
-    <div class="data-callout"><strong>条款 &gt; 总分</strong><p>V2 的信号是条款级的，验证也应在条款级进行。<br>有逐条人工标签的数据，比答卷数量更重要。</p></div>
+    <div class="data-callout"><strong>7 题 · 199 份</strong><p>操纵检验选了 7 道参考答案可拆成 3–5 个得分点的题，满分均为 5。<br>条款级验证需要逐条人工标签，要等 RiceChem。</p></div>
     <div class="section-foot"><p>Feedback Collection 与 RubricHub 只用于参数训练，V2 不再需要。下载入口不代表无访问限制：遵循各数据集条款。</p><span>ITEM-LEVEL LABELS FIRST</span></div>
   </section>
 
@@ -559,7 +559,7 @@ body[data-version=v1] .slide[data-ver=v2],body[data-version=v2] .slide[data-ver=
   <section class="slide" id="slide-17-v2" data-ver="v2" aria-labelledby="title-17-v2" data-title="讨论与下一步" data-subtitle="V1 还是 V2，以及负结果是否可接受">
     <div class="eyebrow">17 / Discussion <span class="tag warm">V2 修订</span></div>
     <div class="closing">
-      <div><h2 id="title-17-v2">哪种评分分歧，<br>能指出 rubric<br><span class="accent">哪一条没写清</span>？</h2><p class="big-q">From disagreement to the unclear clause.</p><p class="lead" style="margin-top:21px">潜在贡献从“一个新奖励”变为“一次信号对比”：<br>无论加减分分歧是否有效，结果都有信息量。</p><div class="closing-box"><strong>建议下一步：</strong>定稿 L± 与 N 的模板后，先用一道题、200 份答卷跑操纵检验；通过后做五种信号的对比回归，再做标签效率实验。RL 不在本阶段范围内。</div></div>
+      <div><h2 id="title-17-v2">哪种评分分歧，<br>能指出 rubric<br><span class="accent">哪一条没写清</span>？</h2><p class="big-q">From disagreement to the unclear clause.</p><p class="lead" style="margin-top:21px">潜在贡献从“一个新奖励”变为“一次信号对比”：<br>无论加减分分歧是否有效，结果都有信息量。</p><div class="closing-box"><strong>建议下一步：</strong>审阅三版 rubric 后，先用 Mohler 的 7 道题、199 份答卷跑操纵检验；通过后做五种信号的对比回归，再做标签效率实验。RL 不在本阶段范围内。</div></div>
       <div>
         <div class="discussion"><h3><strong>01</strong>选 V1 还是 V2？</h3><p>V1 保留 RL 与模型 A 的叙事，风险集中在最后；V2 放弃 RL，换来每一步都有停止条件。</p></div>
         <div class="discussion"><h3><strong>02</strong>锚点用人工标签还是模型 A？</h3><p>V2 用 n 个人工标签；A 可保留为一条蒸馏对照臂。需要确认数据集已有标签是否够用。</p></div>
@@ -596,7 +596,7 @@ body[data-version=v1] .slide[data-ver=v2],body[data-version=v2] .slide[data-ver=
       <tr><td>L± 协议</td><td data-label="V1">从零加分 / 从满分扣分，逐项判定。</td><td data-label="V2">逐条判定，只在默认规则上不同；输出含“未规定”。</td><td data-label="修改原因">逐项判定下两路几乎等价；分歧定位到条款才能指导改写。</td></tr>
       <tr><td>第一个实验</td><td data-label="V1">gap 是否超出噪声。</td><td data-label="V2">gap 是否随 rubric 清晰度变化。</td><td data-label="修改原因">超出噪声也可能只是锚定效应。</td></tr>
       <tr><td>回归分析</td><td data-label="V1">人工误差 ~ gap + A 距离。</td><td data-label="V2">N 的人工误差 ~ 五种信号 + 答案固定效应。</td><td data-label="修改原因">避免 gap 机械进入因变量；排除答案难度混淆。</td></tr>
-      <tr><td>主数据集</td><td data-label="V1">ASAP-SAS（0–2 / 0–3 分）。</td><td data-label="V2">RiceChem、Mohler；ASAP-SAS 降为次要。</td><td data-label="修改原因">分值太低时 gap 几乎只有 0 或 1。</td></tr>
+      <tr><td>主数据集</td><td data-label="V1">ASAP-SAS（0–2 / 0–3 分）。</td><td data-label="V2">Mohler 起步，RiceChem 待申请；ASAP-SAS 降为次要。</td><td data-label="修改原因">分值太低时 gap 几乎只有 0 或 1。</td></tr>
       <tr><td>优化方式</td><td data-label="V1">先提示优化，之后 RL。</td><td data-label="V2">只做提示优化。</td><td data-label="修改原因">题目数量不足以训练生成器。</td></tr>
     </tbody></table>
     <div class="data-callout"><strong>9 + 1</strong><p>V2 修订第 1、3、10–14、16、17 页，新增本页；其余页面两版相同。<br>代价：失去“RL 训练 rubric 生成器”的叙事，调用量粗略估计为 V1 的 3–4 倍。</p></div>
@@ -650,8 +650,8 @@ body[data-version=v1] .slide[data-ver=v2],body[data-version=v2] .slide[data-ver=
   "slide-10-v2": "表格前四行与 V1 相同，只改了最后一行和下方两栏。重点讲为什么不再用 A：A 的成本与 L 相近，无标签的优势只有相对人工标签才成立。再讲与 Han & Kim 的关系：把他们的信号作为一条对照臂。",
   "slide-11-v2": "三个问题按顺序做，前一个不通过就停。Q₁ 是操纵检验，一天内可完成。Q₂ 是信号对比，下一页展开。Q₃ 是标签效率曲线，对比相同 n 的 Reflect-and-Revise。调用量比 V1 多，3–4 倍是粗略估计。",
   "slide-12-v2": "先讲底部的恒等式：如果因变量取 L± 自身的误差，gap 一定显著，这是 V1 回归的问题。所以因变量换成中性协议 N 的误差，并加答案固定效应。然后讲三种结果各自意味着什么，三种都可以报告。",
-  "slide-13-v2": "V1 的清单是先补齐信息再跑；V2 认为第一个实验足够便宜，应该先跑。唯一必须事先定稿的是协议模板，因为它决定 gap 是否有意义。12,000 次调用是按页面上的参数算出的，不含重试。",
-  "slide-14-v2": "RiceChem 有逐条人工标签，可以直接验证“分歧高的条款是否就是判定出错的条款”，但只有 4 道题。Mohler 题目多、0–5 分，但需要自己写分项 rubric。规模数字来自论文和数据卡，尚未下载核对。",
+  "slide-13-v2": "V1 的清单是先补齐信息再跑；V2 认为第一个实验足够便宜，应该先跑。脚本已经搭好并用模拟输出测通，尚未发出真实调用。跑之前必须人工审阅三版 rubric，因为补全版的规则是助手起草的。11,940 次调用按页面上的参数算出，不含重试。",
+  "slide-14-v2": "RiceChem 有逐条人工标签，可以直接验证“分歧高的条款是否就是判定出错的条款”，但数据需要向作者申请，而且只有 4 道题。所以 pilot 先用公开的 Mohler：选了 7 道题共 199 份答卷，分项 rubric 是自己写的。Mohler 的数字已对照下载的数据核对。",
   "slide-16-v2": "V2 的成功标准是标签效率。强调每一道关卡都可能让项目停下，并且较可能停在 Gate 02 或更早，这是本提案的判断而非数据。请听众事先确认负结果是否可接受。",
   "slide-17-v2": "需要对齐三个决定：选 V1 还是 V2；锚点用人工标签还是模型 A；负结果是否算完成。可以按 V 键回到 V1 的同一页对照。",
   "slide-19-v2": "这页只在 V2 中出现，用于逐项对照。每行的第四列是修改原因。说明 V2 是评审后的修订建议，尚未经过讨论确认；V2 的代价是失去 RL 叙事和更多的调用量。"
@@ -1325,7 +1325,6 @@ body[data-version=v1] .slide[data-ver=v2],body[data-version=v2] .slide[data-ver=
   "按顺序回答三个问题，每一步都有停止条件。": "Answer three questions in order; each has a stopping rule.",
   "除跨模型分歧一臂外，全程固定同一个基础模型。全部实验只需要 API 调用和已有的人工分数。": "The base model stays fixed throughout, except in the cross-model arm. Every experiment needs only API calls and existing human scores.",
   "gap 是否随 rubric 清晰度变化？": "Does the gap move with rubric clarity?",
-  "同一道题准备三版 rubric：故意写模糊的、原版、手工补全默认规则的。若 gap 不随清晰度单调下降，它测的是框架偏差而非 rubric，项目停止。": "Write three rubrics for one question: deliberately vague, original, and hand-completed with default rules. If the gap does not fall monotonically with clarity, it measures framing bias rather than the rubric, and the project stops.",
   "加减分分歧是否比其他扰动更能预测人工误差？": "Does the add/deduct split predict human-score error better than other perturbations?",
   "在 rubric 变体上比较五种无标签信号对人工误差的增量解释力（见下一页）。": "Across rubric variants, compare how much each of five label-free signals adds in explaining human-score error (next slide).",
   "标签很少时，分歧定位是否提高修订效果？": "With few labels, does localization improve revision?",
@@ -1389,7 +1388,6 @@ body[data-version=v1] .slide[data-ver=v2],body[data-version=v2] .slide[data-ver=
   "橙色为阻塞项。V2 把“先补齐信息”改为“先跑一个一天内能完成的实验”：它直接决定项目是否继续。": "Orange items are blockers. V2 replaces “collect information first” with “run a one-day experiment first”: it decides whether the project continues.",
   "阻塞项 · 第一天": "Blocker · Day one",
   "操纵检验": "Manipulation check",
-  "一道题、200 份答卷、三版 rubric：模糊 / 原版 / 手工补全": "One question, 200 answers, three rubrics: vague / original / hand-completed",
   "两种协议各重复 5 次；逐条与整体两种模板都跑": "5 repeats per protocol; run both itemized and holistic templates",
   "通过：gap 随清晰度单调下降，且超过同协议重复的波动": "Pass: the gap falls monotonically with clarity and exceeds same-protocol repeat variation",
   "不通过：项目停止，或改用其他扰动": "Fail: stop, or switch to another perturbation",
@@ -1401,27 +1399,15 @@ body[data-version=v1] .slide[data-ver=v2],body[data-version=v2] .slide[data-ver=
   "温度与重复次数 r；独立会话": "Temperature and repeats r; separate sessions",
   "Q₂ 之前": "Before Q₂",
   "数据与 rubric 变体": "Data and rubric variants",
-  "主数据集需有 5 分以上分值，或逐条人工标签": "The main dataset needs a scale of 5+ points or per-clause human labels",
   "核对满分、分数分布与评分者一致率": "Verify maximum scores, score distributions, and inter-rater agreement",
   "检查模型是否见过数据：ASAP-SAS 自 2012 年公开": "Check for training-data exposure: ASAP-SAS has been public since 2012",
   "Q₃ 之前": "Before Q₃",
   "n 个标签的抽样方式与随机种子数": "How the n labels are sampled, and how many seeds",
   "Reflect-and-Revise 基线使用相同的 n 与调用预算": "Give the Reflect-and-Revise baseline the same n and call budget",
-  "1 天 · 1 题": "1 day · 1 question",
-  "操纵检验的调用量：200 份 × 3 版 rubric × 2 种协议 × 5 次重复 × 2 种模板 = 12,000 次评分。": "Calls for the manipulation check: 200 answers × 3 rubrics × 2 protocols × 5 repeats × 2 templates = 12,000 grading calls.",
   "预注册与文献精读移到操纵检验之后；协议模板必须在跑之前定稿。": "Preregistration and the literature read move after the manipulation check; the protocol templates must be final before it runs.",
   "优先条款级标签与更高分值": "Prefer clause-level labels and wider score scales",
-  "主数据集换成有条款级标签或更高分值的题目。": "Move the main dataset to questions with clause-level labels or wider scales.",
-  "ASAP-SAS 为 0–2 / 0–3 分，gap 几乎只有 0 或 1。V2 优先选择能在条款级验证分歧的数据。规模数字来自原论文或数据卡，使用前需核对。": "ASAP-SAS uses 0–2 / 0–3 scales, so the gap is almost always 0 or 1. V2 prefers data where disagreement can be validated per clause. Sizes come from the papers or dataset cards; verify before use.",
-  "首选 pilot · 条款级标签": "Preferred pilot · Clause-level labels",
   "大学化学长答题：4 道题、27 个 rubric 条款、1,264 份答卷。": "College chemistry long answers: 4 questions, 27 rubric items, 1,264 responses.",
   "每个条款有助教标注的 TRUE / FALSE。": "Each rubric item has a TA-assigned TRUE / FALSE label.",
-  "操纵检验与条款级验证：分歧高的条款是否就是判定出错的条款。": "Manipulation check and clause-level validation: are high-disagreement clauses the misjudged ones?",
-  "只有 4 道题；单一学科。": "Only 4 questions; one subject.",
-  "题目多样性 · 0–5 分": "Question diversity · 0–5 scale",
-  "数据结构课程短答题：约 80 道题、2,273 份答卷；人工 0–5 分。": "Data-structures short answers: about 80 questions, 2,273 responses; human scores 0–5.",
-  "信号对比回归与按题留出。": "Signal-comparison regression and leave-one-question-out.",
-  "只有参考答案，没有分项 rubric；需先撰写。": "Reference answers only, no itemized rubric; one must be written first.",
   "跨题泛化 · 步骤级标注": "Cross-question transfer · Step-level labels",
   "高考题：9 个学科、1,030 道题、4,109 份答卷；专家逐步评分并标注错因。": "Gaokao questions: 9 subjects, 1,030 questions, 4,109 responses; experts score each step and tag error causes.",
   "后续检验跨学科、跨题迁移。": "Later tests of cross-subject and cross-question transfer.",
@@ -1429,9 +1415,6 @@ body[data-version=v1] .slide[data-ver=v2],body[data-version=v2] .slide[data-ver=
   "次要验证 · 与文献可比": "Secondary check · Comparable to prior work",
   "与已有论文的结果对照。": "Compare against published results.",
   "分值离散；自 2012 年公开，模型可能见过。": "Coarse scales; public since 2012, so models may have seen it.",
-  "条款 > 总分": "Clause > total",
-  "V2 的信号是条款级的，验证也应在条款级进行。": "V2’s signal is clause-level, so validation should be clause-level too.",
-  "有逐条人工标签的数据，比答卷数量更重要。": "Per-clause human labels matter more than the number of answers.",
   "Feedback Collection 与 RubricHub 只用于参数训练，V2 不再需要。下载入口不代表无访问限制：遵循各数据集条款。": "Feedback Collection and RubricHub serve parameter training only, which V2 drops. Download links do not guarantee unrestricted access; follow each dataset’s terms.",
   "三道关卡与标签效率": "Three gates and label efficiency",
   "三道关卡，每一道都可能让项目停下。": "Three gates; any one can stop the project.",
@@ -1456,7 +1439,6 @@ body[data-version=v1] .slide[data-ver=v2],body[data-version=v2] .slide[data-ver=
   "哪一条没写清": "clause is unclear",
   "潜在贡献从“一个新奖励”变为“一次信号对比”：": "The potential contribution shifts from “a new reward” to “a signal comparison”:",
   "无论加减分分歧是否有效，结果都有信息量。": "the result is informative whether or not the add/deduct split works.",
-  "定稿 L± 与 N 的模板后，先用一道题、200 份答卷跑操纵检验；通过后做五种信号的对比回归，再做标签效率实验。RL 不在本阶段范围内。": "Once the L± and N templates are final, run the manipulation check on one question and 200 answers. If it passes, run the five-signal regression, then the label-efficiency experiment. RL is out of scope for this phase.",
   "选 V1 还是 V2？": "V1 or V2?",
   "V1 保留 RL 与模型 A 的叙事，风险集中在最后；V2 放弃 RL，换来每一步都有停止条件。": "V1 keeps the RL and model-A story, with the risk concentrated at the end. V2 gives up RL in exchange for a stopping rule at every step.",
   "锚点用人工标签还是模型 A？": "Human labels or model A as the anchor?",
@@ -1492,7 +1474,6 @@ body[data-version=v1] .slide[data-ver=v2],body[data-version=v2] .slide[data-ver=
   "避免 gap 机械进入因变量；排除答案难度混淆。": "Keeps the gap out of the outcome by construction; rules out answer-difficulty confounding.",
   "主数据集": "Main dataset",
   "ASAP-SAS（0–2 / 0–3 分）。": "ASAP-SAS (0–2 / 0–3 scales).",
-  "RiceChem、Mohler；ASAP-SAS 降为次要。": "RiceChem and Mohler; ASAP-SAS becomes secondary.",
   "分值太低时 gap 几乎只有 0 或 1。": "On narrow scales the gap is almost always 0 or 1.",
   "优化方式": "Optimization",
   "先提示优化，之后 RL。": "Prompt optimization first, then RL.",
@@ -1507,13 +1488,33 @@ body[data-version=v1] .slide[data-ver=v2],body[data-version=v2] .slide[data-ver=
   "表格前四行与 V1 相同，只改了最后一行和下方两栏。重点讲为什么不再用 A：A 的成本与 L 相近，无标签的优势只有相对人工标签才成立。再讲与 Han & Kim 的关系：把他们的信号作为一条对照臂。": "The first four rows match V1; only the last row and the two boxes changed. Explain why A is dropped: A costs about as much as L, so a label-free signal is an advantage only relative to human labels. Then the relation to Han & Kim: their signal becomes a control arm.",
   "三个问题按顺序做，前一个不通过就停。Q₁ 是操纵检验，一天内可完成。Q₂ 是信号对比，下一页展开。Q₃ 是标签效率曲线，对比相同 n 的 Reflect-and-Revise。调用量比 V1 多，3–4 倍是粗略估计。": "The three questions run in order; stop if one fails. Q₁ is the manipulation check, doable in a day. Q₂ is the signal comparison, detailed on the next slide. Q₃ is the label-efficiency curve against Reflect-and-Revise at the same n. Calls exceed V1; 3–4× is a rough estimate.",
   "先讲底部的恒等式：如果因变量取 L± 自身的误差，gap 一定显著，这是 V1 回归的问题。所以因变量换成中性协议 N 的误差，并加答案固定效应。然后讲三种结果各自意味着什么，三种都可以报告。": "Start with the identity at the bottom: if the outcome is the error of L± themselves, the gap is significant by construction, which is the problem with V1’s regression. So the outcome becomes the error of neutral protocol N, with answer fixed effects. Then explain what each of the three outcomes means; all three are reportable.",
-  "V1 的清单是先补齐信息再跑；V2 认为第一个实验足够便宜，应该先跑。唯一必须事先定稿的是协议模板，因为它决定 gap 是否有意义。12,000 次调用是按页面上的参数算出的，不含重试。": "V1’s checklist collects information before running; V2 holds that the first experiment is cheap enough to run first. Only the protocol templates must be final beforehand, because they decide whether the gap means anything. The 12,000 calls follow from the parameters on the slide and exclude retries.",
-  "RiceChem 有逐条人工标签，可以直接验证“分歧高的条款是否就是判定出错的条款”，但只有 4 道题。Mohler 题目多、0–5 分，但需要自己写分项 rubric。规模数字来自论文和数据卡，尚未下载核对。": "RiceChem has per-clause human labels, so it can directly test whether high-disagreement clauses are the misjudged ones, but it has only 4 questions. Mohler has many questions on a 0–5 scale but needs an itemized rubric written for it. Sizes come from the papers and dataset cards and have not been checked against a download.",
   "V2 的成功标准是标签效率。强调每一道关卡都可能让项目停下，并且较可能停在 Gate 02 或更早，这是本提案的判断而非数据。请听众事先确认负结果是否可接受。": "V2 succeeds on label efficiency. Stress that any gate can stop the project and that stopping at Gate 02 or earlier is the likelier outcome; this is our judgment, not data. Ask the audience to confirm in advance whether a negative result is acceptable.",
   "需要对齐三个决定：选 V1 还是 V2；锚点用人工标签还是模型 A；负结果是否算完成。可以按 V 键回到 V1 的同一页对照。": "Three decisions to align on: V1 or V2; human labels or model A as the anchor; whether a negative result counts as done. Press V to compare with the same page in V1.",
   "这页只在 V2 中出现，用于逐项对照。每行的第四列是修改原因。说明 V2 是评审后的修订建议，尚未经过讨论确认；V2 的代价是失去 RL 叙事和更多的调用量。": "This slide appears only in V2, for item-by-item comparison. The fourth column gives the reason for each change. Make clear that V2 is a revision proposed after review and not yet agreed; its cost is the loss of the RL story and more grading calls.",
   "已切换到 V2 · 修订方案": "Switched to V2 · Revised proposal",
-  "已切换到 V1 · 原方案": "Switched to V1 · Original proposal"
+  "已切换到 V1 · 原方案": "Switched to V1 · Original proposal",
+  "每道题准备三版 rubric：只写主题的模糊版、原版、手工补全默认规则的。若 gap 不随清晰度单调下降，它测的是框架偏差而非 rubric，项目停止。": "Write three rubrics per question: a vague one with topics only, the original, and one hand-completed with default rules. If the gap does not fall monotonically with clarity, it measures framing bias rather than the rubric, and the project stops.",
+  "Mohler 的 7 道题、199 份答卷；每题三版 rubric：模糊 / 原版 / 手工补全": "7 Mohler questions, 199 answers; three rubrics each: vague / original / hand-completed",
+  "1 天 · 7 题": "1 day · 7 questions",
+  "操纵检验的调用量：199 份 × 3 版 rubric × 2 种协议 × 5 次重复 × 2 种模板 = 11,940 次评分。": "Calls for the manipulation check: 199 answers × 3 rubrics × 2 protocols × 5 repeats × 2 templates = 11,940 grading calls.",
+  "补全版规则由助手起草，需人工审阅：只澄清，不改考点": "The completed rules are assistant-drafted and need human review: clarify only, never change what is assessed",
+  "ASAP-SAS 为 0–2 / 0–3 分，gap 几乎只有 0 或 1。RiceChem 有条款级标签，但数据需向作者申请，pilot 先用公开的 Mohler。Mohler 的数字已对照下载的数据核对，其余来自论文或数据卡。": "ASAP-SAS uses 0–2 / 0–3 scales, so the gap is almost always 0 or 1. RiceChem has clause-level labels but is released on request, so the pilot starts on the public Mohler data. Mohler’s figures were checked against the download; the rest come from papers or dataset cards.",
+  "审阅三版 rubric 后，先用 Mohler 的 7 道题、199 份答卷跑操纵检验；通过后做五种信号的对比回归，再做标签效率实验。RL 不在本阶段范围内。": "After reviewing the three rubric versions, run the manipulation check on 7 Mohler questions and 199 answers. If it passes, run the five-signal regression, then the label-efficiency experiment. RL is out of scope for this phase.",
+  "Mohler 起步，RiceChem 待申请；ASAP-SAS 降为次要。": "Start on Mohler, request RiceChem; ASAP-SAS becomes secondary.",
+  "pilot 从公开的 Mohler 起步，RiceChem 申请后做条款级验证。": "Start the pilot on public Mohler data; use RiceChem for clause-level validation once granted.",
+  "7 题 · 199 份": "7 questions · 199 answers",
+  "操纵检验选了 7 道参考答案可拆成 3–5 个得分点的题，满分均为 5。": "The manipulation check uses 7 questions whose reference answers split into 3–5 scoring points, each out of 5.",
+  "条款级验证需要逐条人工标签，要等 RiceChem。": "Clause-level validation needs per-clause human labels, so it waits for RiceChem.",
+  "首选 pilot · 公开 · CC BY 4.0": "Preferred pilot · Public · CC BY 4.0",
+  "数据结构课程短答题：81 道开放题、2,273 份答卷；两位评分者。": "Data-structures short answers: 81 open-ended questions, 2,273 responses; two graders.",
+  "作业题 0–5 分，两场考试的题 0–10 分。": "Assignments are scored 0–5; the two exams 0–10.",
+  "操纵检验，之后做信号对比回归与按题留出。": "Manipulation check, then the signal-comparison regression and leave-one-question-out.",
+  "每题只有 24–31 份答卷；只有参考答案，分项 rubric 需自行撰写。": "Only 24–31 responses per question; reference answers only, so itemized rubrics must be written.",
+  "条款级验证 · 需申请": "Clause-level validation · On request",
+  "条款级验证：分歧高的条款是否就是判定出错的条款。": "Clause-level validation: are high-disagreement clauses the misjudged ones?",
+  "数据不公开，需向作者填表申请；只有 4 道题。": "Not public; request it from the authors by form. Only 4 questions.",
+  "V1 的清单是先补齐信息再跑；V2 认为第一个实验足够便宜，应该先跑。脚本已经搭好并用模拟输出测通，尚未发出真实调用。跑之前必须人工审阅三版 rubric，因为补全版的规则是助手起草的。11,940 次调用按页面上的参数算出，不含重试。": "V1’s checklist collects information before running; V2 holds that the first experiment is cheap enough to run first. The scripts are built and tested on simulated outputs; no real call has been made. The three rubric versions must be reviewed by a person before the run, because the completed rules were drafted by an assistant. The 11,940 calls follow from the parameters on the slide and exclude retries.",
+  "RiceChem 有逐条人工标签，可以直接验证“分歧高的条款是否就是判定出错的条款”，但数据需要向作者申请，而且只有 4 道题。所以 pilot 先用公开的 Mohler：选了 7 道题共 199 份答卷，分项 rubric 是自己写的。Mohler 的数字已对照下载的数据核对。": "RiceChem has per-clause human labels, so it can directly test whether high-disagreement clauses are the misjudged ones, but it is released on request and has only 4 questions. The pilot therefore starts on public Mohler data: 7 questions and 199 answers, with itemized rubrics written for this study. Mohler’s figures were checked against the download."
 };
   var language='zh',rubricClear=false,counterCorrect=false;
   var textBindings=[],attributeBindings=[];
