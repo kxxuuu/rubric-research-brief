@@ -87,6 +87,9 @@ body[data-version=v1] .slide[data-ver=v2],body[data-version=v2] .slide[data-ver=
 .change-table td:first-child{width:11%;font-weight:600}.change-table td:nth-child(2){width:26%;color:var(--muted)}.change-table td:nth-child(3){width:31%}
 @media(max-width:720px){.version-toggle{font-size:10px;gap:3px}}
 @media print{.eyebrow .tag{font-size:8px}}
+.pilot-table td{padding:11px 12px;font-variant-numeric:tabular-nums}.pilot-table td:first-child{font-weight:600}.pilot-table .ci{color:var(--muted);font-size:12px;white-space:nowrap}.pilot-table tr.flag td{background:var(--warm)}.pilot-side .metric-line{font-size:13px}.pilot-side .metric-line b{font-size:17px}.pilot-list .anchor-options{gap:11px}.pilot-list .anchor-option h3{font-size:16px}.pilot-list .anchor-option p{font-size:12.5px;line-height:1.7}
+@media screen and (min-width:721px) and (max-height:850px){.pilot-table td{padding:7px 11px}.pilot-list .anchor-options{gap:7px}.pilot-list .anchor-option{padding-top:7px}.pilot-list .anchor-option .num{font-size:21px}.pilot-list .anchor-option p{line-height:1.55;margin-top:2px}.pilot-table+.note-line{padding-top:10px}.pilot-list .anchor-option h3{font-size:15px}.pilot-list .anchor-option p{font-size:12px}}
+@media print{.pilot-table td{padding:7px 9px;font-size:10px}.pilot-table .ci{font-size:9px}.pilot-list .anchor-option h3{font-size:13px}.pilot-list .anchor-option p{font-size:10px}.pilot-side .metric-line b{font-size:14px}}
 </style>
 </head>
 <body>
@@ -126,7 +129,7 @@ body[data-version=v1] .slide[data-ver=v2],body[data-version=v2] .slide[data-ver=
   <section class="slide" id="slide-1-v2" data-ver="v2" aria-labelledby="title-1-v2" data-title="研究问题" data-subtitle="哪种评分分歧指向 rubric 缺陷">
     <div class="hero-grid">
       <div>
-        <div class="eyebrow hero-kicker">01 / Research proposal <span class="tag neutral">尚未开展实验</span><span class="tag warm">V2 修订</span></div>
+        <div class="eyebrow hero-kicker">01 / Research proposal <span class="tag neutral">操纵检验已完成 · 1 个模型</span><span class="tag warm">V2 修订</span></div>
         <h1 id="title-1-v2">同一份答案，<br>换一种评分方式。<br><span class="accent">哪种分歧值得相信？</span></h1>
         <p class="hero-desc">比较多种无标签的评分分歧信号，<br>检验它们能否在人工标签很少时改进 rubric。</p>
         <div class="hero-meta"><div>研究对象<b>Rubric 诊断与修订</b></div><div>候选方法<b>分歧定位 + 少量人工标签</b></div><div>应用场景<b>学生短答题评分</b></div></div>
@@ -452,7 +455,7 @@ body[data-version=v1] .slide[data-ver=v2],body[data-version=v2] .slide[data-ver=
       <div class="check-block"><span class="tag">Q₂ 之前</span><h3>数据与 rubric 变体</h3><ul><li>补全版规则由助手起草，需人工审阅：只澄清，不改考点</li><li>核对满分、分数分布与评分者一致率</li><li>变体类型与数量；语义等价检查，防止通过改考点“作弊”</li><li>检查模型是否见过数据：ASAP-SAS 自 2012 年公开</li></ul></div>
       <div class="check-block"><span class="tag">Q₃ 之前</span><h3>划分、指标与成本</h3><ul><li>n 个标签的抽样方式与随机种子数</li><li>唯一主指标；回归形式、聚类标准误与效应阈值</li><li>Reflect-and-Revise 基线使用相同的 n 与调用预算</li><li>先跑 1–2 题、200 份测 token，再推全量费用</li></ul></div>
     </div>
-    <div class="data-callout"><strong>1 天 · 7 题</strong><p>操纵检验的调用量：199 份 × 3 版 rubric × 2 种协议 × 5 次重复 × 2 种模板 = 11,940 次评分。</p></div>
+    <div class="data-callout"><strong>1 天 · 7 题</strong><p>操纵检验的调用量：199 份 × 3 版 rubric × 2 种协议 × 5 次重复 × 2 种模板 = 11,940 次评分。<br>已在本地 gemma3:12b 上跑完，结果见第 20 页。</p></div>
     <div class="section-foot"><p>预注册与文献精读移到操纵检验之后；协议模板必须在跑之前定稿。</p><span>KILL TEST FIRST</span></div>
   </section>
 
@@ -523,11 +526,11 @@ body[data-version=v1] .slide[data-ver=v2],body[data-version=v2] .slide[data-ver=
   </section>
 
   <section class="slide" id="slide-16-v2" data-ver="v2" aria-labelledby="title-16-v2" data-title="成功标准" data-subtitle="三道关卡与标签效率">
-    <div class="heading"><div class="eyebrow">16 / Success &amp; failure criteria <span class="tag warm">V2 修订</span></div><h2 id="title-16-v2">三道关卡，每一道都可能让项目停下。</h2><p class="lead">V2 的成功标准是标签效率：人工标签数相同，留出集上更准。当前所有实验结果均为待测。</p></div>
+    <div class="heading"><div class="eyebrow">16 / Success &amp; failure criteria <span class="tag warm">V2 修订</span></div><h2 id="title-16-v2">三道关卡，每一道都可能让项目停下。</h2><p class="lead">V2 的成功标准是标签效率：人工标签数相同，留出集上更准。操纵检验已在一个模型上完成，其余均为待测。</p></div>
     <div class="results-layout">
       <div>
         <table class="results-table"><thead><tr><th>评估维度</th><th>指标 / 检查</th><th>结果</th></tr></thead><tbody>
-          <tr><td><strong>操纵检验</strong></td><td>gap 随 rubric 清晰度的变化<br><span class="small muted">相对同协议重复评分差距</span></td><td class="pending">待测</td></tr>
+          <tr><td><strong>操纵检验</strong></td><td>gap 随 rubric 清晰度的变化<br><span class="small muted">相对同协议重复评分差距</span></td><td><span class="tag">通过</span><br><span class="small muted">gemma3:12b · 第 20 页</span></td></tr>
           <tr><td><strong>信号有效性</strong></td><td>各信号对人工误差的增量解释力<br><span class="small muted">因变量为中性协议 N 的误差</span></td><td class="pending">待测</td></tr>
           <tr><td><strong>标签效率</strong></td><td>n = 20 / 50 / 100 时的留出集 QWK<br><span class="small muted">对比相同 n 的 Reflect-and-Revise</span></td><td class="pending">待测</td></tr>
           <tr><td><strong>退化检查</strong></td><td>分数分布、排序、逐项证据<br><span class="small muted">检测常数评分与rubric语义偏移</span></td><td class="pending">待测</td></tr>
@@ -559,7 +562,7 @@ body[data-version=v1] .slide[data-ver=v2],body[data-version=v2] .slide[data-ver=
   <section class="slide" id="slide-17-v2" data-ver="v2" aria-labelledby="title-17-v2" data-title="讨论与下一步" data-subtitle="V1 还是 V2，以及负结果是否可接受">
     <div class="eyebrow">17 / Discussion <span class="tag warm">V2 修订</span></div>
     <div class="closing">
-      <div><h2 id="title-17-v2">哪种评分分歧，<br>能指出 rubric<br><span class="accent">哪一条没写清</span>？</h2><p class="big-q">From disagreement to the unclear clause.</p><p class="lead" style="margin-top:21px">潜在贡献从“一个新奖励”变为“一次信号对比”：<br>无论加减分分歧是否有效，结果都有信息量。</p><div class="closing-box"><strong>建议下一步：</strong>审阅三版 rubric 后，先用 Mohler 的 7 道题、199 份答卷跑操纵检验；通过后做五种信号的对比回归，再做标签效率实验。RL 不在本阶段范围内。</div></div>
+      <div><h2 id="title-17-v2">哪种评分分歧，<br>能指出 rubric<br><span class="accent">哪一条没写清</span>？</h2><p class="big-q">From disagreement to the unclear clause.</p><p class="lead" style="margin-top:21px">潜在贡献从“一个新奖励”变为“一次信号对比”：<br>无论加减分分歧是否有效，结果都有信息量。</p><div class="closing-box"><strong>建议下一步：</strong>操纵检验已在 gemma3:12b 上按预设标准通过，但效应依赖一道题（第 20、21 页）。先加题并换一个模型复核，再做五种信号的对比回归与标签效率实验。RL 不在本阶段范围内。</div></div>
       <div>
         <div class="discussion"><h3><strong>01</strong>选 V1 还是 V2？</h3><p>V1 保留 RL 与模型 A 的叙事，风险集中在最后；V2 放弃 RL，换来每一步都有停止条件。</p></div>
         <div class="discussion"><h3><strong>02</strong>锚点用人工标签还是模型 A？</h3><p>V2 用 n 个人工标签；A 可保留为一条蒸馏对照臂。需要确认数据集已有标签是否够用。</p></div>
@@ -584,7 +587,7 @@ body[data-version=v1] .slide[data-ver=v2],body[data-version=v2] .slide[data-ver=
       <li><a href="https://huggingface.co/datasets/sojuL/RubricHub_v1" target="_blank" rel="noopener">RubricHub · 官方数据卡 ↗</a><span>通用 rubric 生成数据；使用时固定版本，规模不与其他论文的子集直接等同。</span></li>
       <li><a href="https://arxiv.org/abs/2610.13303" target="_blank" rel="noopener">Agreement Without Alignment · arXiv:2610.13303 ↗</a><span>Han & Kim，2026-10-09；表 3 的共识与人工一致性结果；三个通用评测数据集，非学生评分。</span></li>
     </ol>
-    <p class="ref-bottom">更新日期：2026-11-05。第 2、4 页为构造示例，第 7 页矩阵为符号示意，第 12 页为分析设计，第 15 页为调用量估算，第 16 页均为待测。本文件可离线演示，外部文献链接需要网络。</p>
+    <p class="ref-bottom">更新日期：2026-11-16。第 2、4 页为构造示例，第 7 页矩阵为符号示意，第 12 页为分析设计，第 15 页为调用量估算，第 16 页除 V2 的操纵检验外均为待测；V2 第 20、21 页为实测结果。本文件可离线演示，外部文献链接需要网络。</p>
     <div class="section-foot"><p>按 ← / → 翻页，Home / End 跳转首尾；“讲稿备注”提供每页讲解提示；“打印 / PDF”输出全部页面。</p><span>END OF BRIEF</span></div>
   </section>
 
@@ -599,8 +602,58 @@ body[data-version=v1] .slide[data-ver=v2],body[data-version=v2] .slide[data-ver=
       <tr><td>主数据集</td><td data-label="V1">ASAP-SAS（0–2 / 0–3 分）。</td><td data-label="V2">Mohler 起步，RiceChem 待申请；ASAP-SAS 降为次要。</td><td data-label="修改原因">分值太低时 gap 几乎只有 0 或 1。</td></tr>
       <tr><td>优化方式</td><td data-label="V1">先提示优化，之后 RL。</td><td data-label="V2">只做提示优化。</td><td data-label="修改原因">题目数量不足以训练生成器。</td></tr>
     </tbody></table>
-    <div class="data-callout"><strong>9 + 1</strong><p>V2 修订第 1、3、10–14、16、17 页，新增本页；其余页面两版相同。<br>代价：失去“RL 训练 rubric 生成器”的叙事，调用量粗略估计为 V1 的 3–4 倍。</p></div>
-    <div class="section-foot"><p>V2 的全部内容为设计建议，没有实验结果。</p><span>V2 · PROPOSED REVISION</span></div>
+    <div class="data-callout"><strong>9 + 3</strong><p>V2 修订第 1、3、10–14、16、17 页，新增本页与第 20、21 页；其余页面两版相同。<br>代价：失去“RL 训练 rubric 生成器”的叙事，调用量粗略估计为 V1 的 3–4 倍。</p></div>
+    <div class="section-foot"><p>除第 20、21 页的操纵检验结果外，V2 的内容均为设计建议。</p><span>V2 · PROPOSED REVISION</span></div>
+  </section>
+
+  <section class="slide dense" id="slide-20-v2" data-ver="v2" aria-labelledby="title-20-v2" data-title="操纵检验结果" data-subtitle="按预设标准通过 · 一个模型">
+    <div class="heading"><div class="eyebrow">20 / Pilot result <span class="tag warm">仅 V2</span></div><h2 id="title-20-v2">操纵检验按预设标准通过：rubric 越清晰，gap 越小。</h2><p class="lead">本地 gemma3:12b，Mohler 的 7 道题、199 份答卷，11,940 次调用全部成功。通过标准在看到数据前写定，下表是预设分析的原始输出。</p></div>
+    <div class="results-layout">
+      <div>
+        <table class="results-table pilot-table"><thead><tr><th>Rubric 版本</th><th>逐条 |gap|</th><th>95% 区间</th><th>逐条对半差</th><th>整体 |gap|</th><th>整体对半差</th></tr></thead><tbody>
+          <tr><td>模糊</td><td>0.860</td><td class="ci">[0.722, 1.007]</td><td>0.262</td><td>0.439</td><td>0.363</td></tr>
+          <tr><td>原版</td><td>0.702</td><td class="ci">[0.558, 0.856]</td><td>0.200</td><td>0.411</td><td>0.343</td></tr>
+          <tr><td>补全</td><td>0.599</td><td class="ci">[0.470, 0.732]</td><td>0.193</td><td>0.299</td><td>0.328</td></tr>
+        </tbody></table>
+        <p class="note-line">|gap|：同一份答卷在扣分与加分协议下 5 次平均分之差的绝对值，满分 5 分。对半差：同一协议内两半重复评分的差，作为噪声基线。区间按答卷重抽样。</p>
+      </div>
+      <div class="pilot-side">
+        <div class="label">Pre-set pass rule · 逐条协议</div>
+        <div class="metric-line"><span>|gap| 按 模糊 &gt; 原版 &gt; 补全 下降</span><b>是</b></div>
+        <div class="metric-line"><span>模糊减补全的 95% 区间高于 0</span><b>[+0.064, +0.448]</b></div>
+        <div class="metric-line"><span>模糊版 |gap| 大于同协议对半差</span><b>0.860 &gt; 0.262</b></div>
+        <div class="bridge"><h3>整体协议也通过，但 gap 接近噪声。</h3><p>模糊减补全为 +0.140，区间 [+0.031, +0.247]。补全版的 0.299 已低于对半差 0.328。</p></div>
+      </div>
+    </div>
+    <div class="data-callout"><strong>0.86 → 0.60</strong><p>逐条协议的平均 |gap|，从模糊版到补全版，下降约 30%。<br>首轮有 1 次调用输出不完整，重跑同一条命令后成功。</p></div>
+    <div class="section-foot"><p>只有一个模型、7 道题。结果的适用范围见下一页。原始记录在 pilot/results/gemma12b.jsonl。</p><span>GATE 01 · PASSED ON ONE MODEL</span></div>
+  </section>
+
+  <section class="slide dense" id="slide-21-v2" data-ver="v2" aria-labelledby="title-21-v2" data-title="稳健性与机制" data-subtitle="效应依赖一道题 · 来源不是“未规定”">
+    <div class="heading"><div class="eyebrow">21 / Robustness &amp; mechanism <span class="tag warm">仅 V2</span></div><h2 id="title-21-v2">通过，但效应主要来自一道题，来源也与设想不同。</h2><p class="lead">本页是看到数据后做的补充检查，不改变上一页按预设标准得出的判定。</p></div>
+    <div class="results-layout">
+      <div>
+        <div class="label">Leave one question out · 逐条协议</div>
+        <table class="results-table pilot-table"><thead><tr><th>剔除的题</th><th>模糊 / 原版 / 补全</th><th>单调下降</th><th>模糊减补全</th></tr></thead><tbody>
+          <tr><td>不剔除</td><td>0.860 / 0.702 / 0.599</td><td>是</td><td>+0.261 <span class="ci">[+0.064, +0.448]</span></td></tr>
+          <tr class="flag"><td>E06.Q06</td><td>0.758 / 0.779 / 0.660</td><td>否</td><td>+0.098 <span class="ci">[−0.091, +0.297]</span></td></tr>
+          <tr><td>E08.Q07</td><td>0.840 / 0.717 / 0.630</td><td>是</td><td>+0.209 <span class="ci">[−0.007, +0.423]</span></td></tr>
+          <tr><td>其余 5 题中任一</td><td>—</td><td>是</td><td>+0.230 至 +0.395 <span class="ci">区间均高于 0</span></td></tr>
+        </tbody></table>
+        <p class="note-line">剔除各题后的区间为另行重抽样计算。按题重抽样时，模糊减补全的区间为 [−0.146, +0.723]。E06.Q06 的模糊版得分点只写“One way”“A second way”，没有给出内容。</p>
+      </div>
+      <div class="pilot-list">
+        <div class="label">Where the gap comes from</div>
+        <div class="anchor-options">
+          <div class="anchor-option"><h3><span class="num">1</span>“未规定”不是来源</h3><p>“未规定”只占条目判定的 1%–7%，原版最高。两种协议同等计分后，gap 仍是 0.876 / 0.616 / 0.443。</p></div>
+          <div class="anchor-option"><h3><span class="num">2</span>来源是相反的判定</h3><p>加分协议判满足、扣分协议判不满足的条目，占 16.2% → 8.3% → 4.9%。</p></div>
+          <div class="anchor-option"><h3><span class="num">3</span>扣分协议反而更严</h3><p>模糊版下扣分协议平均低 0.44 分。模型没有遵守“有疑问就不扣”。</p></div>
+          <div class="anchor-option"><h3><span class="num">4</span>条目层面的指标更稳</h3><p>两种协议多数判定不同的条目占 24.3% → 16.3% → 9.7%；剔除 E06.Q06 后是 22.5% → 19.7% → 11.2%。</p></div>
+        </div>
+      </div>
+    </div>
+    <div class="data-callout"><strong>7 道题</strong><p>结论对这 7 道题成立。换一批题是否成立，还没有证据。<br>建议下一步先加题，再换一个模型复核。</p></div>
+    <div class="section-foot"><p>限制：模糊版同时去掉了参考答案；补全版规则由助手起草；只有一个本地 12B 模型，平均比人工低 0.8–1.4 分。</p><span>POST-HOC CHECKS</span></div>
   </section>
 </main>
 <aside class="speaker-notes" id="speakerNotes" aria-label="当前页讲稿备注"><b>SPEAKER NOTES</b><p id="notesText"></p></aside>
@@ -645,16 +698,18 @@ body[data-version=v1] .slide[data-ver=v2],body[data-version=v2] .slide[data-ver=
     '可从这里打开原论文、代码和数据。声明资料整理日期，示例与实测的区别，以及不同论文版本和复现可用性的边界。'
   ];
   var notesV2={
-  "slide-1-v2": "V2 的开场：问题从“加减分 gap 能否当奖励”改为“哪种无标签的评分分歧指向 rubric 缺陷”。加减分仍是主角，但它需要和其他扰动比较。所有内容仍是提案，没有实验结果。",
+  "slide-1-v2": "V2 的开场：问题从“加减分 gap 能否当奖励”改为“哪种无标签的评分分歧指向 rubric 缺陷”。加减分仍是主角，但它需要和其他扰动比较。除操纵检验（第 20、21 页）外，其余内容仍是提案。",
   "slide-3-v2": "三处变化：锚点从模型 A 换成 n 个人工标签；L± 改为逐条判定、只在默认规则上不同；分歧用于定位要改写的条款，而不是作为标量奖励。测试分数由第三种中性协议给出。不训练任何模型参数。",
   "slide-10-v2": "表格前四行与 V1 相同，只改了最后一行和下方两栏。重点讲为什么不再用 A：A 的成本与 L 相近，无标签的优势只有相对人工标签才成立。再讲与 Han & Kim 的关系：把他们的信号作为一条对照臂。",
   "slide-11-v2": "三个问题按顺序做，前一个不通过就停。Q₁ 是操纵检验，一天内可完成。Q₂ 是信号对比，下一页展开。Q₃ 是标签效率曲线，对比相同 n 的 Reflect-and-Revise。调用量比 V1 多，3–4 倍是粗略估计。",
   "slide-12-v2": "先讲底部的恒等式：如果因变量取 L± 自身的误差，gap 一定显著，这是 V1 回归的问题。所以因变量换成中性协议 N 的误差，并加答案固定效应。然后讲三种结果各自意味着什么，三种都可以报告。",
-  "slide-13-v2": "V1 的清单是先补齐信息再跑；V2 认为第一个实验足够便宜，应该先跑。脚本已经搭好并用模拟输出测通，尚未发出真实调用。跑之前必须人工审阅三版 rubric，因为补全版的规则是助手起草的。11,940 次调用按页面上的参数算出，不含重试。",
+  "slide-13-v2": "V1 的清单是先补齐信息再跑；V2 认为第一个实验足够便宜，应该先跑。全量调用已在本地 gemma3:12b 上跑完，结果见第 20 页。补全版的规则是助手起草的，解读结果前需确认已经人工审阅。11,940 次调用按页面上的参数算出，不含重试。",
   "slide-14-v2": "RiceChem 有逐条人工标签，可以直接验证“分歧高的条款是否就是判定出错的条款”，但数据需要向作者申请，而且只有 4 道题。所以 pilot 先用公开的 Mohler：选了 7 道题共 199 份答卷，分项 rubric 是自己写的。Mohler 的数字已对照下载的数据核对。",
-  "slide-16-v2": "V2 的成功标准是标签效率。强调每一道关卡都可能让项目停下，并且较可能停在 Gate 02 或更早，这是本提案的判断而非数据。请听众事先确认负结果是否可接受。",
+  "slide-16-v2": "V2 的成功标准是标签效率。Gate 01 已在一个模型上通过（第 20 页）。强调每一道关卡都可能让项目停下，并且较可能停在 Gate 02 或更早，这是本提案的判断而非数据。请听众事先确认负结果是否可接受。",
   "slide-17-v2": "需要对齐三个决定：选 V1 还是 V2；锚点用人工标签还是模型 A；负结果是否算完成。可以按 V 键回到 V1 的同一页对照。",
-  "slide-19-v2": "这页只在 V2 中出现，用于逐项对照。每行的第四列是修改原因。说明 V2 是评审后的修订建议，尚未经过讨论确认；V2 的代价是失去 RL 叙事和更多的调用量。"
+  "slide-19-v2": "这页只在 V2 中出现，用于逐项对照。每行的第四列是修改原因。说明 V2 是评审后的修订建议，尚未经过讨论确认；V2 的代价是失去 RL 叙事和更多的调用量。",
+  "slide-20-v2": "这是 V2 第一道关卡的结果。先讲设置：本地 gemma3:12b，7 道题、199 份答卷，每个条件重复 5 次。再讲三条预设标准都成立。强调两点：结果只来自一个模型；整体协议的 gap 接近噪声。试跑的 240 次调用没有用于调整提示词或参数。",
+  "slide-21-v2": "这页是事后检查，要和上一页的预设分析分开讲。第一，剔除 E06.Q06 后单调性和区间都不成立，这道题的模糊版几乎没有内容。第二，gap 不是来自“未规定”，而是两种协议对同一条目给出相反判定，而且扣分协议更严。第三，条目层面的分歧率在剔除 E06.Q06 后仍然单调下降。结论：对这 7 道题成立，推广到新题目还需要更多题。"
 };
   allSlides.filter(function(s){return s.dataset.ver!=='v2'}).forEach(function(s,i){s._note=notes[i]});
   allSlides.forEach(function(s){if(s.dataset.ver==='v2')s._note=notesV2[s.id]||''});
@@ -1096,7 +1151,7 @@ body[data-version=v1] .slide[data-ver=v2],body[data-version=v2] .slide[data-ver=
   "约 10 万条 GPT-4 合成评分反馈；用于模型能力训练，非独立人工真值。": "~100K GPT-4-generated grading feedback records; training data, not independent human truth.",
   "RubricHub · 官方数据卡 ↗": "RubricHub · Official dataset card ↗",
   "通用 rubric 生成数据；使用时固定版本，规模不与其他论文的子集直接等同。": "General rubric-generation data. Pin the version; do not equate its size with subsets used in other papers.",
-  "更新日期：2026-11-05。第 2、4 页为构造示例，第 7 页矩阵为符号示意，第 12 页为分析设计，第 15 页为调用量估算，第 16 页均为待测。本文件可离线演示，外部文献链接需要网络。": "Updated Oct. 30, 2026. Slides 2 and 4 are constructed examples; slide 7 is symbolic; slide 12 estimates calls; slide 13 is unmeasured. Works offline; source links require internet.",
+  "更新日期：2026-11-16。第 2、4 页为构造示例，第 7 页矩阵为符号示意，第 12 页为分析设计，第 15 页为调用量估算，第 16 页除 V2 的操纵检验外均为待测；V2 第 20、21 页为实测结果。本文件可离线演示，外部文献链接需要网络。": "Updated Oct. 30, 2026. Slides 2 and 4 are constructed examples; slide 7 is symbolic; slide 12 estimates calls; slide 13 is unmeasured. Works offline; source links require internet.",
   "按 ← / → 翻页，Home / End 跳转首尾；“讲稿备注”提供每页讲解提示；“打印 / PDF”输出全部页面。": "Use ← / → to navigate and Home / End to jump. Speaker notes provide talking points; Print / PDF exports all slides in the selected language.",
   "当前页讲稿备注": "Speaker notes for the current slide",
   "页码导航": "Slide navigation",
@@ -1245,7 +1300,7 @@ body[data-version=v1] .slide[data-ver=v2],body[data-version=v2] .slide[data-ver=
   "不能支持“评分更准确”；检查奖励利用、分数塌缩与 A 的共同偏差。Han & Kim 在跨模型分歧上已观察到这一情况。": "Do not claim improved accuracy. Check reward exploitation, score collapse, and shared bias from A. Han & Kim observed exactly this with cross-model disagreement.",
   "补齐阻塞项后，在 ASAP-SAS 上先做 1 道题、数百份答案的协议实验与 rubric 变体回归；若 gap 有独立信息，再进入提示优化与消融，之后评估 RL。": "After clearing the blockers, run a protocol pilot and rubric-variant regression on one ASAP-SAS question with a few hundred answers. If the gap carries independent information, move to prompt optimization and ablations before considering RL.",
   "Han & Kim，2026-10-09；表 3 的共识与人工一致性结果；三个通用评测数据集，非学生评分。": "Han & Kim, Oct. 9, 2026; Table 3 consensus and human-agreement results; three general evaluation datasets, not student grading.",
-  "更新日期：2026-11-05。第 2、4 页为构造示例，第 7 页矩阵为符号示意，第 12 页为分析设计，第 15 页为调用量估算，第 16 页均为待测。本文件可离线演示，外部文献链接需要网络。": "Updated Nov. 5, 2026. Slides 2 and 4 are constructed examples; slide 7 is symbolic; slide 12 is an analysis design; slide 15 estimates calls; slide 16 is unmeasured. Works offline; source links require internet.",
+  "更新日期：2026-11-16。第 2、4 页为构造示例，第 7 页矩阵为符号示意，第 12 页为分析设计，第 15 页为调用量估算，第 16 页除 V2 的操纵检验外均为待测；V2 第 20、21 页为实测结果。本文件可离线演示，外部文献链接需要网络。": "Updated Nov. 16, 2026. Slides 2 and 4 are constructed examples; slide 7 is symbolic; slide 12 is an analysis design; slide 15 estimates calls; slide 16 is unmeasured except V2’s manipulation check; V2 slides 20–21 report measured results. Works offline; source links require internet.",
   "这是最需要回应的工作。它用 5 个不同模型 judge 的逐条分歧挑出歧义条款并改写，人工标签只用于评估。结论是共识上升、人工一致性不变。强调三点区别：我们的分歧来自同一模型的加 / 减分执行；有 A 锚定偏差；场景是学生短答与部分分。把它当作动机，并在消融中加入跨模型分歧组。": "This is the work we most need to answer. It rewrites ambiguous clauses chosen by per-clause disagreement among five different judge models, using human labels only for evaluation. Consensus rose while human agreement did not. Stress three differences: our disagreement comes from additive vs. deductive execution within one model; A anchors bias; the setting is student short answers with partial credit. Treat it as motivation and add a cross-model disagreement ablation.",
   "三个假设已按讨论重写。H₁ 除了 gap 是否超出噪声，还要看 tA 是否落在两路之间，这决定“两边夹向 A”的叙事能否成立。H₂ 用回归检验 gap 在控制 A 距离后是否仍有信息。H₃ 是 gap 成为独立贡献的关键：gap 不需要标签，在 A 预算有限时应更有价值。消融新增逐路对齐 A 与跨模型分歧两组。": "The three hypotheses were rewritten. H₁ asks both whether the gap exceeds noise and whether tA falls between the paths, which determines whether the squeeze-toward-A story holds. H₂ uses regression to test whether the gap still carries information after controlling for distance to A. H₃ is what makes the gap a contribution: it needs no labels, so it should matter most when A’s budget is limited. Two ablations were added: per-path A alignment and cross-model disagreement.",
   "用偏差与歧义的分解说明三种猜想并不互斥。核心是用人工分数而非 A 当裁判，否则 (a) 永远显得成立。重点讲右上角关键格：gap 变小但离 A 更远时，人工误差是否仍下降。这个分析只需 API 调用和已有人工分数，可作为阶段 1 的核心实验，结果决定 λc 与 λa 的设定。": "Use the bias–ambiguity decomposition to show the three explanations are not mutually exclusive. Human scores, not A, must adjudicate; otherwise (a) always appears to win. Focus on the key cell: when the gap shrinks but distance to A grows, does human error still fall? The analysis needs only API calls and existing human scores, so it can anchor phase 1 and inform λc and λa.",
@@ -1418,7 +1473,7 @@ body[data-version=v1] .slide[data-ver=v2],body[data-version=v2] .slide[data-ver=
   "Feedback Collection 与 RubricHub 只用于参数训练，V2 不再需要。下载入口不代表无访问限制：遵循各数据集条款。": "Feedback Collection and RubricHub serve parameter training only, which V2 drops. Download links do not guarantee unrestricted access; follow each dataset’s terms.",
   "三道关卡与标签效率": "Three gates and label efficiency",
   "三道关卡，每一道都可能让项目停下。": "Three gates; any one can stop the project.",
-  "V2 的成功标准是标签效率：人工标签数相同，留出集上更准。当前所有实验结果均为待测。": "V2 succeeds on label efficiency: the same number of human labels, better held-out accuracy. All experiment results remain unmeasured.",
+  "V2 的成功标准是标签效率：人工标签数相同，留出集上更准。操纵检验已在一个模型上完成，其余均为待测。": "V2 succeeds on label efficiency: the same number of human labels, better held-out accuracy. The manipulation check is done on one model; everything else remains unmeasured.",
   "gap 随 rubric 清晰度的变化": "Change in gap with rubric clarity",
   "信号有效性": "Signal validity",
   "各信号对人工误差的增量解释力": "Each signal’s added explanatory power for human-score error",
@@ -1479,16 +1534,16 @@ body[data-version=v1] .slide[data-ver=v2],body[data-version=v2] .slide[data-ver=
   "先提示优化，之后 RL。": "Prompt optimization first, then RL.",
   "只做提示优化。": "Prompt optimization only.",
   "题目数量不足以训练生成器。": "Too few questions to train a generator.",
-  "V2 修订第 1、3、10–14、16、17 页，新增本页；其余页面两版相同。": "V2 revises slides 1, 3, 10–14, 16, and 17 and adds this one; all other slides are identical.",
+  "V2 修订第 1、3、10–14、16、17 页，新增本页与第 20、21 页；其余页面两版相同。": "V2 revises slides 1, 3, 10–14, 16, and 17 and adds this one plus slides 20–21; all other slides are identical.",
   "代价：失去“RL 训练 rubric 生成器”的叙事，调用量粗略估计为 V1 的 3–4 倍。": "The cost: no “RL-trained rubric generator” story, and roughly 3–4× V1’s grading calls.",
-  "V2 的全部内容为设计建议，没有实验结果。": "Everything in V2 is a design recommendation; there are no experimental results.",
+  "除第 20、21 页的操纵检验结果外，V2 的内容均为设计建议。": "Apart from the manipulation-check results on slides 20–21, V2 is a design recommendation.",
   "切换方案版本（V 键）": "Switch proposal version (V key)",
-  "V2 的开场：问题从“加减分 gap 能否当奖励”改为“哪种无标签的评分分歧指向 rubric 缺陷”。加减分仍是主角，但它需要和其他扰动比较。所有内容仍是提案，没有实验结果。": "Opening for V2: the question shifts from “can the add/deduct gap serve as a reward” to “which label-free grading disagreement points to a rubric flaw”. The add/deduct split is still the lead, but it must be compared with other perturbations. Everything remains a proposal, with no experimental results.",
+  "V2 的开场：问题从“加减分 gap 能否当奖励”改为“哪种无标签的评分分歧指向 rubric 缺陷”。加减分仍是主角，但它需要和其他扰动比较。除操纵检验（第 20、21 页）外，其余内容仍是提案。": "Opening for V2: the question shifts from “can the add/deduct gap serve as a reward” to “which label-free grading disagreement points to a rubric flaw”. The add/deduct split is still the lead, but it must be compared with other perturbations. Apart from the manipulation check (slides 20–21), everything remains a proposal.",
   "三处变化：锚点从模型 A 换成 n 个人工标签；L± 改为逐条判定、只在默认规则上不同；分歧用于定位要改写的条款，而不是作为标量奖励。测试分数由第三种中性协议给出。不训练任何模型参数。": "Three changes: the anchor moves from model A to n human labels; L± judge clause by clause and differ only in the default rule; disagreement locates the clause to rewrite instead of serving as a scalar reward. Test scores come from a third, neutral protocol. No model parameters are trained.",
   "表格前四行与 V1 相同，只改了最后一行和下方两栏。重点讲为什么不再用 A：A 的成本与 L 相近，无标签的优势只有相对人工标签才成立。再讲与 Han & Kim 的关系：把他们的信号作为一条对照臂。": "The first four rows match V1; only the last row and the two boxes changed. Explain why A is dropped: A costs about as much as L, so a label-free signal is an advantage only relative to human labels. Then the relation to Han & Kim: their signal becomes a control arm.",
   "三个问题按顺序做，前一个不通过就停。Q₁ 是操纵检验，一天内可完成。Q₂ 是信号对比，下一页展开。Q₃ 是标签效率曲线，对比相同 n 的 Reflect-and-Revise。调用量比 V1 多，3–4 倍是粗略估计。": "The three questions run in order; stop if one fails. Q₁ is the manipulation check, doable in a day. Q₂ is the signal comparison, detailed on the next slide. Q₃ is the label-efficiency curve against Reflect-and-Revise at the same n. Calls exceed V1; 3–4× is a rough estimate.",
   "先讲底部的恒等式：如果因变量取 L± 自身的误差，gap 一定显著，这是 V1 回归的问题。所以因变量换成中性协议 N 的误差，并加答案固定效应。然后讲三种结果各自意味着什么，三种都可以报告。": "Start with the identity at the bottom: if the outcome is the error of L± themselves, the gap is significant by construction, which is the problem with V1’s regression. So the outcome becomes the error of neutral protocol N, with answer fixed effects. Then explain what each of the three outcomes means; all three are reportable.",
-  "V2 的成功标准是标签效率。强调每一道关卡都可能让项目停下，并且较可能停在 Gate 02 或更早，这是本提案的判断而非数据。请听众事先确认负结果是否可接受。": "V2 succeeds on label efficiency. Stress that any gate can stop the project and that stopping at Gate 02 or earlier is the likelier outcome; this is our judgment, not data. Ask the audience to confirm in advance whether a negative result is acceptable.",
+  "V2 的成功标准是标签效率。Gate 01 已在一个模型上通过（第 20 页）。强调每一道关卡都可能让项目停下，并且较可能停在 Gate 02 或更早，这是本提案的判断而非数据。请听众事先确认负结果是否可接受。": "V2 succeeds on label efficiency. Gate 01 has passed on one model (slide 20). Stress that any gate can stop the project and that stopping at Gate 02 or earlier is the likelier outcome; this is our judgment, not data. Ask the audience to confirm in advance whether a negative result is acceptable.",
   "需要对齐三个决定：选 V1 还是 V2；锚点用人工标签还是模型 A；负结果是否算完成。可以按 V 键回到 V1 的同一页对照。": "Three decisions to align on: V1 or V2; human labels or model A as the anchor; whether a negative result counts as done. Press V to compare with the same page in V1.",
   "这页只在 V2 中出现，用于逐项对照。每行的第四列是修改原因。说明 V2 是评审后的修订建议，尚未经过讨论确认；V2 的代价是失去 RL 叙事和更多的调用量。": "This slide appears only in V2, for item-by-item comparison. The fourth column gives the reason for each change. Make clear that V2 is a revision proposed after review and not yet agreed; its cost is the loss of the RL story and more grading calls.",
   "已切换到 V2 · 修订方案": "Switched to V2 · Revised proposal",
@@ -1499,7 +1554,7 @@ body[data-version=v1] .slide[data-ver=v2],body[data-version=v2] .slide[data-ver=
   "操纵检验的调用量：199 份 × 3 版 rubric × 2 种协议 × 5 次重复 × 2 种模板 = 11,940 次评分。": "Calls for the manipulation check: 199 answers × 3 rubrics × 2 protocols × 5 repeats × 2 templates = 11,940 grading calls.",
   "补全版规则由助手起草，需人工审阅：只澄清，不改考点": "The completed rules are assistant-drafted and need human review: clarify only, never change what is assessed",
   "ASAP-SAS 为 0–2 / 0–3 分，gap 几乎只有 0 或 1。RiceChem 有条款级标签，但数据需向作者申请，pilot 先用公开的 Mohler。Mohler 的数字已对照下载的数据核对，其余来自论文或数据卡。": "ASAP-SAS uses 0–2 / 0–3 scales, so the gap is almost always 0 or 1. RiceChem has clause-level labels but is released on request, so the pilot starts on the public Mohler data. Mohler’s figures were checked against the download; the rest come from papers or dataset cards.",
-  "审阅三版 rubric 后，先用 Mohler 的 7 道题、199 份答卷跑操纵检验；通过后做五种信号的对比回归，再做标签效率实验。RL 不在本阶段范围内。": "After reviewing the three rubric versions, run the manipulation check on 7 Mohler questions and 199 answers. If it passes, run the five-signal regression, then the label-efficiency experiment. RL is out of scope for this phase.",
+  "操纵检验已在 gemma3:12b 上按预设标准通过，但效应依赖一道题（第 20、21 页）。先加题并换一个模型复核，再做五种信号的对比回归与标签效率实验。RL 不在本阶段范围内。": "The manipulation check passed its pre-set rule on gemma3:12b, but the effect depends on one question (slides 20–21). Add questions and replicate on a second model first, then run the five-signal regression and the label-efficiency experiment. RL is out of scope for this phase.",
   "Mohler 起步，RiceChem 待申请；ASAP-SAS 降为次要。": "Start on Mohler, request RiceChem; ASAP-SAS becomes secondary.",
   "pilot 从公开的 Mohler 起步，RiceChem 申请后做条款级验证。": "Start the pilot on public Mohler data; use RiceChem for clause-level validation once granted.",
   "7 题 · 199 份": "7 questions · 199 answers",
@@ -1513,8 +1568,65 @@ body[data-version=v1] .slide[data-ver=v2],body[data-version=v2] .slide[data-ver=
   "条款级验证 · 需申请": "Clause-level validation · On request",
   "条款级验证：分歧高的条款是否就是判定出错的条款。": "Clause-level validation: are high-disagreement clauses the misjudged ones?",
   "数据不公开，需向作者填表申请；只有 4 道题。": "Not public; request it from the authors by form. Only 4 questions.",
-  "V1 的清单是先补齐信息再跑；V2 认为第一个实验足够便宜，应该先跑。脚本已经搭好并用模拟输出测通，尚未发出真实调用。跑之前必须人工审阅三版 rubric，因为补全版的规则是助手起草的。11,940 次调用按页面上的参数算出，不含重试。": "V1’s checklist collects information before running; V2 holds that the first experiment is cheap enough to run first. The scripts are built and tested on simulated outputs; no real call has been made. The three rubric versions must be reviewed by a person before the run, because the completed rules were drafted by an assistant. The 11,940 calls follow from the parameters on the slide and exclude retries.",
-  "RiceChem 有逐条人工标签，可以直接验证“分歧高的条款是否就是判定出错的条款”，但数据需要向作者申请，而且只有 4 道题。所以 pilot 先用公开的 Mohler：选了 7 道题共 199 份答卷，分项 rubric 是自己写的。Mohler 的数字已对照下载的数据核对。": "RiceChem has per-clause human labels, so it can directly test whether high-disagreement clauses are the misjudged ones, but it is released on request and has only 4 questions. The pilot therefore starts on public Mohler data: 7 questions and 199 answers, with itemized rubrics written for this study. Mohler’s figures were checked against the download."
+  "V1 的清单是先补齐信息再跑；V2 认为第一个实验足够便宜，应该先跑。全量调用已在本地 gemma3:12b 上跑完，结果见第 20 页。补全版的规则是助手起草的，解读结果前需确认已经人工审阅。11,940 次调用按页面上的参数算出，不含重试。": "V1’s checklist collects information before running; V2 holds that the first experiment is cheap enough to run first. The full run has completed on a local gemma3:12b; results are on slide 20. The completed rules were drafted by an assistant, so confirm that a person reviewed them before interpreting the result. The 11,940 calls follow from the parameters on the slide and exclude retries.",
+  "RiceChem 有逐条人工标签，可以直接验证“分歧高的条款是否就是判定出错的条款”，但数据需要向作者申请，而且只有 4 道题。所以 pilot 先用公开的 Mohler：选了 7 道题共 199 份答卷，分项 rubric 是自己写的。Mohler 的数字已对照下载的数据核对。": "RiceChem has per-clause human labels, so it can directly test whether high-disagreement clauses are the misjudged ones, but it is released on request and has only 4 questions. The pilot therefore starts on public Mohler data: 7 questions and 199 answers, with itemized rubrics written for this study. Mohler’s figures were checked against the download.",
+  "操纵检验已完成 · 1 个模型": "Manipulation check done · 1 model",
+  "已在本地 gemma3:12b 上跑完，结果见第 20 页。": "Completed on a local gemma3:12b; results on slide 20.",
+  "通过": "Pass",
+  "gemma3:12b · 第 20 页": "gemma3:12b · slide 20",
+  "操纵检验结果": "Manipulation check result",
+  "按预设标准通过 · 一个模型": "Passes the pre-set rule · one model",
+  "操纵检验按预设标准通过：rubric 越清晰，gap 越小。": "The manipulation check passes its pre-set rule: clearer rubrics, smaller gap.",
+  "本地 gemma3:12b，Mohler 的 7 道题、199 份答卷，11,940 次调用全部成功。通过标准在看到数据前写定，下表是预设分析的原始输出。": "Local gemma3:12b; 7 Mohler questions, 199 answers; all 11,940 calls succeeded. The pass rule was fixed before any data was seen; the table is the pre-set analysis output.",
+  "Rubric 版本": "Rubric version",
+  "逐条 |gap|": "Itemized |gap|",
+  "95% 区间": "95% interval",
+  "逐条对半差": "Itemized split-half",
+  "整体 |gap|": "Holistic |gap|",
+  "整体对半差": "Holistic split-half",
+  "模糊": "Vague",
+  "原版": "Original",
+  "补全": "Completed",
+  "|gap|：同一份答卷在扣分与加分协议下 5 次平均分之差的绝对值，满分 5 分。对半差：同一协议内两半重复评分的差，作为噪声基线。区间按答卷重抽样。": "|gap|: absolute difference between an answer’s 5-run mean scores under the deductive and additive protocols, out of 5 points. Split-half: difference between two halves of the repeats within one protocol, used as the noise baseline. Intervals resample answers.",
+  "Pre-set pass rule · 逐条协议": "Pre-set pass rule · Itemized protocol",
+  "|gap| 按 模糊 > 原版 > 补全 下降": "|gap| falls: vague > original > completed",
+  "是": "Yes",
+  "否": "No",
+  "模糊减补全的 95% 区间高于 0": "95% interval of vague minus completed lies above 0",
+  "模糊版 |gap| 大于同协议对半差": "Vague |gap| exceeds the same-protocol split-half",
+  "整体协议也通过，但 gap 接近噪声。": "The holistic protocol also passes, but its gap is near the noise.",
+  "模糊减补全为 +0.140，区间 [+0.031, +0.247]。补全版的 0.299 已低于对半差 0.328。": "Vague minus completed is +0.140, interval [+0.031, +0.247]. The completed version’s 0.299 is already below its split-half of 0.328.",
+  "逐条协议的平均 |gap|，从模糊版到补全版，下降约 30%。": "Mean itemized |gap|, vague to completed: a drop of about 30%.",
+  "首轮有 1 次调用输出不完整，重跑同一条命令后成功。": "One call returned an incomplete output in the first pass and succeeded when the same command was rerun.",
+  "只有一个模型、7 道题。结果的适用范围见下一页。原始记录在 pilot/results/gemma12b.jsonl。": "One model, 7 questions. The next slide covers how far the result holds. Raw records: pilot/results/gemma12b.jsonl.",
+  "稳健性与机制": "Robustness and mechanism",
+  "效应依赖一道题 · 来源不是“未规定”": "The effect rests on one question · “unspecified” is not the source",
+  "通过，但效应主要来自一道题，来源也与设想不同。": "One question carries most of the effect, and the source is not as assumed.",
+  "本页是看到数据后做的补充检查，不改变上一页按预设标准得出的判定。": "These checks were run after seeing the data. They do not change the verdict reached under the pre-set rule on the previous slide.",
+  "Leave one question out · 逐条协议": "Leave one question out · Itemized protocol",
+  "剔除的题": "Question dropped",
+  "模糊 / 原版 / 补全": "Vague / original / completed",
+  "单调下降": "Monotonic",
+  "模糊减补全": "Vague minus completed",
+  "不剔除": "None",
+  "其余 5 题中任一": "Any one of the other 5",
+  "+0.230 至 +0.395": "+0.230 to +0.395",
+  "区间均高于 0": "all intervals above 0",
+  "剔除各题后的区间为另行重抽样计算。按题重抽样时，模糊减补全的区间为 [−0.146, +0.723]。E06.Q06 的模糊版得分点只写“One way”“A second way”，没有给出内容。": "Intervals after dropping a question come from a separate resampling. Resampling questions as well, the vague-minus-completed interval is [−0.146, +0.723]. The vague rubric for E06.Q06 lists its items only as “One way”, “A second way”, with no content.",
+  "“未规定”不是来源": "“Unspecified” is not the source",
+  "“未规定”只占条目判定的 1%–7%，原版最高。两种协议同等计分后，gap 仍是 0.876 / 0.616 / 0.443。": "“Unspecified” makes up only 1%–7% of item verdicts and is highest under the original rubric. Scored the same way in both protocols, the gap is still 0.876 / 0.616 / 0.443.",
+  "来源是相反的判定": "The source is opposite verdicts",
+  "加分协议判满足、扣分协议判不满足的条目，占 16.2% → 8.3% → 4.9%。": "Items judged met under the additive protocol and not met under the deductive one: 16.2% → 8.3% → 4.9%.",
+  "扣分协议反而更严": "The deductive protocol is the stricter one",
+  "模糊版下扣分协议平均低 0.44 分。模型没有遵守“有疑问就不扣”。": "Under the vague rubric the deductive protocol scores 0.44 points lower on average. The model did not follow “when in doubt, do not deduct”.",
+  "条目层面的指标更稳": "The item-level measure is steadier",
+  "两种协议多数判定不同的条目占 24.3% → 16.3% → 9.7%；剔除 E06.Q06 后是 22.5% → 19.7% → 11.2%。": "Items whose majority verdict differs between protocols: 24.3% → 16.3% → 9.7%; without E06.Q06, 22.5% → 19.7% → 11.2%.",
+  "7 道题": "7 questions",
+  "结论对这 7 道题成立。换一批题是否成立，还没有证据。": "The conclusion holds for these 7 questions. There is no evidence yet that it holds for a new set.",
+  "建议下一步先加题，再换一个模型复核。": "Suggested next step: add questions, then replicate on a second model.",
+  "限制：模糊版同时去掉了参考答案；补全版规则由助手起草；只有一个本地 12B 模型，平均比人工低 0.8–1.4 分。": "Limits: the vague version also drops the reference answer; the completed rules were assistant-drafted; a single local 12B model, scoring 0.8–1.4 points below the human graders on average.",
+  "这是 V2 第一道关卡的结果。先讲设置：本地 gemma3:12b，7 道题、199 份答卷，每个条件重复 5 次。再讲三条预设标准都成立。强调两点：结果只来自一个模型；整体协议的 gap 接近噪声。试跑的 240 次调用没有用于调整提示词或参数。": "This is the result for V2’s first gate. Start with the setup: a local gemma3:12b, 7 questions, 199 answers, 5 repeats per condition. Then show that all three pre-set criteria hold. Stress two points: the result comes from one model, and the holistic gap is near the noise. The 240-call trial run was not used to adjust any prompt or parameter.",
+  "这页是事后检查，要和上一页的预设分析分开讲。第一，剔除 E06.Q06 后单调性和区间都不成立，这道题的模糊版几乎没有内容。第二，gap 不是来自“未规定”，而是两种协议对同一条目给出相反判定，而且扣分协议更严。第三，条目层面的分歧率在剔除 E06.Q06 后仍然单调下降。结论：对这 7 道题成立，推广到新题目还需要更多题。": "These are post-hoc checks; keep them separate from the pre-set analysis on the previous slide. First, without E06.Q06 both monotonicity and the interval fail, and that question’s vague rubric has almost no content. Second, the gap does not come from “unspecified” verdicts but from the two protocols giving opposite verdicts on the same item, with the deductive protocol the stricter one. Third, the item-level disagreement rate still falls monotonically without E06.Q06. Conclusion: it holds for these 7 questions; generalizing to new questions needs more of them."
 };
   var language='zh',rubricClear=false,counterCorrect=false;
   var textBindings=[],attributeBindings=[];
