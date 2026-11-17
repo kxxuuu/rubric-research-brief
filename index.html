@@ -1773,7 +1773,7 @@ body[data-version=v1] .slide[data-ver=v2],body[data-version=v2] .slide[data-ver=
     if(!quiet)announce(t(version==='v2'?'已切换到 V2 · 修订方案':'已切换到 V1 · 原方案'));
   }
   document.getElementById('versionBtn').addEventListener('click',function(){setVersion(version==='v2'?'v1':'v2')});
-  if(/^v?1$/i.test(new URLSearchParams(location.search).get('v')||'')){version='v1';slides=allSlides.filter(inVersion)}
+  if(/^v?1$/i.test(new URLSearchParams(location.search).get('v')||'')){version='v1';slides=allSlides.filter(inVersion);buildNav()}
   window.addEventListener('hashchange',function(){var n=Number(location.hash.slice(1));if(Number.isInteger(n)&&n>=1&&n<=slides.length)setPage(n-1)});
   var initial=Number(location.hash.slice(1));current=Number.isInteger(initial)&&initial>=1&&initial<=slides.length?initial-1:0;
   applyLanguage('en');
