@@ -586,7 +586,7 @@ body[data-version=v1] .slide[data-ver=v2],body[data-version=v2] .slide[data-ver=
       <li><a href="https://huggingface.co/datasets/sojuL/RubricHub_v1" target="_blank" rel="noopener">RubricHub · 官方数据卡 ↗</a><span>通用 rubric 生成数据；使用时固定版本，规模不与其他论文的子集直接等同。</span></li>
       <li><a href="https://arxiv.org/abs/2610.13303" target="_blank" rel="noopener">Agreement Without Alignment · arXiv:2610.13303 ↗</a><span>Han & Kim，2026-10-09；表 3 的共识与人工一致性结果；三个通用评测数据集，非学生评分。</span></li>
     </ol>
-    <p class="ref-bottom">更新日期：2026-11-16。第 2、4 页为构造示例，第 7 页矩阵为符号示意，第 12 页为分析设计，第 15 页为调用量估算，第 16 页除 V2 的操纵检验外均为待测；V2 第 20、21 页为实测结果。本文件可离线演示，外部文献链接需要网络。</p>
+    <p class="ref-bottom">更新日期：2026-11-17。第 2、4 页为构造示例，第 7 页矩阵为符号示意，第 12 页为分析设计，第 15 页为调用量估算，第 16 页除 V2 的操纵检验外均为待测；V2 第 20–22 页为实测结果。本文件可离线演示，外部文献链接需要网络。</p>
     <div class="section-foot"><p>按 ← / → 翻页，Home / End 跳转首尾；“讲稿备注”提供每页讲解提示；“打印 / PDF”输出全部页面。</p><span>END OF BRIEF</span></div>
   </section>
 
@@ -601,8 +601,8 @@ body[data-version=v1] .slide[data-ver=v2],body[data-version=v2] .slide[data-ver=
       <tr><td>主数据集</td><td data-label="V1">ASAP-SAS（0–2 / 0–3 分）。</td><td data-label="V2">Mohler 起步，RiceChem 待申请；ASAP-SAS 降为次要。</td><td data-label="修改原因">分值太低时 gap 几乎只有 0 或 1。</td></tr>
       <tr><td>优化方式</td><td data-label="V1">先提示优化，之后 RL。</td><td data-label="V2">只做提示优化。</td><td data-label="修改原因">题目数量不足以训练生成器。</td></tr>
     </tbody></table>
-    <div class="data-callout"><strong>9 + 3</strong><p>V2 修订第 1、3、10–14、16、17 页，新增本页与第 20、21 页；其余页面两版相同。<br>代价：失去“RL 训练 rubric 生成器”的叙事，调用量粗略估计为 V1 的 3–4 倍。</p></div>
-    <div class="section-foot"><p>除第 20、21 页的操纵检验结果外，V2 的内容均为设计建议。</p><span>V2 · PROPOSED REVISION</span></div>
+    <div class="data-callout"><strong>9 + 4</strong><p>V2 修订第 1、3、10–14、16、17 页，新增本页与第 20–22 页；其余页面两版相同。<br>代价：失去“RL 训练 rubric 生成器”的叙事，调用量粗略估计为 V1 的 3–4 倍。</p></div>
+    <div class="section-foot"><p>除第 20–22 页的实测结果外，V2 的内容均为设计建议。</p><span>V2 · PROPOSED REVISION</span></div>
   </section>
 
   <section class="slide dense" id="slide-20-v2" data-ver="v2" aria-labelledby="title-20-v2" data-title="操纵检验结果" data-subtitle="按预设标准通过 · 一个模型">
@@ -654,6 +654,38 @@ body[data-version=v1] .slide[data-ver=v2],body[data-version=v2] .slide[data-ver=
     <div class="data-callout"><strong>7 道题</strong><p>结论对这 7 道题成立。换一批题是否成立，还没有证据。<br>建议下一步先加题，再换一个模型复核。</p></div>
     <div class="section-foot"><p>限制：模糊版同时去掉了参考答案；补全版规则由助手起草；只有一个本地 12B 模型，平均比人工低 0.8–1.4 分。</p><span>POST-HOC CHECKS</span></div>
   </section>
+
+  <section class="slide dense" id="slide-22-v2" data-ver="v2" aria-labelledby="title-22-v2" data-title="分歧的稳定性" data-subtitle="答卷层面稳定 · 条目时有时无 · 方向因题而异">
+    <div class="heading"><div class="eyebrow">22 / Stability <span class="tag warm">仅 V2</span></div><h2 id="title-22-v2">每份答卷的分歧能复现，单个条目的分歧只有一部分能。</h2><p class="lead">本页也是事后检查：把每种协议的 5 次重复随机拆成两组各 2 次，比较两组结果，拆 200 次取平均。</p></div>
+    <div class="results-layout">
+      <div>
+        <div class="label">Per answer · 答卷层面的 gap</div>
+        <table class="results-table pilot-table"><thead><tr><th>Rubric 版本</th><th>逐条可靠度</th><th>逐条方向一致</th><th>整体可靠度</th><th>整体方向一致</th></tr></thead><tbody>
+          <tr><td>模糊</td><td>0.87</td><td>92%</td><td>0.62</td><td>68%</td></tr>
+          <tr><td>原版</td><td>0.90</td><td>92%</td><td>0.60</td><td>77%</td></tr>
+          <tr><td>补全</td><td>0.90</td><td>94%</td><td>0.49</td><td>65%</td></tr>
+        </tbody></table>
+        <p class="note-line">可靠度：两组 gap 的相关，换算到 5 次重复。方向一致：两组 gap 都不为 0 时正负号相同的比例。去掉 E06.Q06 后，逐条可靠度为 0.85–0.91。</p>
+        <div class="label" style="margin-top:4px">Per item · 逐条协议的条目判定</div>
+        <table class="results-table pilot-table"><thead><tr><th>Rubric 版本</th><th>总是一致</th><th>稳定分歧</th><th>时有时无</th></tr></thead><tbody>
+          <tr><td>模糊</td><td>60.6%</td><td>9.6%</td><td>29.9%</td></tr>
+          <tr><td>原版</td><td>67.8%</td><td>6.0%</td><td>26.2%</td></tr>
+          <tr><td>补全</td><td>76.9%</td><td>4.2%</td><td>19.0%</td></tr>
+        </tbody></table>
+        <p class="note-line">稳定分歧：两种协议各自 5 次一致，但彼此相反。模糊版 62 个稳定分歧中有 51 个是加分判满足、扣分判不满足。</p>
+      </div>
+      <div class="pilot-list">
+        <div class="label">What this means</div>
+        <div class="anchor-options">
+          <div class="anchor-option"><h3><span class="num">1</span>逐条协议：答卷层面稳定</h3><p>同一份答卷上两种协议差多少、谁高谁低，换一批重复基本能复现。补全版的 gap 更小，但剩下的部分同样稳定。</p></div>
+          <div class="anchor-option"><h3><span class="num">2</span>整体协议：接近一半是噪声</h3><p>可靠度 0.49–0.62，与第 20 页整体 gap 接近对半差的结果一致。</p></div>
+          <div class="anchor-option"><h3><span class="num">3</span>按条款定位需要多次重复</h3><p>只跑一次看到的条目分歧，大多换一次就消失。按条款定位分歧时，应重复多次、取多数判定。</p></div>
+          <div class="anchor-option"><h3><span class="num">4</span>哪一方更严，因题而异</h3><p>原版下，E01.Q02 扣分协议平均低 1.51 分，E08.Q04 高 0.81 分，其余题接近 0。</p></div>
+        </div>
+      </div>
+    </div>
+    <div class="section-foot"><p>限制：只有 gemma3:12b（温度 1）。稳定只说明同一模型重复采样时能复现，不说明分歧来自 rubric 不清楚。</p><span>POST-HOC · STABILITY</span></div>
+  </section>
 </main>
 <aside class="speaker-notes" id="speakerNotes" aria-label="当前页讲稿备注"><b>SPEAKER NOTES</b><p id="notesText"></p></aside>
 <footer class="bottom">
@@ -697,7 +729,7 @@ body[data-version=v1] .slide[data-ver=v2],body[data-version=v2] .slide[data-ver=
     '可从这里打开原论文、代码和数据。声明资料整理日期，示例与实测的区别，以及不同论文版本和复现可用性的边界。'
   ];
   var notesV2={
-  "slide-1-v2": "V2 的开场：问题从“加减分 gap 能否当奖励”改为“哪种无标签的评分分歧指向 rubric 缺陷”。加减分仍是主角，但它需要和其他扰动比较。除操纵检验（第 20、21 页）外，其余内容仍是提案。",
+  "slide-1-v2": "V2 的开场：问题从“加减分 gap 能否当奖励”改为“哪种无标签的评分分歧指向 rubric 缺陷”。加减分仍是主角，但它需要和其他扰动比较。除第 20–22 页的实测结果外，其余内容仍是提案。",
   "slide-3-v2": "三处变化：锚点从模型 A 换成 n 个人工标签；L± 改为逐条判定、只在默认规则上不同；分歧用于定位要改写的条款，而不是作为标量奖励。测试分数由第三种中性协议给出。不训练任何模型参数。",
   "slide-10-v2": "表格前四行与 V1 相同，只改了最后一行和下方两栏。重点讲为什么不再用 A：A 的成本与 L 相近，无标签的优势只有相对人工标签才成立。再讲与 Han & Kim 的关系：把他们的信号作为一条对照臂。",
   "slide-11-v2": "三个问题按顺序做，前一个不通过就停。Q₁ 是操纵检验，一天内可完成。Q₂ 是信号对比，下一页展开。Q₃ 是标签效率曲线，对比相同 n 的 Reflect-and-Revise。调用量比 V1 多，3–4 倍是粗略估计。",
@@ -708,7 +740,8 @@ body[data-version=v1] .slide[data-ver=v2],body[data-version=v2] .slide[data-ver=
   "slide-17-v2": "需要对齐三个决定：选 V1 还是 V2；锚点用人工标签还是模型 A；负结果是否算完成。可以按 V 键回到 V1 的同一页对照。",
   "slide-19-v2": "这页只在 V2 中出现，用于逐项对照。每行的第四列是修改原因。说明 V2 是评审后的修订建议，尚未经过讨论确认；V2 的代价是失去 RL 叙事和更多的调用量。",
   "slide-20-v2": "这是 V2 第一道关卡的结果。先讲设置：本地 gemma3:12b，7 道题、199 份答卷，每个条件重复 5 次。再讲三条预设标准都成立。强调两点：结果只来自一个模型；整体协议的 gap 接近噪声。试跑的 240 次调用没有用于调整提示词或参数。",
-  "slide-21-v2": "这页是事后检查，要和上一页的预设分析分开讲。第一，剔除 E06.Q06 后单调性和区间都不成立，这道题的模糊版几乎没有内容。第二，gap 不是来自“未规定”，而是两种协议对同一条目给出相反判定，而且扣分协议更严。第三，条目层面的分歧率在剔除 E06.Q06 后仍然单调下降。结论：对这 7 道题成立，推广到新题目还需要更多题。"
+  "slide-21-v2": "这页是事后检查，要和上一页的预设分析分开讲。第一，剔除 E06.Q06 后单调性和区间都不成立，这道题的模糊版几乎没有内容。第二，gap 不是来自“未规定”，而是两种协议对同一条目给出相反判定，而且扣分协议更严。第三，条目层面的分歧率在剔除 E06.Q06 后仍然单调下降。结论：对这 7 道题成立，推广到新题目还需要更多题。",
+  "slide-22-v2": "这页回答“L± 分歧稳不稳定”，也是事后检查。先讲方法：把 5 次重复拆成两组，看两组是否给出同样的结果。逐条协议下，每份答卷的分歧几乎完全能复现，补全版剩下的分歧也一样稳定；整体协议接近一半是噪声。条目层面只有一部分分歧每次都出现，所以按条款定位必须多次重复。最后提醒：哪一方更严因题而异；稳定只说明能复现，不说明分歧来自 rubric 不清楚。"
 };
   allSlides.filter(function(s){return s.dataset.ver!=='v2'}).forEach(function(s,i){s._note=notes[i]});
   allSlides.forEach(function(s){if(s.dataset.ver==='v2')s._note=notesV2[s.id]||''});
@@ -1299,7 +1332,7 @@ body[data-version=v1] .slide[data-ver=v2],body[data-version=v2] .slide[data-ver=
   "不能支持“评分更准确”；检查奖励利用、分数塌缩与 A 的共同偏差。Han & Kim 在跨模型分歧上已观察到这一情况。": "Do not claim improved accuracy. Check reward exploitation, score collapse, and shared bias from A. Han & Kim observed exactly this with cross-model disagreement.",
   "补齐阻塞项后，在 ASAP-SAS 上先做 1 道题、数百份答案的协议实验与 rubric 变体回归；若 gap 有独立信息，再进入提示优化与消融，之后评估 RL。": "After clearing the blockers, run a protocol pilot and rubric-variant regression on one ASAP-SAS question with a few hundred answers. If the gap carries independent information, move to prompt optimization and ablations before considering RL.",
   "Han & Kim，2026-10-09；表 3 的共识与人工一致性结果；三个通用评测数据集，非学生评分。": "Han & Kim, Oct. 9, 2026; Table 3 consensus and human-agreement results; three general evaluation datasets, not student grading.",
-  "更新日期：2026-11-16。第 2、4 页为构造示例，第 7 页矩阵为符号示意，第 12 页为分析设计，第 15 页为调用量估算，第 16 页除 V2 的操纵检验外均为待测；V2 第 20、21 页为实测结果。本文件可离线演示，外部文献链接需要网络。": "Updated Nov. 16, 2026. Slides 2 and 4 are constructed examples; slide 7 is symbolic; slide 12 is an analysis design; slide 15 estimates calls; slide 16 is unmeasured except V2’s manipulation check; V2 slides 20–21 report measured results. Works offline; source links require internet.",
+  "更新日期：2026-11-17。第 2、4 页为构造示例，第 7 页矩阵为符号示意，第 12 页为分析设计，第 15 页为调用量估算，第 16 页除 V2 的操纵检验外均为待测；V2 第 20–22 页为实测结果。本文件可离线演示，外部文献链接需要网络。": "Updated Nov. 17, 2026. Slides 2 and 4 are constructed examples; slide 7 is symbolic; slide 12 is an analysis design; slide 15 estimates calls; slide 16 is unmeasured except V2’s manipulation check; V2 slides 20–22 report measured results. Works offline; source links require internet.",
   "这是最需要回应的工作。它用 5 个不同模型 judge 的逐条分歧挑出歧义条款并改写，人工标签只用于评估。结论是共识上升、人工一致性不变。强调三点区别：我们的分歧来自同一模型的加 / 减分执行；有 A 锚定偏差；场景是学生短答与部分分。把它当作动机，并在消融中加入跨模型分歧组。": "This is the work we most need to answer. It rewrites ambiguous clauses chosen by per-clause disagreement among five different judge models, using human labels only for evaluation. Consensus rose while human agreement did not. Stress three differences: our disagreement comes from additive vs. deductive execution within one model; A anchors bias; the setting is student short answers with partial credit. Treat it as motivation and add a cross-model disagreement ablation.",
   "三个假设已按讨论重写。H₁ 除了 gap 是否超出噪声，还要看 tA 是否落在两路之间，这决定“两边夹向 A”的叙事能否成立。H₂ 用回归检验 gap 在控制 A 距离后是否仍有信息。H₃ 是 gap 成为独立贡献的关键：gap 不需要标签，在 A 预算有限时应更有价值。消融新增逐路对齐 A 与跨模型分歧两组。": "The three hypotheses were rewritten. H₁ asks both whether the gap exceeds noise and whether tA falls between the paths, which determines whether the squeeze-toward-A story holds. H₂ uses regression to test whether the gap still carries information after controlling for distance to A. H₃ is what makes the gap a contribution: it needs no labels, so it should matter most when A’s budget is limited. Two ablations were added: per-path A alignment and cross-model disagreement.",
   "用偏差与歧义的分解说明三种猜想并不互斥。核心是用人工分数而非 A 当裁判，否则 (a) 永远显得成立。重点讲右上角关键格：gap 变小但离 A 更远时，人工误差是否仍下降。这个分析只需 API 调用和已有人工分数，可作为阶段 1 的核心实验，结果决定 λc 与 λa 的设定。": "Use the bias–ambiguity decomposition to show the three explanations are not mutually exclusive. Human scores, not A, must adjudicate; otherwise (a) always appears to win. Focus on the key cell: when the gap shrinks but distance to A grows, does human error still fall? The analysis needs only API calls and existing human scores, so it can anchor phase 1 and inform λc and λa.",
@@ -1533,11 +1566,36 @@ body[data-version=v1] .slide[data-ver=v2],body[data-version=v2] .slide[data-ver=
   "先提示优化，之后 RL。": "Prompt optimization first, then RL.",
   "只做提示优化。": "Prompt optimization only.",
   "题目数量不足以训练生成器。": "Too few questions to train a generator.",
-  "V2 修订第 1、3、10–14、16、17 页，新增本页与第 20、21 页；其余页面两版相同。": "V2 revises slides 1, 3, 10–14, 16, and 17 and adds this one plus slides 20–21; all other slides are identical.",
+  "V2 修订第 1、3、10–14、16、17 页，新增本页与第 20–22 页；其余页面两版相同。": "V2 revises slides 1, 3, 10–14, 16, and 17 and adds this one plus slides 20–22; all other slides are identical.",
   "代价：失去“RL 训练 rubric 生成器”的叙事，调用量粗略估计为 V1 的 3–4 倍。": "The cost: no “RL-trained rubric generator” story, and roughly 3–4× V1’s grading calls.",
-  "除第 20、21 页的操纵检验结果外，V2 的内容均为设计建议。": "Apart from the manipulation-check results on slides 20–21, V2 is a design recommendation.",
+  "除第 20–22 页的实测结果外，V2 的内容均为设计建议。": "Apart from the measured results on slides 20–22, V2 is a design recommendation.",
   "切换方案版本（V 键）": "Switch proposal version (V key)",
-  "V2 的开场：问题从“加减分 gap 能否当奖励”改为“哪种无标签的评分分歧指向 rubric 缺陷”。加减分仍是主角，但它需要和其他扰动比较。除操纵检验（第 20、21 页）外，其余内容仍是提案。": "Opening for V2: the question shifts from “can the add/deduct gap serve as a reward” to “which label-free grading disagreement points to a rubric flaw”. The add/deduct split is still the lead, but it must be compared with other perturbations. Apart from the manipulation check (slides 20–21), everything remains a proposal.",
+  "V2 的开场：问题从“加减分 gap 能否当奖励”改为“哪种无标签的评分分歧指向 rubric 缺陷”。加减分仍是主角，但它需要和其他扰动比较。除第 20–22 页的实测结果外，其余内容仍是提案。": "Opening for V2: the question shifts from “can the add/deduct gap serve as a reward” to “which label-free grading disagreement points to a rubric flaw”. The add/deduct split is still the lead, but it must be compared with other perturbations. Apart from the measured results on slides 20–22, everything remains a proposal.",
+  "分歧的稳定性": "Stability of the disagreement",
+  "答卷层面稳定 · 条目时有时无 · 方向因题而异": "Stable per answer · intermittent per item · direction varies by question",
+  "每份答卷的分歧能复现，单个条目的分歧只有一部分能。": "The disagreement on each answer replicates; on single items, only some of it does.",
+  "本页也是事后检查：把每种协议的 5 次重复随机拆成两组各 2 次，比较两组结果，拆 200 次取平均。": "Also post hoc: the 5 repeats per protocol are split at random into two sets of 2 and compared, averaged over 200 splits.",
+  "Per answer · 答卷层面的 gap": "Per answer · gap",
+  "逐条可靠度": "Itemized reliability",
+  "逐条方向一致": "Itemized same sign",
+  "整体可靠度": "Holistic reliability",
+  "整体方向一致": "Holistic same sign",
+  "可靠度：两组 gap 的相关，换算到 5 次重复。方向一致：两组 gap 都不为 0 时正负号相同的比例。去掉 E06.Q06 后，逐条可靠度为 0.85–0.91。": "Reliability: correlation of the two sets’ gaps, projected to 5 repeats. Same sign: share of answers with matching sign when both gaps are nonzero. Without E06.Q06, itemized reliability is 0.85–0.91.",
+  "Per item · 逐条协议的条目判定": "Per item · itemized verdicts",
+  "总是一致": "Always agree",
+  "稳定分歧": "Stable disagreement",
+  "时有时无": "Intermittent",
+  "稳定分歧：两种协议各自 5 次一致，但彼此相反。模糊版 62 个稳定分歧中有 51 个是加分判满足、扣分判不满足。": "Stable disagreement: each protocol is consistent over its 5 runs, but the two differ. In the vague version, 51 of 62 are L+ met / L− not met.",
+  "逐条协议：答卷层面稳定": "Itemized: stable per answer",
+  "同一份答卷上两种协议差多少、谁高谁低，换一批重复基本能复现。补全版的 gap 更小，但剩下的部分同样稳定。": "How far apart the two protocols are on an answer, and which is higher, mostly replicates with fresh repeats. The completed version’s gap is smaller, but what remains is just as stable.",
+  "整体协议：接近一半是噪声": "Holistic: about half noise",
+  "可靠度 0.49–0.62，与第 20 页整体 gap 接近对半差的结果一致。": "Reliability is 0.49–0.62, consistent with slide 20, where the holistic gap is close to the split-half noise.",
+  "按条款定位需要多次重复": "Locating clauses needs repeats",
+  "只跑一次看到的条目分歧，大多换一次就消失。按条款定位分歧时，应重复多次、取多数判定。": "Most item disagreements seen in a single run vanish on the next. To locate disagreement by clause, repeat several times and use the majority verdict.",
+  "哪一方更严，因题而异": "Which side is stricter varies by question",
+  "原版下，E01.Q02 扣分协议平均低 1.51 分，E08.Q04 高 0.81 分，其余题接近 0。": "With the original rubric, L− averages 1.51 points lower on E01.Q02 and 0.81 higher on E08.Q04; the other questions are near 0.",
+  "限制：只有 gemma3:12b（温度 1）。稳定只说明同一模型重复采样时能复现，不说明分歧来自 rubric 不清楚。": "Limits: gemma3:12b only (temperature 1). Stability means the same model reproduces the disagreement on resampling, not that the disagreement comes from an unclear rubric.",
+  "这页回答“L± 分歧稳不稳定”，也是事后检查。先讲方法：把 5 次重复拆成两组，看两组是否给出同样的结果。逐条协议下，每份答卷的分歧几乎完全能复现，补全版剩下的分歧也一样稳定；整体协议接近一半是噪声。条目层面只有一部分分歧每次都出现，所以按条款定位必须多次重复。最后提醒：哪一方更严因题而异；稳定只说明能复现，不说明分歧来自 rubric 不清楚。": "This slide answers “is the L± disagreement stable?” and is also post hoc. Start with the method: split the 5 repeats into two sets and see whether both give the same result. Under the itemized protocol, each answer’s disagreement replicates almost fully, and what remains under the completed rubric is just as stable; the holistic protocol is about half noise. At the item level only some disagreements recur every time, so locating clauses needs repeats. Close with two cautions: which side is stricter varies by question, and stability shows the disagreement replicates, not that it comes from an unclear rubric.",
   "三处变化：锚点从模型 A 换成 n 个人工标签；L± 改为逐条判定、只在默认规则上不同；分歧用于定位要改写的条款，而不是作为标量奖励。测试分数由第三种中性协议给出。不训练任何模型参数。": "Three changes: the anchor moves from model A to n human labels; L± judge clause by clause and differ only in the default rule; disagreement locates the clause to rewrite instead of serving as a scalar reward. Test scores come from a third, neutral protocol. No model parameters are trained.",
   "表格前四行与 V1 相同，只改了最后一行和下方两栏。重点讲为什么不再用 A：A 的成本与 L 相近，无标签的优势只有相对人工标签才成立。再讲与 Han & Kim 的关系：把他们的信号作为一条对照臂。": "The first four rows match V1; only the last row and the two boxes changed. Explain why A is dropped: A costs about as much as L, so a label-free signal is an advantage only relative to human labels. Then the relation to Han & Kim: their signal becomes a control arm.",
   "三个问题按顺序做，前一个不通过就停。Q₁ 是操纵检验，一天内可完成。Q₂ 是信号对比，下一页展开。Q₃ 是标签效率曲线，对比相同 n 的 Reflect-and-Revise。调用量比 V1 多，3–4 倍是粗略估计。": "The three questions run in order; stop if one fails. Q₁ is the manipulation check, doable in a day. Q₂ is the signal comparison, detailed on the next slide. Q₃ is the label-efficiency curve against Reflect-and-Revise at the same n. Calls exceed V1; 3–4× is a rough estimate.",
