@@ -65,7 +65,7 @@ html[lang=en] .closing h2{font-size:40px;line-height:1.25}html[lang=en] .discuss
 @media screen and (min-width:721px) and (max-height:850px){html[lang=en] .heading{margin-bottom:17px}html[lang=en] h2{font-size:29px}html[lang=en] .lead{font-size:13px}html[lang=en] .lit-table td,html[lang=en] .data-table td{font-size:12px;padding-top:11px;padding-bottom:11px}html[lang=en] .flow-node h3{font-size:17px}html[lang=en] .flow-node p{font-size:11px}html[lang=en] .comparison-table td{padding-top:10px;padding-bottom:10px}html[lang=en] .paper-caution{font-size:10px}html[lang=en] .bridge p{font-size:11px}html[lang=en] .method-steps strong{font-size:14px}html[lang=en] .method-steps p{font-size:11px}html[lang=en] .closing h2{font-size:36px}}
 @media(max-width:720px){.language-toggle{font-size:10px;gap:3px}html[lang=en] h1{font-size:39px}html[lang=en] h2{font-size:26px}html[lang=en] .lead{font-size:14px}html[lang=en] .hero-desc{font-size:15px}html[lang=en] .hero-meta{flex-wrap:wrap}html[lang=en] .agent-reference p{font-size:12px}html[lang=en] .agent-reference .to-reward{font-size:11px}html[lang=en] .closing h2{font-size:34px}html[lang=en] .chapter{display:none}html[lang=en] .reward-table td:last-child{font-size:14px}.overview{top:108px}}
 @media print{html[lang=en] h1{font-size:43px}html[lang=en] h2{font-size:26px}html[lang=en] .heading{margin-bottom:15px}html[lang=en] .lead{font-size:11px;line-height:1.5}html[lang=en] .hero-desc{font-size:13px}html[lang=en] .method-steps strong{font-size:13px}html[lang=en] .method-steps p{font-size:10px}html[lang=en] .flow-node h3{font-size:16px}html[lang=en] .flow-node p{font-size:10px}html[lang=en] .agent-reference p{font-size:10px}html[lang=en] .agent-reference .to-reward{font-size:9px}html[lang=en] .paper-caution,html[lang=en] .bridge p,html[lang=en] .reward-summary{font-size:10px}html[lang=en] .protocol-list{font-size:10px}html[lang=en] .comparison-bottom h3{font-size:12px}html[lang=en] .comparison-table .sub{font-size:9px}html[lang=en] .closing h2{font-size:35px}}
-.check-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}.check-block{border-top:2px solid var(--green);padding-top:14px}.check-block.blocker{border-top-color:var(--orange)}.check-block.blocker .tag{background:var(--warm);color:var(--orange)}.check-block h3{font-size:16px;margin:9px 0 8px}.check-block ul{padding-left:17px;margin:0;font-size:12px;line-height:1.75;color:var(--muted)}.check-block li{margin-bottom:6px}
+.check-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}.check-block{border-top:2px solid var(--green);padding-top:14px}.check-block.blocker{border-top-color:var(--orange)}.check-block.blocker .tag{background:var(--warm);color:var(--orange)}.check-block h3{font-size:16px;margin:9px 0 8px}.check-block ul{padding-left:17px;margin:0;font-size:12px;line-height:1.75;color:var(--muted)}.check-block li{margin-bottom:6px}.st{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.03em;line-height:1.5;padding:0 5px;margin-right:6px;border-radius:3px;vertical-align:1px;white-space:nowrap}.st.done{background:var(--mint);color:var(--green)}.st.part{background:var(--pale);color:var(--blue)}.st.todo{color:var(--muted);box-shadow:inset 0 0 0 1px var(--line)}
 .disc-layout{display:grid;grid-template-columns:1fr 1.08fr;gap:40px}.disc-layout .anchor-option p{padding-left:35px}.reg-line{font-family:var(--serif);font-size:20px;line-height:1.6;margin:6px 0 4px}.quad{width:100%;border-collapse:collapse;font-size:12px;margin:14px 0 10px;table-layout:fixed}.quad th{font-size:11px;font-weight:500;color:var(--muted);padding:8px;text-align:center}.quad th:first-child{width:18%}.quad td{padding:11px 10px;border:1px solid var(--line);text-align:center;line-height:1.55;background:#fff}.quad td.key-cell{background:var(--mint);color:var(--green);font-weight:600}.read-list{font-size:12px;line-height:1.75;color:var(--muted);padding-left:17px;margin:6px 0 0}.read-list li{margin-bottom:4px}.read-list b{color:var(--ink);font-weight:600}
 @media(max-width:1000px){.check-grid{grid-template-columns:1fr 1fr}.disc-layout{gap:25px}}
 @media(max-width:720px){.check-grid,.disc-layout{grid-template-columns:1fr;gap:18px}.reg-line{font-size:17px}.disc-layout .anchor-option p{padding-left:0}}
@@ -96,7 +96,7 @@ body[data-version=v1] .slide[data-ver=v2],body[data-version=v2] .slide[data-ver=
 <header class="topbar">
   <div class="brand"><div class="brand-symbol" aria-hidden="true">R</div><div><div class="brand-name">RUBRIC / RESEARCH BRIEF</div><div class="brand-sub">A PROPOSAL FOR DISCUSSION · 2026.11</div></div></div>
   <nav class="tools" aria-label="演示工具">
-    <button class="tool key version-toggle" id="versionBtn" type="button" aria-label="切换方案版本（V 键）" title="切换方案版本（V 键）" aria-pressed="false"><span data-ver-code="v1" class="selected">V1</span><span aria-hidden="true"> / </span><span data-ver-code="v2">V2</span></button>
+    <button class="tool key version-toggle" id="versionBtn" type="button" aria-label="切换方案版本（V 键）" title="切换方案版本（V 键）" aria-pressed="true"><span data-ver-code="v1">V1</span><span aria-hidden="true"> / </span><span data-ver-code="v2" class="selected">V2</span></button>
     <button class="tool key language-toggle" id="languageBtn" type="button" aria-label="Switch to English" title="Switch to English" aria-pressed="false"><span data-lang-code="zh" lang="zh-CN" class="selected">中文</span><span aria-hidden="true"> / </span><span data-lang-code="en" lang="en">EN</span></button>
     <button class="tool" id="overviewBtn" aria-expanded="false">目录</button>
     <button class="tool" id="notesBtn" aria-pressed="false">讲稿备注</button>
@@ -447,16 +447,15 @@ body[data-version=v1] .slide[data-ver=v2],body[data-version=v2] .slide[data-ver=
     <div class="section-foot"><p>前两列完成后即可开始 H₁；后两列可在 pilot 中并行补齐。</p><span>CHECKLIST BEFORE H₁</span></div>
   </section>
 
-  <section class="slide" id="slide-13-v2" data-ver="v2" aria-labelledby="title-13-v2" data-title="实验前准备" data-subtitle="先跑操纵检验，再补清单">
-    <div class="heading"><div class="eyebrow">13 / Before the pilot <span class="tag warm">V2 修订</span></div><h2 id="title-13-v2">先跑操纵检验，再补清单。</h2><p class="lead">橙色为阻塞项。V2 把“先补齐信息”改为“先跑一个一天内能完成的实验”：它直接决定项目是否继续。</p></div>
+  <section class="slide" id="slide-13-v2" data-ver="v2" aria-labelledby="title-13-v2" data-title="实验前准备" data-subtitle="操纵检验已完成，清单其余部分待补">
+    <div class="heading"><div class="eyebrow">13 / Before the pilot <span class="tag warm">V2 修订</span></div><h2 id="title-13-v2">操纵检验已跑完，清单其余部分大多未做。</h2><p class="lead">橙色为阻塞项；每条前标注截至 2026-11-17 的进度。操纵检验的调用量与结果见第 20 页。</p></div>
     <div class="check-grid">
-      <div class="check-block blocker"><span class="tag">阻塞项 · 第一天</span><h3>操纵检验</h3><ul><li>Mohler 的 7 道题、199 份答卷；每题三版 rubric：模糊 / 原版 / 手工补全</li><li>两种协议各重复 5 次；逐条与整体两种模板都跑</li><li>通过：gap 随清晰度单调下降，且超过同协议重复的波动</li><li>不通过：项目停止，或改用其他扰动</li></ul></div>
-      <div class="check-block blocker"><span class="tag">阻塞项 · 协议</span><h3>L± 与中性协议 N 的模板</h3><ul><li>L+：有明确证据才给分；L−：有明确错误或缺失才扣分</li><li>每条输出：满足 / 不满足 / 未规定，并引用答卷原文</li><li>N：逐条判定，不指定默认方向</li><li>温度与重复次数 r；独立会话</li></ul></div>
-      <div class="check-block"><span class="tag">Q₂ 之前</span><h3>数据与 rubric 变体</h3><ul><li>补全版规则由助手起草，需人工审阅：只澄清，不改考点</li><li>核对满分、分数分布与评分者一致率</li><li>变体类型与数量；语义等价检查，防止通过改考点“作弊”</li><li>检查模型是否见过数据：ASAP-SAS 自 2012 年公开</li></ul></div>
-      <div class="check-block"><span class="tag">Q₃ 之前</span><h3>划分、指标与成本</h3><ul><li>n 个标签的抽样方式与随机种子数</li><li>唯一主指标；回归形式、聚类标准误与效应阈值</li><li>Reflect-and-Revise 基线使用相同的 n 与调用预算</li><li>先跑 1–2 题、200 份测 token，再推全量费用</li></ul></div>
+      <div class="check-block"><span class="tag">第一天 · 已完成</span><h3>操纵检验</h3><ul><li><span class="st done">已完成</span>Mohler 的 7 道题、199 份答卷；每题三版 rubric：模糊 / 原版 / 补全</li><li><span class="st done">已完成</span>两种协议各重复 5 次，逐条与整体模板都跑；11,940 次调用全部成功</li><li><span class="st done">已完成</span>按预设标准，两种模板都通过（见第 20 页）</li><li><span class="st part">部分</span>只在 gemma3:12b 一个模型上跑过；去掉 E06.Q06 后不再单调</li></ul></div>
+      <div class="check-block blocker"><span class="tag">阻塞项 · 协议</span><h3>L± 与中性协议 N 的模板</h3><ul><li><span class="st done">已完成</span>L+：有明确证据才给分；L−：有明确错误或缺失才扣分</li><li><span class="st done">已完成</span>每条输出：满足 / 不满足 / 未规定，并引用答卷原文</li><li><span class="st part">部分</span>N：模板已写好，但还没有在 gemma3:12b 上跑</li><li><span class="st part">部分</span>重复 r = 5，每次独立请求；温度未设定，用的是模型默认值</li></ul></div>
+      <div class="check-block"><span class="tag">Q₂ 之前</span><h3>数据与 rubric 变体</h3><ul><li><span class="st todo">未做</span>补全版规则由助手起草，需人工审阅：只澄清，不改考点</li><li><span class="st todo">未做</span>核对满分、分数分布与评分者一致率</li><li><span class="st todo">未做</span>变体类型与数量；语义等价检查，防止通过改考点“作弊”</li><li><span class="st todo">未做</span>检查模型是否见过数据：Mohler 数据 2011 年起公开，ASAP-SAS 2012 年起公开</li></ul></div>
+      <div class="check-block"><span class="tag">Q₃ 之前</span><h3>划分、指标与成本</h3><ul><li><span class="st todo">未做</span>n 个标签的抽样方式与随机种子数</li><li><span class="st todo">未做</span>唯一主指标；回归形式、聚类标准误与效应阈值</li><li><span class="st todo">未做</span>Reflect-and-Revise 基线使用相同的 n 与调用预算</li><li><span class="st part">部分</span>token 已实测：每次平均输入约 329、输出约 94（gemma3:12b）；全量费用未推算</li></ul></div>
     </div>
-    <div class="data-callout"><strong>1 天 · 7 题</strong><p>操纵检验的调用量：199 份 × 3 版 rubric × 2 种协议 × 5 次重复 × 2 种模板 = 11,940 次评分。<br>已在本地 gemma3:12b 上跑完，结果见第 20 页。</p></div>
-    <div class="section-foot"><p>预注册与文献精读移到操纵检验之后；协议模板必须在跑之前定稿。</p><span>KILL TEST FIRST</span></div>
+    <div class="section-foot"><p>预注册与文献精读移到操纵检验之后，目前都还没有开始。</p><span>STATUS · 2026-11-17</span></div>
   </section>
 
   <section class="slide dense" id="slide-14" data-ver="v1" aria-labelledby="title-14" data-title="数据选择" data-subtitle="真实评分用于验证，合成 rubric 用于冷启动">
@@ -673,7 +672,7 @@ body[data-version=v1] .slide[data-ver=v2],body[data-version=v2] .slide[data-ver=
 (function(){
   'use strict';
   var allSlides=Array.from(document.querySelectorAll('.slide'));
-  var version='v1';
+  var version='v2';
   function inVersion(s){return !s.dataset.ver||s.dataset.ver===version}
   var slides=allSlides.filter(inVersion);
   var current=0,reading=false,notesOn=false,toastTimer;
@@ -703,7 +702,7 @@ body[data-version=v1] .slide[data-ver=v2],body[data-version=v2] .slide[data-ver=
   "slide-10-v2": "表格前四行与 V1 相同，只改了最后一行和下方两栏。重点讲为什么不再用 A：A 的成本与 L 相近，无标签的优势只有相对人工标签才成立。再讲与 Han & Kim 的关系：把他们的信号作为一条对照臂。",
   "slide-11-v2": "三个问题按顺序做，前一个不通过就停。Q₁ 是操纵检验，一天内可完成。Q₂ 是信号对比，下一页展开。Q₃ 是标签效率曲线，对比相同 n 的 Reflect-and-Revise。调用量比 V1 多，3–4 倍是粗略估计。",
   "slide-12-v2": "先讲底部的恒等式：如果因变量取 L± 自身的误差，gap 一定显著，这是 V1 回归的问题。所以因变量换成中性协议 N 的误差，并加答案固定效应。然后讲三种结果各自意味着什么，三种都可以报告。",
-  "slide-13-v2": "V1 的清单是先补齐信息再跑；V2 认为第一个实验足够便宜，应该先跑。全量调用已在本地 gemma3:12b 上跑完，结果见第 20 页。补全版的规则是助手起草的，解读结果前需确认已经人工审阅。11,940 次调用按页面上的参数算出，不含重试。",
+  "slide-13-v2": "V1 的清单是先补齐信息再跑；V2 认为第一个实验足够便宜，应该先跑。现在操纵检验已在本地 gemma3:12b 上跑完，结果见第 20 页；每条前的标签是截至 2026-11-17 的进度。最该先补的两项：补全版规则还没有人工审阅，结果只来自一个模型。11,940 次调用按页面上的参数算出，不含重试。",
   "slide-14-v2": "RiceChem 有逐条人工标签，可以直接验证“分歧高的条款是否就是判定出错的条款”，但数据需要向作者申请，而且只有 4 道题。所以 pilot 先用公开的 Mohler：选了 7 道题共 199 份答卷，分项 rubric 是自己写的。Mohler 的数字已对照下载的数据核对。",
   "slide-16-v2": "V2 的成功标准是标签效率。Gate 01 已在一个模型上通过（第 20 页）。强调每一道关卡都可能让项目停下，并且较可能停在 Gate 02 或更早，这是本提案的判断而非数据。请听众事先确认负结果是否可接受。",
   "slide-17-v2": "需要对齐三个决定：选 V1 还是 V2；锚点用人工标签还是模型 A；负结果是否算完成。可以按 V 键回到 V1 的同一页对照。",
@@ -1568,7 +1567,23 @@ body[data-version=v1] .slide[data-ver=v2],body[data-version=v2] .slide[data-ver=
   "条款级验证 · 需申请": "Clause-level validation · On request",
   "条款级验证：分歧高的条款是否就是判定出错的条款。": "Clause-level validation: are high-disagreement clauses the misjudged ones?",
   "数据不公开，需向作者填表申请；只有 4 道题。": "Not public; request it from the authors by form. Only 4 questions.",
-  "V1 的清单是先补齐信息再跑；V2 认为第一个实验足够便宜，应该先跑。全量调用已在本地 gemma3:12b 上跑完，结果见第 20 页。补全版的规则是助手起草的，解读结果前需确认已经人工审阅。11,940 次调用按页面上的参数算出，不含重试。": "V1’s checklist collects information before running; V2 holds that the first experiment is cheap enough to run first. The full run has completed on a local gemma3:12b; results are on slide 20. The completed rules were drafted by an assistant, so confirm that a person reviewed them before interpreting the result. The 11,940 calls follow from the parameters on the slide and exclude retries.",
+  "V1 的清单是先补齐信息再跑；V2 认为第一个实验足够便宜，应该先跑。现在操纵检验已在本地 gemma3:12b 上跑完，结果见第 20 页；每条前的标签是截至 2026-11-17 的进度。最该先补的两项：补全版规则还没有人工审阅，结果只来自一个模型。11,940 次调用按页面上的参数算出，不含重试。": "V1’s checklist collects information before running; V2 holds that the first experiment is cheap enough to run first. The manipulation check has now run on a local gemma3:12b; results are on slide 20. The label on each line is its status as of 2026-11-17. The two gaps to close first: no person has reviewed the completed rules yet, and the result comes from one model. The 11,940 calls follow from the parameters on the slide and exclude retries.",
+  "操纵检验已完成，清单其余部分待补": "Manipulation check done; rest of the checklist open",
+  "操纵检验已跑完，清单其余部分大多未做。": "The manipulation check is done; most of the checklist is not.",
+  "橙色为阻塞项；每条前标注截至 2026-11-17 的进度。操纵检验的调用量与结果见第 20 页。": "Orange items are blockers; each line shows its status as of 2026-11-17. Call counts and results for the manipulation check are on slide 20.",
+  "第一天 · 已完成": "Day one · Done",
+  "已完成": "Done",
+  "部分": "Partial",
+  "未做": "To do",
+  "Mohler 的 7 道题、199 份答卷；每题三版 rubric：模糊 / 原版 / 补全": "7 Mohler questions, 199 answers; three rubrics each: vague / original / completed",
+  "两种协议各重复 5 次，逐条与整体模板都跑；11,940 次调用全部成功": "5 repeats per protocol, itemized and holistic templates; all 11,940 calls succeeded",
+  "按预设标准，两种模板都通过（见第 20 页）": "Both templates pass the pre-set criteria (slide 20)",
+  "只在 gemma3:12b 一个模型上跑过；去掉 E06.Q06 后不再单调": "Run on one model only (gemma3:12b); without E06.Q06 the trend is no longer monotone",
+  "N：模板已写好，但还没有在 gemma3:12b 上跑": "N: the template is written but has not been run on gemma3:12b",
+  "重复 r = 5，每次独立请求；温度未设定，用的是模型默认值": "r = 5 repeats, each a separate request; temperature not set, so the model default applies",
+  "检查模型是否见过数据：Mohler 数据 2011 年起公开，ASAP-SAS 2012 年起公开": "Check for training-data exposure: Mohler has been public since 2011, ASAP-SAS since 2012",
+  "token 已实测：每次平均输入约 329、输出约 94（gemma3:12b）；全量费用未推算": "Tokens measured: about 329 in and 94 out per call (gemma3:12b); full cost not yet estimated",
+  "预注册与文献精读移到操纵检验之后，目前都还没有开始。": "Preregistration and the literature read move after the manipulation check; neither has started.",
   "RiceChem 有逐条人工标签，可以直接验证“分歧高的条款是否就是判定出错的条款”，但数据需要向作者申请，而且只有 4 道题。所以 pilot 先用公开的 Mohler：选了 7 道题共 199 份答卷，分项 rubric 是自己写的。Mohler 的数字已对照下载的数据核对。": "RiceChem has per-clause human labels, so it can directly test whether high-disagreement clauses are the misjudged ones, but it is released on request and has only 4 questions. The pilot therefore starts on public Mohler data: 7 questions and 199 answers, with itemized rubrics written for this study. Mohler’s figures were checked against the download.",
   "操纵检验已完成 · 1 个模型": "Manipulation check done · 1 model",
   "已在本地 gemma3:12b 上跑完，结果见第 20 页。": "Completed on a local gemma3:12b; results on slide 20.",
@@ -1686,7 +1701,7 @@ body[data-version=v1] .slide[data-ver=v2],body[data-version=v2] .slide[data-ver=
     document.getElementById('notesText').textContent=t(slides[current]._note);
     document.querySelectorAll('.step').forEach(function(b,i){b.classList.toggle('current',i===current);b.classList.toggle('done',i<current);if(i===current)b.setAttribute('aria-current','page');else b.removeAttribute('aria-current')});
     document.querySelectorAll('.overview-card').forEach(function(b,i){b.setAttribute('aria-current',String(i===current))});
-    try{history.replaceState(null,'',(version==='v2'?'?v=2':location.pathname)+'#'+(current+1))}catch(e){}
+    try{history.replaceState(null,'',(version==='v1'?'?v=1':location.pathname)+'#'+(current+1))}catch(e){}
     if(scroll!==false){if(reading)slides[current].scrollIntoView({block:'start'});else window.scrollTo(0,0)}
   }
   function buildNav(){
@@ -1758,7 +1773,7 @@ body[data-version=v1] .slide[data-ver=v2],body[data-version=v2] .slide[data-ver=
     if(!quiet)announce(t(version==='v2'?'已切换到 V2 · 修订方案':'已切换到 V1 · 原方案'));
   }
   document.getElementById('versionBtn').addEventListener('click',function(){setVersion(version==='v2'?'v1':'v2')});
-  if(/^v?2$/i.test(new URLSearchParams(location.search).get('v')||'')){version='v2';slides=allSlides.filter(inVersion)}
+  if(/^v?1$/i.test(new URLSearchParams(location.search).get('v')||'')){version='v1';slides=allSlides.filter(inVersion)}
   window.addEventListener('hashchange',function(){var n=Number(location.hash.slice(1));if(Number.isInteger(n)&&n>=1&&n<=slides.length)setPage(n-1)});
   var initial=Number(location.hash.slice(1));current=Number.isInteger(initial)&&initial>=1&&initial<=slides.length?initial-1:0;
   applyLanguage('en');
