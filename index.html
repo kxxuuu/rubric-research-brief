@@ -525,12 +525,12 @@ body[data-version=v1] .slide[data-ver=v2],body[data-version=v2] .slide[data-ver=
   </section>
 
   <section class="slide" id="slide-16-v2" data-ver="v2" aria-labelledby="title-16-v2" data-title="成功标准" data-subtitle="三道关卡与标签效率">
-    <div class="heading"><div class="eyebrow">16 / Success &amp; failure criteria <span class="tag warm">V2 修订</span></div><h2 id="title-16-v2">三道关卡，每一道都可能让项目停下。</h2><p class="lead">V2 的成功标准是标签效率：人工标签数相同，留出集上更准。操纵检验已在一个模型上完成，其余均为待测。</p></div>
+    <div class="heading"><div class="eyebrow">16 / Success &amp; failure criteria <span class="tag warm">V2 修订</span></div><h2 id="title-16-v2">三道关卡，每一道都可能让项目停下。</h2><p class="lead">V2 的成功标准是标签效率：人工标签数相同，留出集上更准。操纵检验已在一个模型、21 道题上通过；信号有效性在答卷层面未通过，其余待测。</p></div>
     <div class="results-layout">
       <div>
         <table class="results-table"><thead><tr><th>评估维度</th><th>指标 / 检查</th><th>结果</th></tr></thead><tbody>
-          <tr><td><strong>操纵检验</strong></td><td>gap 随 rubric 清晰度的变化<br><span class="small muted">相对同协议重复评分差距</span></td><td><span class="tag">通过</span><br><span class="small muted">gemma3:12b · 第 20 页</span></td></tr>
-          <tr><td><strong>信号有效性</strong></td><td>各信号对人工误差的增量解释力<br><span class="small muted">因变量为中性协议 N 的误差</span></td><td class="pending">待测</td></tr>
+          <tr><td><strong>操纵检验</strong></td><td>gap 随 rubric 清晰度的变化<br><span class="small muted">相对同协议重复评分差距</span></td><td><span class="tag">通过</span><br><span class="small muted">gemma3:12b · 第 20、23 页</span></td></tr>
+          <tr><td><strong>信号有效性</strong></td><td>各信号对人工误差的增量解释力<br><span class="small muted">因变量为中性协议 N 的误差</span></td><td><span class="tag warm">答卷层面未通过</span><br><span class="small muted">第 24 页 · 条目层面待测</span></td></tr>
           <tr><td><strong>标签效率</strong></td><td>n = 20 / 50 / 100 时的留出集 QWK<br><span class="small muted">对比相同 n 的 Reflect-and-Revise</span></td><td class="pending">待测</td></tr>
           <tr><td><strong>退化检查</strong></td><td>分数分布、排序、逐项证据<br><span class="small muted">检测常数评分与rubric语义偏移</span></td><td class="pending">待测</td></tr>
         </tbody></table>
@@ -561,7 +561,7 @@ body[data-version=v1] .slide[data-ver=v2],body[data-version=v2] .slide[data-ver=
   <section class="slide" id="slide-17-v2" data-ver="v2" aria-labelledby="title-17-v2" data-title="讨论与下一步" data-subtitle="V1 还是 V2，以及负结果是否可接受">
     <div class="eyebrow">17 / Discussion <span class="tag warm">V2 修订</span></div>
     <div class="closing">
-      <div><h2 id="title-17-v2">哪种评分分歧，<br>能指出 rubric<br><span class="accent">哪一条没写清</span>？</h2><p class="big-q">From disagreement to the unclear clause.</p><p class="lead" style="margin-top:21px">潜在贡献从“一个新奖励”变为“一次信号对比”：<br>无论加减分分歧是否有效，结果都有信息量。</p><div class="closing-box"><strong>建议下一步：</strong>操纵检验已在 gemma3:12b 上按预设标准通过，但效应依赖一道题（第 20、21 页）。先加题并换一个模型复核，再做五种信号的对比回归与标签效率实验。RL 不在本阶段范围内。</div></div>
+      <div><h2 id="title-17-v2">哪种评分分歧，<br>能指出 rubric<br><span class="accent">哪一条没写清</span>？</h2><p class="big-q">From disagreement to the unclear clause.</p><p class="lead" style="margin-top:21px">潜在贡献从“一个新奖励”变为“一次信号对比”：<br>无论加减分分歧是否有效，结果都有信息量。</p><div class="closing-box"><strong>建议下一步：</strong>操纵检验在 21 道题上按预设标准通过（第 23 页）；预注册的信号检验判定，答卷层面的 gap 找不出打错的答卷（第 24 页）。下一步申请 RiceChem，在条目层面检验分歧定位，并换一个模型复核。RL 不在本阶段范围内。</div></div>
       <div>
         <div class="discussion"><h3><strong>01</strong>选 V1 还是 V2？</h3><p>V1 保留 RL 与模型 A 的叙事，风险集中在最后；V2 放弃 RL，换来每一步都有停止条件。</p></div>
         <div class="discussion"><h3><strong>02</strong>锚点用人工标签还是模型 A？</h3><p>V2 用 n 个人工标签；A 可保留为一条蒸馏对照臂。需要确认数据集已有标签是否够用。</p></div>
@@ -686,6 +686,59 @@ body[data-version=v1] .slide[data-ver=v2],body[data-version=v2] .slide[data-ver=
     </div>
     <div class="section-foot"><p>限制：只有 gemma3:12b（温度 1）。稳定只说明同一模型重复采样时能复现，不说明分歧来自 rubric 不清楚。</p><span>POST-HOC · STABILITY</span></div>
   </section>
+
+  <section class="slide dense" id="slide-23-v2" data-ver="v2" aria-labelledby="title-23-v2" data-title="21 道题的操纵检验" data-subtitle="仍然通过 · 不再依赖一道题">
+    <div class="heading"><div class="eyebrow">23 / Replication on 21 questions <span class="tag warm">仅 V2</span></div><h2 id="title-23-v2">加到 21 道题，操纵检验仍然通过，不再依赖一道题。</h2><p class="lead">同一模型、同一流程，新增 14 道 Mohler 题：588 份答卷，35,280 次调用全部成功。额外检查在开跑前写定。</p></div>
+    <div class="results-layout">
+      <div>
+        <table class="results-table pilot-table"><thead><tr><th>Rubric 版本</th><th>逐条 |gap|</th><th>95% 区间</th><th>逐条对半差</th><th>整体 |gap|</th></tr></thead><tbody>
+          <tr><td>模糊</td><td>1.180</td><td class="ci">[1.078, 1.283]</td><td>0.250</td><td>0.476</td></tr>
+          <tr><td>原版</td><td>0.804</td><td class="ci">[0.722, 0.884]</td><td>0.215</td><td>0.415</td></tr>
+          <tr><td>补全</td><td>0.536</td><td class="ci">[0.466, 0.606]</td><td>0.192</td><td>0.328</td></tr>
+        </tbody></table>
+        <div class="label" style="margin-top:4px">Pre-set extra checks · 模糊减补全</div>
+        <table class="results-table pilot-table"><thead><tr><th>范围</th><th>模糊减补全</th><th>三条标准</th></tr></thead><tbody>
+          <tr><td>只看新 14 题</td><td>+0.839 <span class="ci">[+0.688, +0.985]</span></td><td>都成立</td></tr>
+          <tr><td>21 题去掉 E06.Q06</td><td>+0.611 <span class="ci">[+0.486, +0.736]</span></td><td>都成立</td></tr>
+          <tr><td>逐题剔除，21 种情况</td><td>+0.592 至 +0.703</td><td>都成立</td></tr>
+          <tr><td>按题重抽样</td><td>+0.643 <span class="ci">[+0.412, +0.879]</span></td><td>单调 100%</td></tr>
+        </tbody></table>
+      </div>
+      <div class="pilot-side">
+        <div class="label">Pre-set pass rule · 逐条协议</div>
+        <div class="metric-line"><span>|gap| 按 模糊 &gt; 原版 &gt; 补全 下降</span><b>是</b></div>
+        <div class="metric-line"><span>模糊减补全的 95% 区间高于 0</span><b>[+0.519, +0.764]</b></div>
+        <div class="metric-line"><span>模糊版 |gap| 大于同协议对半差</span><b>1.180 &gt; 0.250</b></div>
+        <div class="bridge"><h3>协议间更一致，不等于打得更准。</h3><p>和人工均分的平均误差没有一致地下降：加分协议从 1.34 升到 1.52，扣分协议从 1.82 降到 1.58。模型整体仍比人工严约 1 分。</p></div>
+      </div>
+    </div>
+    <div class="data-callout"><strong>+0.26 → +0.84</strong><p>原 7 题与新 14 题的模糊减补全。新题效应大得多，可能是起草的模糊版更短、规则更硬。</p></div>
+    <div class="section-foot"><p>限制：新题 rubric 由助手起草，不算完全独立的重复；E01.Q02、E08.Q04 方向相反；只有 gemma3:12b。</p><span>GATE 01 · 21 QUESTIONS</span></div>
+  </section>
+
+  <section class="slide dense" id="slide-24-v2" data-ver="v2" aria-labelledby="title-24-v2" data-title="E2 信号检验" data-subtitle="预注册 · 判定 NO-GO">
+    <div class="heading"><div class="eyebrow">24 / Signal test · E2 <span class="tag warm">仅 V2</span></div><h2 id="title-24-v2">答卷层面，gap 找不出模型打错的答卷。</h2><p class="lead">模型用中性协议 N 打分，每题 5 份人工锚点校准偏差，误差 ≥ 1 分算打错。比较各信号在同一道题内找出打错答卷的 AUROC，0.5 等于瞎猜。方案和脚本在看 N 数据前冻结。</p></div>
+    <div class="results-layout">
+      <div>
+        <div class="label">AUROC · 新 14 题（主分析）</div>
+        <table class="results-table pilot-table"><thead><tr><th>Rubric 版本</th><th>L± gap</th><th>N 重复波动</th><th>L± 重复波动</th><th>N 未规定</th><th>人工分歧</th></tr></thead><tbody>
+          <tr><td>模糊</td><td>0.50</td><td>0.50</td><td>0.51</td><td>0.49</td><td>0.55</td></tr>
+          <tr class="flag"><td>原版</td><td>0.44</td><td>0.46</td><td>0.48</td><td>0.47</td><td>0.49</td></tr>
+          <tr><td>补全</td><td>0.48</td><td>0.47</td><td>0.49</td><td>0.49</td><td>0.48</td></tr>
+        </tbody></table>
+        <p class="note-line">原版一行是主检验。人工分歧（两位评分者的分差）实际使用时拿不到，只作参考。21 题合并、换锚点数或阈值，结论不变。原始输出在 pilot_mohler21/results/gemma12b.e2.md。</p>
+      </div>
+      <div class="pilot-side">
+        <div class="label">Pre-registered rule · 主检验</div>
+        <div class="metric-line"><span>AUROC(gap)</span><b>0.44 [0.41, 0.48]</b></div>
+        <div class="metric-line"><span>AUROC(N 重复波动)</span><b>0.46 [0.43, 0.50]</b></div>
+        <div class="metric-line"><span>差值，需下界 &gt; 0 且 gap ≥ 0.60</span><b>−0.02 [−0.07, +0.03]</b></div>
+        <div class="bridge"><h3>唯一的线索在题目层面。</h3><p>平均 gap 越大的题，模型与人工的排序一致度越低：模糊 / 原版 / 补全的 ρ 为 −0.25 / −0.57 / −0.46。只有 21 个点，未检验。</p></div>
+      </div>
+    </div>
+    <div class="data-callout"><strong>NO-GO</strong><p>V2 不再声称“答卷层面的 gap 能标出打错的答卷”。<br>下一步转到条目层面：分歧的条目是否就是判错的条目，需要 RiceChem 的逐项标签。</p></div>
+    <div class="section-foot"><p>限制：只有 gemma3:12b；人工均分本身有噪声；只有 14 道题，区间较宽。未做 rubric 同义改写对照。</p><span>GATE 02 · ANSWER LEVEL · NO-GO</span></div>
+  </section>
 </main>
 <aside class="speaker-notes" id="speakerNotes" aria-label="当前页讲稿备注"><b>SPEAKER NOTES</b><p id="notesText"></p></aside>
 <footer class="bottom">
@@ -736,12 +789,14 @@ body[data-version=v1] .slide[data-ver=v2],body[data-version=v2] .slide[data-ver=
   "slide-12-v2": "先讲底部的恒等式：如果因变量取 L± 自身的误差，gap 一定显著，这是 V1 回归的问题。所以因变量换成中性协议 N 的误差，并加答案固定效应。然后讲三种结果各自意味着什么，三种都可以报告。",
   "slide-13-v2": "V1 的清单是先补齐信息再跑；V2 认为第一个实验足够便宜，应该先跑。现在操纵检验已在本地 gemma3:12b 上跑完，结果见第 20 页；每条前的标签是截至 2026-11-17 的进度。最该先补的两项：补全版规则还没有人工审阅，结果只来自一个模型。11,940 次调用按页面上的参数算出，不含重试。",
   "slide-14-v2": "RiceChem 有逐条人工标签，可以直接验证“分歧高的条款是否就是判定出错的条款”，但数据需要向作者申请，而且只有 4 道题。所以 pilot 先用公开的 Mohler：选了 7 道题共 199 份答卷，分项 rubric 是自己写的。Mohler 的数字已对照下载的数据核对。",
-  "slide-16-v2": "V2 的成功标准是标签效率。Gate 01 已在一个模型上通过（第 20 页）。强调每一道关卡都可能让项目停下，并且较可能停在 Gate 02 或更早，这是本提案的判断而非数据。请听众事先确认负结果是否可接受。",
+  "slide-16-v2": "V2 的成功标准是标签效率。Gate 01 已在一个模型、21 道题上通过（第 20、23 页）。Gate 02 在答卷层面未通过（第 24 页）：gap 不比单纯的重复波动更能找出打错的答卷。条目层面还没测，需要 RiceChem。请听众确认这个负结果怎么报告。",
   "slide-17-v2": "需要对齐三个决定：选 V1 还是 V2；锚点用人工标签还是模型 A；负结果是否算完成。可以按 V 键回到 V1 的同一页对照。",
   "slide-19-v2": "这页只在 V2 中出现，用于逐项对照。每行的第四列是修改原因。说明 V2 是评审后的修订建议，尚未经过讨论确认；V2 的代价是失去 RL 叙事和更多的调用量。",
   "slide-20-v2": "这是 V2 第一道关卡的结果。先讲设置：本地 gemma3:12b，7 道题、199 份答卷，每个条件重复 5 次。再讲三条预设标准都成立。强调两点：结果只来自一个模型；整体协议的 gap 接近噪声。试跑的 240 次调用没有用于调整提示词或参数。",
   "slide-21-v2": "这页是事后检查，要和上一页的预设分析分开讲。第一，剔除 E06.Q06 后单调性和区间都不成立，这道题的模糊版几乎没有内容。第二，gap 不是来自“未规定”，而是两种协议对同一条目给出相反判定，而且扣分协议更严。第三，条目层面的分歧率在剔除 E06.Q06 后仍然单调下降。结论：对这 7 道题成立，推广到新题目还需要更多题。",
-  "slide-22-v2": "这页回答“L± 分歧稳不稳定”，也是事后检查。先讲方法：把 5 次重复拆成两组，看两组是否给出同样的结果。逐条协议下，每份答卷的分歧几乎完全能复现，补全版剩下的分歧也一样稳定；整体协议接近一半是噪声。条目层面只有一部分分歧每次都出现，所以按条款定位必须多次重复。最后提醒：哪一方更严因题而异；稳定只说明能复现，不说明分歧来自 rubric 不清楚。"
+  "slide-22-v2": "这页回答“L± 分歧稳不稳定”，也是事后检查。先讲方法：把 5 次重复拆成两组，看两组是否给出同样的结果。逐条协议下，每份答卷的分歧几乎完全能复现，补全版剩下的分歧也一样稳定；整体协议接近一半是噪声。条目层面只有一部分分歧每次都出现，所以按条款定位必须多次重复。最后提醒：哪一方更严因题而异；稳定只说明能复现，不说明分歧来自 rubric 不清楚。",
+  "slide-23-v2": "这页回应第 21 页“效应依赖一道题”的问题。同一模型、同一流程加了 14 道题，三条预设标准仍然成立；只看新题、去掉 E06.Q06、逐题剔除、按题重抽样，这些额外检查在开跑前写定，也都成立。要提醒两点：新题的 rubric 是助手起草的，效应比原 7 题大得多，不算完全独立的重复；协议之间更一致，但和人工的误差没有一致地变小。",
+  "slide-24-v2": "这页是预注册的信号检验，方案和脚本在看 N 数据前冻结。设定是：用 N 打分，每题 5 份人工锚点校准偏差，看各信号能否在同一道题里先挑出打错的答卷。主检验在原版 rubric、新 14 题上，gap 的 AUROC 是 0.44，不比 N 自己的重复波动 0.46 好，判定 NO-GO。所有信号都接近 0.5，连人工评分者的分歧也是。唯一的线索在题目层面：gap 大的题，模型和人工更不一致，这支持转到条目层面检验。"
 };
   allSlides.filter(function(s){return s.dataset.ver!=='v2'}).forEach(function(s,i){s._note=notes[i]});
   allSlides.forEach(function(s){if(s.dataset.ver==='v2')s._note=notesV2[s.id]||''});
@@ -1699,7 +1754,52 @@ body[data-version=v1] .slide[data-ver=v2],body[data-version=v2] .slide[data-ver=
   "建议下一步先加题，再换一个模型复核。": "Suggested next step: add questions, then replicate on a second model.",
   "限制：模糊版同时去掉了参考答案；补全版规则由助手起草；只有一个本地 12B 模型，平均比人工低 0.8–1.4 分。": "Limits: the vague version also drops the reference answer; the completed rules were assistant-drafted; a single local 12B model, scoring 0.8–1.4 points below the human graders on average.",
   "这是 V2 第一道关卡的结果。先讲设置：本地 gemma3:12b，7 道题、199 份答卷，每个条件重复 5 次。再讲三条预设标准都成立。强调两点：结果只来自一个模型；整体协议的 gap 接近噪声。试跑的 240 次调用没有用于调整提示词或参数。": "This is the result for V2’s first gate. Start with the setup: a local gemma3:12b, 7 questions, 199 answers, 5 repeats per condition. Then show that all three pre-set criteria hold. Stress two points: the result comes from one model, and the holistic gap is near the noise. The 240-call trial run was not used to adjust any prompt or parameter.",
-  "这页是事后检查，要和上一页的预设分析分开讲。第一，剔除 E06.Q06 后单调性和区间都不成立，这道题的模糊版几乎没有内容。第二，gap 不是来自“未规定”，而是两种协议对同一条目给出相反判定，而且扣分协议更严。第三，条目层面的分歧率在剔除 E06.Q06 后仍然单调下降。结论：对这 7 道题成立，推广到新题目还需要更多题。": "These are post-hoc checks; keep them separate from the pre-set analysis on the previous slide. First, without E06.Q06 both monotonicity and the interval fail, and that question’s vague rubric has almost no content. Second, the gap does not come from “unspecified” verdicts but from the two protocols giving opposite verdicts on the same item, with the deductive protocol the stricter one. Third, the item-level disagreement rate still falls monotonically without E06.Q06. Conclusion: it holds for these 7 questions; generalizing to new questions needs more of them."
+  "这页是事后检查，要和上一页的预设分析分开讲。第一，剔除 E06.Q06 后单调性和区间都不成立，这道题的模糊版几乎没有内容。第二，gap 不是来自“未规定”，而是两种协议对同一条目给出相反判定，而且扣分协议更严。第三，条目层面的分歧率在剔除 E06.Q06 后仍然单调下降。结论：对这 7 道题成立，推广到新题目还需要更多题。": "These are post-hoc checks; keep them separate from the pre-set analysis on the previous slide. First, without E06.Q06 both monotonicity and the interval fail, and that question’s vague rubric has almost no content. Second, the gap does not come from “unspecified” verdicts but from the two protocols giving opposite verdicts on the same item, with the deductive protocol the stricter one. Third, the item-level disagreement rate still falls monotonically without E06.Q06. Conclusion: it holds for these 7 questions; generalizing to new questions needs more of them.",
+  "21 道题的操纵检验": "Manipulation check on 21 questions",
+  "仍然通过 · 不再依赖一道题": "Still passes · no longer rests on one question",
+  "加到 21 道题，操纵检验仍然通过，不再依赖一道题。": "On 21 questions the check still passes, no longer resting on one.",
+  "同一模型、同一流程，新增 14 道 Mohler 题：588 份答卷，35,280 次调用全部成功。额外检查在开跑前写定。": "Same model and pipeline, 14 more Mohler questions: 588 answers, all 35,280 calls succeeded. Extra checks were set before the run.",
+  "Pre-set extra checks · 模糊减补全": "Pre-set extra checks · vague minus completed",
+  "范围": "Scope",
+  "模糊减补全": "Vague minus completed",
+  "三条标准": "Three criteria",
+  "只看新 14 题": "New 14 questions only",
+  "21 题去掉 E06.Q06": "21 questions without E06.Q06",
+  "逐题剔除，21 种情况": "Leave one out, 21 cases",
+  "按题重抽样": "Question-level bootstrap",
+  "都成立": "All hold",
+  "+0.592 至 +0.703": "+0.592 to +0.703",
+  "单调 100%": "Monotone in 100%",
+  "协议间更一致，不等于打得更准。": "More agreement between protocols is not more accuracy.",
+  "和人工均分的平均误差没有一致地下降：加分协议从 1.34 升到 1.52，扣分协议从 1.82 降到 1.58。模型整体仍比人工严约 1 分。": "Mean error against the human average did not fall consistently: additive rose from 1.34 to 1.52, deductive fell from 1.82 to 1.58. The model is still about 1 point harsher than the human graders.",
+  "原 7 题与新 14 题的模糊减补全。新题效应大得多，可能是起草的模糊版更短、规则更硬。": "Vague minus completed, original 7 vs new 14 questions. Much larger on the new ones, possibly because their drafted vague versions are shorter and rules firmer.",
+  "限制：新题 rubric 由助手起草，不算完全独立的重复；E01.Q02、E08.Q04 方向相反；只有 gemma3:12b。": "Limits: assistant-drafted rubrics, so not a fully independent replication; E01.Q02 and E08.Q04 go the other way; gemma3:12b only.",
+  "E2 信号检验": "E2 signal test",
+  "预注册 · 判定 NO-GO": "Pre-registered · NO-GO",
+  "答卷层面，gap 找不出模型打错的答卷。": "At the answer level, the gap does not find the answers the model grades wrongly.",
+  "模型用中性协议 N 打分，每题 5 份人工锚点校准偏差，误差 ≥ 1 分算打错。比较各信号在同一道题内找出打错答卷的 AUROC，0.5 等于瞎猜。方案和脚本在看 N 数据前冻结。": "The model grades with the neutral protocol N; 5 human-scored anchors per question calibrate its bias; an error of 1 point or more counts as wrong. We compare each signal's within-question AUROC for finding wrong answers, where 0.5 is chance. Plan and script were frozen before the N data was opened.",
+  "AUROC · 新 14 题（主分析）": "AUROC · new 14 questions (primary)",
+  "N 重复波动": "N repeat spread",
+  "L± 重复波动": "L± repeat spread",
+  "N 未规定": "N unspecified",
+  "人工分歧": "Human disagreement",
+  "原版一行是主检验。人工分歧（两位评分者的分差）实际使用时拿不到，只作参考。21 题合并、换锚点数或阈值，结论不变。原始输出在 pilot_mohler21/results/gemma12b.e2.md。": "The original row is the primary test. Human disagreement (the gap between the two graders) is not available in practice and is shown for reference only. Pooling all 21 questions or changing the anchor count or threshold does not change the conclusion. Raw output: pilot_mohler21/results/gemma12b.e2.md.",
+  "Pre-registered rule · 主检验": "Pre-registered rule · primary test",
+  "AUROC(N 重复波动)": "AUROC(N repeat spread)",
+  "差值，需下界 > 0 且 gap ≥ 0.60": "Difference; needs lower bound > 0 and gap ≥ 0.60",
+  "唯一的线索在题目层面。": "The only lead is at the question level.",
+  "平均 gap 越大的题，模型与人工的排序一致度越低：模糊 / 原版 / 补全的 ρ 为 −0.25 / −0.57 / −0.46。只有 21 个点，未检验。": "Questions with a larger mean gap show lower model–human rank agreement: ρ = −0.25 / −0.57 / −0.46 for vague / original / completed. Only 21 points, not tested.",
+  "V2 不再声称“答卷层面的 gap 能标出打错的答卷”。": "V2 no longer claims that the answer-level gap can flag wrongly graded answers.",
+  "下一步转到条目层面：分歧的条目是否就是判错的条目，需要 RiceChem 的逐项标签。": "Next, move to the item level: are the disputed items the misjudged ones? That needs RiceChem's item labels.",
+  "限制：只有 gemma3:12b；人工均分本身有噪声；只有 14 道题，区间较宽。未做 rubric 同义改写对照。": "Limits: gemma3:12b only; the human average is itself noisy; only 14 questions, so intervals are wide. No rubric-paraphrase control yet.",
+  "V2 的成功标准是标签效率：人工标签数相同，留出集上更准。操纵检验已在一个模型、21 道题上通过；信号有效性在答卷层面未通过，其余待测。": "V2 succeeds on label efficiency: the same number of human labels, better held-out accuracy. The manipulation check has passed on one model and 21 questions; signal validity failed at the answer level; everything else remains unmeasured.",
+  "gemma3:12b · 第 20、23 页": "gemma3:12b · slides 20, 23",
+  "答卷层面未通过": "Failed at answer level",
+  "第 24 页 · 条目层面待测": "Slide 24 · item level pending",
+  "操纵检验在 21 道题上按预设标准通过（第 23 页）；预注册的信号检验判定，答卷层面的 gap 找不出打错的答卷（第 24 页）。下一步申请 RiceChem，在条目层面检验分歧定位，并换一个模型复核。RL 不在本阶段范围内。": "The manipulation check passed its pre-set rule on 21 questions (slide 23); the pre-registered signal test found that the answer-level gap does not find wrongly graded answers (slide 24). Next, request RiceChem to test localization at the item level, and replicate on a second model. RL is out of scope for this phase.",
+  "V2 的成功标准是标签效率。Gate 01 已在一个模型、21 道题上通过（第 20、23 页）。Gate 02 在答卷层面未通过（第 24 页）：gap 不比单纯的重复波动更能找出打错的答卷。条目层面还没测，需要 RiceChem。请听众确认这个负结果怎么报告。": "V2 succeeds on label efficiency. Gate 01 has passed on one model and 21 questions (slides 20, 23). Gate 02 failed at the answer level (slide 24): the gap finds wrongly graded answers no better than plain repeat spread. The item level is untested and needs RiceChem. Ask the audience how this negative result should be reported.",
+  "这页回应第 21 页“效应依赖一道题”的问题。同一模型、同一流程加了 14 道题，三条预设标准仍然成立；只看新题、去掉 E06.Q06、逐题剔除、按题重抽样，这些额外检查在开跑前写定，也都成立。要提醒两点：新题的 rubric 是助手起草的，效应比原 7 题大得多，不算完全独立的重复；协议之间更一致，但和人工的误差没有一致地变小。": "This answers slide 21's concern that the effect rests on one question. With 14 more questions, same model and pipeline, all three pre-set criteria still hold; the extra checks written down before the run (new questions only, without E06.Q06, leave one out, question-level bootstrap) all hold too. Two caveats: the new rubrics were drafted by the assistant and the effect is much larger than on the original 7, so this is not a fully independent replication; and more agreement between protocols did not consistently mean less error against humans.",
+  "这页是预注册的信号检验，方案和脚本在看 N 数据前冻结。设定是：用 N 打分，每题 5 份人工锚点校准偏差，看各信号能否在同一道题里先挑出打错的答卷。主检验在原版 rubric、新 14 题上，gap 的 AUROC 是 0.44，不比 N 自己的重复波动 0.46 好，判定 NO-GO。所有信号都接近 0.5，连人工评分者的分歧也是。唯一的线索在题目层面：gap 大的题，模型和人工更不一致，这支持转到条目层面检验。": "This is the pre-registered signal test; plan and script were frozen before the N data was opened. Setup: grade with N, calibrate bias with 5 human anchors per question, and ask whether each signal picks out the wrongly graded answers within a question. On the primary test (original rubric, new 14 questions) the gap's AUROC is 0.44, no better than N's own repeat spread at 0.46, so the verdict is NO-GO. Every signal is near 0.5, human disagreement included. The only lead is at the question level: questions with a larger gap show worse model–human agreement, which supports moving to an item-level test."
 };
   var language='zh',rubricClear=false,counterCorrect=false;
   var textBindings=[],attributeBindings=[];
